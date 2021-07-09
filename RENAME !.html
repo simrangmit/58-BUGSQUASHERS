@@ -1,0 +1,65 @@
+<html>
+<head>
+    <title>payment details</title>
+    <link rel="stylesheet" href="Rename.css.css">
+    </head>
+    <body style="background: url(https://images.shiksha.com/mediadata/images/1491286433phpW2rtoz.jpeg)no-repeat; background-size: 100% 100%; ">
+    <div class="backpage">
+        <div class="form-box">
+            <div class="button-box">
+                <div id="btn"></div>
+                <botton type="button" class="toggle-btn" onclick="signup()">  SIGN UP</botton>
+                <botton type="button" class="toggle-btn" onclick="signin()">SIGN IN</botton>
+    
+            </div>
+            <form id="signup" class="input-group">
+               
+                <label for="name"><b>Name</b></label>
+                <input type="text" class="input-field" placeholder="Enter your name" name="name" required>
+            
+                <label for="email"><b>Email</b></label>
+                <input type="text"class="input-field" placeholder="Enter Email" name="email" required>
+            
+                <label for="psw"><b>Password</b></label>
+                <input type="password"class="input-field" placeholder="Enter Password" name="psw" required>
+                <button type="button" class="submit-btn"><a href="Inner.html">signup</a> </button>
+          
+            </form>
+            <form id="signin" class="input-group">
+    
+                <label for="email"><b>Email</b></label>
+                <input type="text"class="input-field" placeholder="Enter Email" name="email" required>
+            
+                <label for="psw"><b>Password</b></label>
+                <input type="password"class="input-field" placeholder="Enter Password" name="psw" required>
+    
+            
+                <button type="button" class="submit-btn"><a href="Inner.html">sign in</a></button>
+           
+            </form>
+        </div>
+        
+    </div>
+    <script>
+        var x=document.getElementById("signup");
+        var y=document.getElementById("signin");
+        var z=document.getElementById("btn");
+
+        function signin(){
+            x.style.left = "-400px";
+            y.style.left = "50px";
+            z.style.left = "110px";
+
+        }
+        function signup(){
+            x.style.left = "50px";
+            y.style.left = "450px";
+            z.style.left = "0px";
+
+        }
+
+    </script>
+</body>
+
+
+</html>
