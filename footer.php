@@ -7,6 +7,7 @@
     </footer>
 
 </div><!--/.fluid-container-->
+<!--SIGNIN-->
 
 <!-- external javascript -->
 
