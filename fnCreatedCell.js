@@ -1,12 +1,11 @@
-// DATA_TEMPLATE: empty_table
+// DATA_TEMPLATE: js_data
 oTest.fnStart( "fnCreatedCell tests" );
 
 $(document).ready( function () {
 	var tmp = 0;
-	var complete = false;
 
 	$('#example').dataTable( {
-		"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+		"aaData": gaaData,
 		"aoColumnDefs": [ {
 			fnCreatedCell: function () {
 				tmp++;
@@ -15,7 +14,7 @@ $(document).ready( function () {
 		} ]
 	} );
 	
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
 		"Cell created is called once for each cell on init",
 		null,
 		function () { return tmp===285; }
@@ -27,15 +26,14 @@ $(document).ready( function () {
 		function () { return tmp===285; }
 	);
 
-	oTest.fnWaitTest(
+	oTest.fnTest(
 		"Four arguments for the function",
 		function () { 
 			oSession.fnRestore();
 			tmp = true;
-			complete = false;
 
 			$('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"aaData": gaaData,
 				"aoColumnDefs": [ {
 					fnCreatedRow: function () {
 						if ( arguments.length !== 4 ) {
@@ -43,24 +41,20 @@ $(document).ready( function () {
 						}
 					},
 					"aTargets": ["_all"]
-				} ],
-				fnInitComplete: function () {
-					complete = true;
-				}
+				} ]
 			} );
 		},
-		function () { return (tmp && complete); }
+		function () { return tmp; }
 	);
 
-	oTest.fnWaitTest(
+	oTest.fnTest(
 		"First argument is a TD element",
 		function () { 
 			oSession.fnRestore();
 			tmp = true;
-			complete = false;
 
 			$('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"aaData": gaaData,
 				"aoColumnDefs": [ {
 					fnCreatedRow: function () {
 						if ( arguments[0].nodeName !== "TD" ) {
@@ -68,24 +62,20 @@ $(document).ready( function () {
 						}
 					},
 					"aTargets": ["_all"]
-				} ],
-				fnInitComplete: function () {
-					complete = true;
-				}
+				} ]
 			} );
 		},
-		function () { return (tmp && complete); }
+		function () { return tmp; }
 	);
 
-	oTest.fnWaitTest(
+	oTest.fnTest(
 		"Second argument is the HTML value",
 		function () { 
 			oSession.fnRestore();
 			tmp = true;
-			complete = false;
 
 			$('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"aaData": gaaData,
 				"aoColumnDefs": [ {
 					fnCreatedRow: function () {
 						if ( arguments[1] != $('td').html() ) {
@@ -93,24 +83,20 @@ $(document).ready( function () {
 						}
 					},
 					"aTargets": ["_all"]
-				} ],
-				fnInitComplete: function () {
-					complete = true;
-				}
+				} ]
 			} );
 		},
-		function () { return (tmp && complete); }
+		function () { return tmp; }
 	);
 
-	oTest.fnWaitTest(
+	oTest.fnTest(
 		"Third argument is the data array",
 		function () { 
 			oSession.fnRestore();
 			tmp = true;
-			complete = false;
 
 			$('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"aaData": gaaData,
 				"aoColumnDefs": [ {
 					fnCreatedRow: function () {
 						if ( arguments[2].length !== 5 ) {
@@ -118,24 +104,20 @@ $(document).ready( function () {
 						}
 					},
 					"aTargets": ["_all"]
-				} ],
-				fnInitComplete: function () {
-					complete = true;
-				}
+				} ]
 			} );
 		},
-		function () { return (tmp && complete); }
+		function () { return tmp; }
 	);
 
-	oTest.fnWaitTest(
+	oTest.fnTest(
 		"Fourth argument is the data source for the row",
 		function () { 
 			oSession.fnRestore();
 			tmp = true;
-			complete = false;
 
 			$('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"aaData": gaaData,
 				"aoColumnDefs": [ {
 					fnCreatedRow: function () {
 						if ( arguments[2] !== this.fnSettings().aoData[ arguments[2] ]._aData ) {
@@ -143,24 +125,20 @@ $(document).ready( function () {
 						}
 					},
 					"aTargets": ["_all"]
-				} ],
-				fnInitComplete: function () {
-					complete = true;
-				}
+				} ]
 			} );
 		},
-		function () { return (tmp && complete); }
+		function () { return tmp; }
 	);
 
-	oTest.fnWaitTest(
+	oTest.fnTest(
 		"Fifth argument is the the col index",
 		function () { 
 			oSession.fnRestore();
 			tmp = true;
-			complete = false;
 
 			$('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"aaData": gaaData,
 				"aoColumnDefs": [ {
 					fnCreatedRow: function () {
 						if ( arguments[1] != $('td:eq('+arguments[4]+')', arguments[0].parentNode).html() ) {
@@ -168,13 +146,10 @@ $(document).ready( function () {
 						}
 					},
 					"aTargets": ["_all"]
-				} ],
-				fnInitComplete: function () {
-					complete = true;
-				}
+				} ]
 			} );
 		},
-		function () { return (tmp && complete); }
+		function () { return tmp; }
 	);
 	
 	

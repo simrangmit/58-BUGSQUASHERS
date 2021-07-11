@@ -1,5 +1,5 @@
-// DATA_TEMPLATE: empty_table
-oTest.fnStart( "Sanity checks for DataTables with data from JS" );
+// DATA_TEMPLATE: dom_data
+oTest.fnStart( "Sanity checks for DataTables with DOM data" );
 
 oTest.fnTest( 
 	"jQuery.dataTable function",
@@ -20,13 +20,10 @@ oTest.fnTest(
 );
 
 $(document).ready( function () {
-	var oInit = {
-		"sAjaxSource": "../../../examples/ajax/sources/arrays.txt"
-	};
-	$('#example').dataTable( oInit );
+	$('#example').dataTable();
 	
 	/* Basic checks */
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
 		"Length changing div exists",
 		null,
 		function () { return document.getElementById('example_length') != null; }
@@ -56,7 +53,7 @@ $(document).ready( function () {
 		function () { return document.getElementById('example_processing') == null; }
 	);
 	
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
 		"10 rows shown on the first page",
 		null,
 		function () { return $('#example tbody tr').length == 10; }
@@ -311,12 +308,12 @@ $(document).ready( function () {
 	/*
 	 * Filtering
 	 */
-	oTest.fnWaitTest(
+	oTest.fnTest(
 		"Filter 'W' - rows",
 		function () { 
 			/* Reset the table such that the old sorting doesn't mess things up */
 			oSession.fnRestore();
-			$('#example').dataTable( oInit );
+			$('#example').dataTable();
 			$('#example_filter input').val("W").keyup(); },
 		function () { return $('#example tbody tr:eq(0) td:eq(0)').html() == "Gecko"; }
 	);

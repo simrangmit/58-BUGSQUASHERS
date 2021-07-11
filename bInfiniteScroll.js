@@ -1,16 +1,14 @@
-// DATA_TEMPLATE: empty_table
+// DATA_TEMPLATE: dom_data
 oTest.fnStart( "bInfiniteScroll" );
 
 
 $(document).ready( function () {
 	var oTable = $('#example').dataTable( {
 		"bScrollInfinite": true,
-		"sScrollY": "200px",
-		"bServerSide": true,
-		"sAjaxSource": "../../../examples/server_side/scripts/server_processing.php"
+		"sScrollY": "200px"
 	} );
 	
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
 		"10 rows by default",
 		null,
 		function () { return $('#example tbody tr').length == 10; }
@@ -26,12 +24,6 @@ $(document).ready( function () {
 		"Get nodes",
 		null,
 		function () { return $('#example tbody>tr').length == 10; }
-	);
-	
-	oTest.fnTest( 
-		"Get nodes function",
-		null,
-		function () { return $('#example').dataTable().fnGetNodes().length == 10; }
 	);
 	
 	oTest.fnWaitTest( 
@@ -53,12 +45,6 @@ $(document).ready( function () {
 	);
 	
 	oTest.fnTest( 
-		"Get nodes function after 20px scroll",
-		null,
-		function () { return $('#example').dataTable().fnGetNodes().length == 20; }
-	);
-	
-	oTest.fnWaitTest( 
 		"Scroll on 10px more results in the same number of rows",
 		function () { $('div.dataTables_scrollBody').scrollTop(30); },
 		function () { return $('#example tbody tr').length == 20; }
@@ -71,8 +57,8 @@ $(document).ready( function () {
 	);
 	
 	oTest.fnWaitTest( 
-		"Scroll to 280px adds another 10 rows",
-		function () { $('div.dataTables_scrollBody').scrollTop(280); },
+		"Scroll to 240px adds another 10 rows",
+		function () { $('div.dataTables_scrollBody').scrollTop(240); },
 		function () { return $('#example tbody tr').length == 30; }
 	);
 	
@@ -89,14 +75,11 @@ $(document).ready( function () {
 	);
 	
 	oTest.fnTest( 
-		"Get nodes function after 240px scroll",
-		null,
-		function () { return $('#example').dataTable().fnGetNodes().length == 30; }
-	);
-	
-	oTest.fnWaitTest( 
 		"Filtering will drop back to 10 rows",
-		function () { oTable.fnFilter('gec') },
+		function () { 
+			$('div.dataTables_scrollBody').scrollTop(0);
+			oTable.fnFilter('gec')
+		},
 		function () { return $('#example tbody tr').length == 10; }
 	);
 	
@@ -112,36 +95,21 @@ $(document).ready( function () {
 		function () { return $('#example tbody>tr').length == 10; }
 	);
 	
-	oTest.fnTest( 
-		"Get nodes function after filtering",
-		null,
-		function () { return $('#example').dataTable().fnGetNodes().length == 10; }
-	);
-	
 	oTest.fnWaitTest( 
 		"Scroll after filtering adds 10",
 		function () { $('div.dataTables_scrollBody').scrollTop(20); },
 		function () { return $('#example tbody tr').length == 20; }
 	);
 	
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
 		"Get nodes after filtering",
 		null,
 		function () { return $('#example tbody>tr').length == 20; }
 	);
 	
-	oTest.fnWaitTest( 
-		"Get nodes function after filtering",
-		null,
-		function () { return $('#example').dataTable().fnGetNodes().length == 20; }
-	);
-	
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
 		"Sorting will drop back to 10 rows",
-		function () {
-			$('div.dataTables_scrollBody').scrollTop(0);
-			oTable.fnSort([[1,'asc']])
-		},
+		function () { oTable.fnSort([[1,'asc']]) },
 		function () { return $('#example tbody tr').length == 10; }
 	);
 	
@@ -155,12 +123,6 @@ $(document).ready( function () {
 		"Get nodes after scrolling",
 		null,
 		function () { return $('#example tbody>tr').length == 20; }
-	);
-	
-	oTest.fnTest( 
-		"Get nodes function after scrolling",
-		null,
-		function () { return $('#example').dataTable().fnGetNodes().length == 20; }
 	);
 	
 	

@@ -1,14 +1,14 @@
-// DATA_TEMPLATE: empty_table
+// DATA_TEMPLATE: js_data
 oTest.fnStart( "oLanguage.sLengthMenu" );
 
 $(document).ready( function () {
 	/* Check the default */
 	var oTable = $('#example').dataTable( {
-		"sAjaxSource": "../../../examples/ajax/sources/arrays.txt"
+		"aaData": gaaData
 	} );
 	var oSettings = oTable.fnSettings();
 	
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
 		"Menu language is 'Show _MENU_ entries' by default",
 		null,
 		function () { return oSettings.oLanguage.sLengthMenu == "Show _MENU_ entries"; }
@@ -39,12 +39,12 @@ $(document).ready( function () {
 	);
 	
 	
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
 		"Menu length language can be defined - no _MENU_ macro",
 		function () {
 			oSession.fnRestore();
 			oTable = $('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"aaData": gaaData,
 				"oLanguage": {
 					"sLengthMenu": "unit test"
 				}
@@ -63,12 +63,12 @@ $(document).ready( function () {
 	);
 	
 	
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
 		"Menu length language can be defined - with _MENU_ macro",
 		function () {
 			oSession.fnRestore();
 			oTable = $('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"aaData": gaaData,
 				"oLanguage": {
 					"sLengthMenu": "unit _MENU_ test"
 				}
@@ -85,12 +85,12 @@ $(document).ready( function () {
 	);
 	
 	
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
 		"Only the _MENU_ macro",
 		function () {
 			oSession.fnRestore();
 			oTable = $('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"aaData": gaaData,
 				"oLanguage": {
 					"sLengthMenu": "_MENU_"
 				}

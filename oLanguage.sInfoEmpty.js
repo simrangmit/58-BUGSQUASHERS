@@ -1,14 +1,14 @@
-// DATA_TEMPLATE: empty_table
+// DATA_TEMPLATE: js_data
 oTest.fnStart( "oLanguage.sInfoEmpty" );
 
 $(document).ready( function () {
 	/* Check the default */
 	var oTable = $('#example').dataTable( {
-		"sAjaxSource": "../../../examples/ajax/sources/arrays.txt"
+		"aaData": gaaData
 	} );
 	var oSettings = oTable.fnSettings();
 	
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
 		"Info empty language is 'Showing 0 to 0 of 0 entries' by default",
 		function () { oTable.fnFilter("nothinghere"); },
 		function () { return oSettings.oLanguage.sInfoEmpty == "Showing 0 to 0 of 0 entries"; }
@@ -26,12 +26,12 @@ $(document).ready( function () {
 	);
 	
 	
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
 		"Info empty language can be defined",
 		function () {
 			oSession.fnRestore();
 			oTable = $('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"aaData": gaaData,
 				"oLanguage": {
 					"sInfoEmpty": "unit test"
 				}
@@ -54,12 +54,12 @@ $(document).ready( function () {
 	);
 	
 	
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
 		"Macro's replaced",
 		function () {
 			oSession.fnRestore();
 			oTable = $('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"aaData": gaaData,
 				"oLanguage": {
 					"sInfoEmpty": "unit _START_ _END_ _TOTAL_ test"
 				}

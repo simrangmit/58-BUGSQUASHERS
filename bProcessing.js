@@ -1,4 +1,4 @@
-// DATA_TEMPLATE: empty_table
+// DATA_TEMPLATE: dom_data
 oTest.fnStart( "bProcessing" );
 
 /* It's actually a bit hard to set this one due to the fact that it will only be shown
@@ -9,30 +9,28 @@ oTest.fnStart( "bProcessing" );
 
 $(document).ready( function () {
 	/* Check the default */
-	var oTable = $('#example').dataTable( {
-		"sAjaxSource": "../../../examples/ajax/sources/arrays.txt"
-	} );
+	var oTable = $('#example').dataTable();
 	var oSettings = oTable.fnSettings();
 	
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
 		"Processing is off by default",
 		null,
 		function () { return oSettings.oFeatures.bProcessing == false; }
 	);
 	
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
 		"Processing div is not in the DOM",
 		function () { oTable.oApi._fnProcessingDisplay( oSettings, true ); },
 		function () { return document.getElementById('example_processing') == null; }
 	);
 	
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
 		"Processing div cannot be shown",
 		function () { oTable.oApi._fnProcessingDisplay( oSettings, true ); },
 		function () { return document.getElementById('example_processing') == null; }
 	);
 	
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
 		"Processing div cannot be hidden",
 		function () { oTable.oApi._fnProcessingDisplay( oSettings, false ); },
 		function () { return document.getElementById('example_processing') == null; }
@@ -40,12 +38,11 @@ $(document).ready( function () {
 	
 	
 	/* Check can disable */
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
 		"Processing can be enabled",
 		function () {
 			oSession.fnRestore();
 			oTable = $('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
 				"bProcessing": true
 			} );
 			oSettings = oTable.fnSettings();
@@ -53,37 +50,36 @@ $(document).ready( function () {
 		function () { return oSettings.oFeatures.bProcessing == true; }
 	);
 	
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
 		"Processing div is in the DOM",
 		function () { oTable.oApi._fnProcessingDisplay( oSettings, true ); },
 		function () { return document.getElementById('example_processing'); }
 	);
 	
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
 		"Processing div is hidden by default",
 		function () { oTable.oApi._fnProcessingDisplay( oSettings, true ); },
 		function () { return document.getElementById('example_processing').style.visibility = "hidden"; }
 	);
 	
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
 		"Processing div can be shown",
 		function () { oTable.oApi._fnProcessingDisplay( oSettings, true ); },
 		function () { return document.getElementById('example_processing').style.visibility = "visible"; }
 	);
 	
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
 		"Processing div can be hidden",
 		function () { oTable.oApi._fnProcessingDisplay( oSettings, false ); },
 		function () { return document.getElementById('example_processing').style.visibility = "hidden"; }
 	);
 	
 	/* Enable makes no difference */
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
 		"Processing disabled override",
 		function () {
 			oSession.fnRestore();
 			oTable = $('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
 				"bProcessing": false
 			} );
 			oSettings = oTable.fnSettings();
@@ -91,7 +87,7 @@ $(document).ready( function () {
 		function () { return oSettings.oFeatures.bProcessing == false; }
 	);
 	
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
 		"Processing div is not in the DOM",
 		function () { oTable.oApi._fnProcessingDisplay( oSettings, true ); },
 		function () { return document.getElementById('example_processing') == null; }

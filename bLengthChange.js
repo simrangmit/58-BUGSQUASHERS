@@ -1,25 +1,23 @@
-// DATA_TEMPLATE: empty_table
+// DATA_TEMPLATE: dom_data
 oTest.fnStart( "bLengthChange" );
 
 $(document).ready( function () {
 	/* Check the default */
-	$('#example').dataTable( {
-		"sAjaxSource": "../../../examples/ajax/sources/arrays.txt"
-	} );
+	$('#example').dataTable();
 	
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
 		"Length div exists by default",
 		null,
 		function () { return document.getElementById('example_length') != null; }
 	);
 	
-	oTest.fnWaitTest(
+	oTest.fnTest(
 		"Four default options",
 		null,
 		function () { return $("select[name=example_length] option").length == 4; }
 	);
 	
-	oTest.fnWaitTest(
+	oTest.fnTest(
 		"Default options",
 		null,
 		function () {
@@ -29,7 +27,7 @@ $(document).ready( function () {
 		}
 	);
 	
-	oTest.fnWaitTest(
+	oTest.fnTest(
 		"Info takes length into account",
 		null,
 		function () { return document.getElementById('example_info').innerHTML == 
@@ -37,19 +35,18 @@ $(document).ready( function () {
 	);
 	
 	/* Check can disable */
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
 		"Change length can be disabled",
 		function () {
 			oSession.fnRestore();
 			$('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
 				"bLengthChange": false
 			} );
 		},
 		function () { return document.getElementById('example_length') == null; }
 	);
 	
-	oTest.fnWaitTest(
+	oTest.fnTest(
 		"Information takes length disabled into account",
 		null,
 		function () { return document.getElementById('example_info').innerHTML == 
@@ -57,12 +54,11 @@ $(document).ready( function () {
 	);
 	
 	/* Enable makes no difference */
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
 		"Length change enabled override",
 		function () {
 			oSession.fnRestore();
 			$('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
 				"bLengthChange": true
 			} );
 		},

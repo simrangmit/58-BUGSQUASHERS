@@ -1,76 +1,67 @@
-// DATA_TEMPLATE: empty_table
+// DATA_TEMPLATE: js_data
 oTest.fnStart( "fnHeaderCallback" );
 
 $(document).ready( function () {
 	/* Check the default */
 	var oTable = $('#example').dataTable( {
-		"sAjaxSource": "../../../examples/ajax/sources/arrays.txt"
+		"aaData": gaaData
 	} );
 	var oSettings = oTable.fnSettings();
-	var mPass, bInit;
+	var mPass;
 	
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
 		"Default should be null",
 		null,
 		function () { return oSettings.fnHeaderCallback == null; }
 	);
 	
 	
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
 		"Five arguments passed",
 		function () {
 			oSession.fnRestore();
 			
 			mPass = -1;
-			bInit = false;
 			$('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"aaData": gaaData,
 				"fnHeaderCallback": function ( ) {
 					mPass = arguments.length;
-				},
-				"fnInitComplete": function () {
-					bInit = true;
 				}
 			} );
 		},
-		function () { return mPass == 5 && bInit; }
+		function () { return mPass == 5; }
 	);
 	
 	
-	/* The header callback is called once for the init and then when the data is added */
-	oTest.fnWaitTest( 
-		"fnHeaderCallback called once per draw",
+	oTest.fnTest( 
+		"fnRowCallback called once per draw",
 		function () {
 			oSession.fnRestore();
 			
 			mPass = 0;
-			bInit = false;
 			$('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"aaData": gaaData,
 				"fnHeaderCallback": function ( nHead, aasData, iStart, iEnd, aiDisplay ) {
 					mPass++;
-				},
-				"fnInitComplete": function () {
-					bInit = true;
 				}
 			} );
 		},
-		function () { return mPass == 2 && bInit; }
+		function () { return mPass == 1; }
 	);
 	
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
 		"fnRowCallback called on paging (i.e. another draw)",
 		function () { $('#example_next').click(); },
-		function () { return mPass == 3; }
+		function () { return mPass == 2; }
 	);
 	
 	
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
 		"fnRowCallback allows us to alter row information",
 		function () {
 			oSession.fnRestore();
 			$('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"aaData": gaaData,
 				"fnHeaderCallback": function ( nHead, aasData, iStart, iEnd, aiDisplay ) {
 					nHead.getElementsByTagName('th')[0].innerHTML = "Displaying "+(iEnd-iStart)+" records";
 				}
@@ -80,14 +71,56 @@ $(document).ready( function () {
 	);
 	
 	
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
+		"Data array has length matching original data",
+		function () {
+			oSession.fnRestore();
+			
+			mPass = true;
+			$('#example').dataTable( {
+				"aaData": gaaData,
+				"fnHeaderCallback": function ( nHead, aasData, iStart, iEnd, aiDisplay ) {
+					if ( aasData.length != 57 )
+					{
+						mPass = false;
+					}
+				}
+			} );
+		},
+		function () { return mPass; }
+	);
+	
+	oTest.fnTest( 
+		"Data array's column lengths match original data",
+		function () {
+			oSession.fnRestore();
+			
+			mPass = true;
+			$('#example').dataTable( {
+				"aaData": gaaData,
+				"fnHeaderCallback": function ( nHead, aasData, iStart, iEnd, aiDisplay ) {
+					for ( var i=0, iLen=aasData.length ; i<iLen ; i++ )
+					{
+						if ( aasData[i].length != 5 )
+						{
+							mPass = false;
+						}
+					}
+				}
+			} );
+		},
+		function () { return mPass; }
+	);
+	
+	
+	oTest.fnTest( 
 		"iStart correct on first page",
 		function () {
 			oSession.fnRestore();
 			
 			mPass = true;
 			$('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"aaData": gaaData,
 				"fnHeaderCallback": function ( nHead, aasData, iStart, iEnd, aiDisplay ) {
 					if ( iStart != 0 )
 					{
@@ -100,22 +133,40 @@ $(document).ready( function () {
 	);
 	
 	
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
 		"iStart correct on second page",
 		function () {
 			oSession.fnRestore();
 			
 			mPass = false;
 			$('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"aaData": gaaData,
 				"fnHeaderCallback": function ( nHead, aasData, iStart, iEnd, aiDisplay ) {
 					if ( iStart == 10 )
 					{
 						mPass = true;
 					}
-				},
-				"fnInitComplete": function () {
-					$('#example_next').click();
+				}
+			} );
+			$('#example_next').click();
+		},
+		function () { return mPass; }
+	);
+	
+	
+	oTest.fnTest( 
+		"iEnd correct on first page",
+		function () {
+			oSession.fnRestore();
+			
+			mPass = true;
+			$('#example').dataTable( {
+				"aaData": gaaData,
+				"fnHeaderCallback": function ( nHead, aasData, iStart, iEnd, aiDisplay ) {
+					if ( iEnd != 10 )
+					{
+						mPass = false;
+					}
 				}
 			} );
 		},
@@ -123,37 +174,35 @@ $(document).ready( function () {
 	);
 	
 	
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
 		"iEnd correct on second page",
 		function () {
 			oSession.fnRestore();
 			
 			mPass = false;
 			$('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"aaData": gaaData,
 				"fnHeaderCallback": function ( nHead, aasData, iStart, iEnd, aiDisplay ) {
 					if ( iEnd == 20 )
 					{
 						mPass = true;
 					}
-				},
-				"fnInitComplete": function () {
-					$('#example_next').click();
 				}
 			} );
+			$('#example_next').click();
 		},
 		function () { return mPass; }
 	);
 	
 	
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
 		"aiDisplay length is full data when not filtered",
 		function () {
 			oSession.fnRestore();
 			
 			mPass = false;
 			$('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"aaData": gaaData,
 				"fnHeaderCallback": function ( nHead, aasData, iStart, iEnd, aiDisplay ) {
 					if ( aiDisplay.length == 57 )
 					{
@@ -165,14 +214,14 @@ $(document).ready( function () {
 		function () { return mPass; }
 	);
 	
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
 		"aiDisplay length is 9 when filtering on 'Mozilla'",
 		function () {
 			oSession.fnRestore();
 			
 			mPass = false;
 			oTable = $('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"aaData": gaaData,
 				"fnHeaderCallback": function ( nHead, aasData, iStart, iEnd, aiDisplay ) {
 					if ( aiDisplay.length == 9 )
 					{

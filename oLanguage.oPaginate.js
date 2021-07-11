@@ -1,4 +1,4 @@
-// DATA_TEMPLATE: empty_table
+// DATA_TEMPLATE: js_data
 oTest.fnStart( "oLanguage.oPaginate" );
 
 /* Note that the paging language information only has relevence in full numbers */
@@ -6,12 +6,12 @@ oTest.fnStart( "oLanguage.oPaginate" );
 $(document).ready( function () {
 	/* Check the default */
 	var oTable = $('#example').dataTable( {
-		"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+		"aaData": gaaData,
 		"sPaginationType": "full_numbers"
 	} );
 	var oSettings = oTable.fnSettings();
 	
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
 		"oLanguage.oPaginate defaults",
 		null,
 		function () {
@@ -38,12 +38,12 @@ $(document).ready( function () {
 	);
 	
 	
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
 		"oLanguage.oPaginate can be defined",
 		function () {
 			oSession.fnRestore();
 			oTable = $('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"aaData": gaaData,
 				"sPaginationType": "full_numbers",
 				"oLanguage": {
 					"oPaginate": {

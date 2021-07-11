@@ -1,4 +1,4 @@
-// DATA_TEMPLATE: empty_table
+// DATA_TEMPLATE: dom_data
 oTest.fnStart( "aoColumns.bUseRendered" );
 
 /* bUseRendered is used to alter sorting data, if false then the original data is used for
@@ -10,7 +10,6 @@ $(document).ready( function () {
 	var mTmp = 0;
 	
 	var oTable = $('#example').dataTable( {
-		"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
 		"aoColumns": [
 			null,
 			{ "fnRender": function (a) {
@@ -27,19 +26,18 @@ $(document).ready( function () {
 	} );
 	var oSettings = oTable.fnSettings();
 	
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
 		"Default for bUseRendered is true - rendered data is used for sorting",
 		function () { $('#example thead th:eq(1)').click(); },
 		function () { return $('#example tbody tr:eq(0) td:eq(1)').html() == 'aaa'; }
 	);
 	
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
 		"When bUseRendered is false, original data is used for sorting",
 		function () {
 			mTmp = 0;
 			oSession.fnRestore();
 			oTable = $('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
 				"aoColumns": [
 					null,
 					{ 
@@ -64,7 +62,7 @@ $(document).ready( function () {
 	);
 	
 	
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
 		"bUseRendered set to false on one columns and true (default) on two others",
 		function () {
 			mTmp = 0;
@@ -73,7 +71,6 @@ $(document).ready( function () {
 			
 			oSession.fnRestore();
 			oTable = $('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
 				"aoColumns": [
 					{
 						"fnRender": function (a) {
@@ -114,13 +111,13 @@ $(document).ready( function () {
 		function () { return $('#example tbody tr:eq(0) td:eq(0)').html() == 'aaa1'; }
 	);
 	
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
 		"Multi-column rendering - 2nd column sorting",
 		function () { $('#example thead th:eq(1)').click(); },
 		function () { return $('#example tbody tr:eq(0) td:eq(1)').html() == 'All others'; }
 	);
 	
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
 		"Multi-column rendering - 3rd column sorting",
 		function () {
 			$('#example thead th:eq(2)').click();
@@ -129,13 +126,13 @@ $(document).ready( function () {
 		function () { return $('#example tbody tr:eq(0) td:eq(2)').html() == 'zzz3'; }
 	);
 	
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
 		"Multi-column rendering - 4th column sorting",
 		function () { $('#example thead th:eq(3)').click(); },
 		function () { return $('#example tbody tr:eq(0) td:eq(3)').html() == '-'; }
 	);
 	
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
 		"Multi-column rendering - 5th column sorting",
 		function () { $('#example thead th:eq(4)').click(); },
 		function () { return $('#example tbody tr:eq(0) td:eq(4)').html() == 'A'; }

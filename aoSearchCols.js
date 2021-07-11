@@ -1,16 +1,14 @@
-// DATA_TEMPLATE: empty_table
+// DATA_TEMPLATE: dom_data
 oTest.fnStart( "aoSearchCols" );
 
 /* We could be here forever testing this one, so we test a limited subset on a couple of colums */
 
 $(document).ready( function () {
 	/* Check the default */
-	var oTable = $('#example').dataTable( {
-		"sAjaxSource": "../../../examples/ajax/sources/arrays.txt"
-	} );
+	var oTable = $('#example').dataTable();
 	var oSettings = oTable.fnSettings();
 	
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
 		"Default should be to have a empty colums array",
 		null,
 		function () {
@@ -25,12 +23,11 @@ $(document).ready( function () {
 	);
 	
 	
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
 		"Search on a single column - no regex statement given",
 		function () {
 			oSession.fnRestore();
 			oTable = $('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
 				"aoSearchCols": [
 					null,
 					{ "sSearch": "Mozilla" },
@@ -43,12 +40,11 @@ $(document).ready( function () {
 		function () { return $('#example_info').html() == "Showing 1 to 9 of 9 entries (filtered from 57 total entries)"; }
 	);
 	
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
 		"Search on two columns - no regex statement given",
 		function () {
 			oSession.fnRestore();
 			oTable = $('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
 				"aoSearchCols": [
 					null,
 					{ "sSearch": "Mozilla" },
@@ -61,12 +57,11 @@ $(document).ready( function () {
 		function () { return $('#example tbody tr:eq(0) td:eq(3)').html() == "1.5"; }
 	);
 	
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
 		"Search on single column - escape regex false",
 		function () {
 			oSession.fnRestore();
 			oTable = $('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
 				"aoSearchCols": [
 					{ "sSearch": ".*ML", "bEscapeRegex": false },
 					null,
@@ -79,12 +74,11 @@ $(document).ready( function () {
 		function () { return $('#example_info').html() == "Showing 1 to 3 of 3 entries (filtered from 57 total entries)"; }
 	);
 	
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
 		"Search on two columns - escape regex false on first, true on second",
 		function () {
 			oSession.fnRestore();
 			oTable = $('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
 				"aoSearchCols": [
 					{ "sSearch": ".*ML", "bEscapeRegex": false },
 					{ "sSearch": "3.3", "bEscapeRegex": true },
@@ -97,12 +91,11 @@ $(document).ready( function () {
 		function () { return $('#example tbody tr:eq(0) td:eq(1)').html() == "Konqureror 3.3"; }
 	);
 	
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
 		"Search on two columns (no records) - escape regex false on first, true on second",
 		function () {
 			oSession.fnRestore();
 			oTable = $('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
 				"aoSearchCols": [
 					{ "sSearch": ".*ML", "bEscapeRegex": false },
 					{ "sSearch": "Allan", "bEscapeRegex": true },

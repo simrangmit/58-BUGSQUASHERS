@@ -1,30 +1,22 @@
-// DATA_TEMPLATE: empty_table
+// DATA_TEMPLATE: dom_data
 oTest.fnStart( "aoColumns.bSeachable" );
 
 $(document).ready( function () {
 	/* Check the default */
-	var oTable = $('#example').dataTable( {
-		"sAjaxSource": "../../../examples/ajax/sources/arrays.txt"
-	} );
+	var oTable = $('#example').dataTable();
 	var oSettings = oTable.fnSettings();
 	
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
 		"Columns are searchable by default",
 		function () { oTable.fnFilter("Camino"); },
-		function () {
-			if ( $('#example tbody tr:eq(0) td:eq(1)')[0] )
-				return $('#example tbody tr:eq(0) td:eq(1)').html().match(/Camino/);
-			else
-				return null;
-		}
+		function () { return $('#example tbody tr:eq(0) td:eq(1)').html().match(/Camino/); }
 	);
 	
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
 		"Disabling sorting on a column removes it from the global filter",
 		function () {
 			oSession.fnRestore();
 			oTable = $('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
 				"aoColumns": [
 					null,
 					{ "bSearchable": false },
@@ -39,18 +31,17 @@ $(document).ready( function () {
 		function () { return $('#example tbody tr:eq(0) td:eq(0)').html() == "No matching records found"; }
 	);
 	
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
 		"Disabled on one column has no effect on other columns",
 		function () { oTable.fnFilter("Webkit"); },
 		function () { return $('#example tbody tr:eq(0) td:eq(0)').html() == "Webkit"; }
 	);
 	
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
 		"Disable filtering on multiple columns",
 		function () {
 			oSession.fnRestore();
 			oTable = $('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
 				"aoColumns": [
 					{ "bSearchable": false },
 					{ "bSearchable": false },
@@ -65,7 +56,7 @@ $(document).ready( function () {
 		function () { return $('#example tbody tr:eq(0) td:eq(0)').html() == "No matching records found"; }
 	);
 	
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
 		"Filter on second disabled column",
 		function () { oTable.fnFilter("Camino"); },
 		function () { return $('#example tbody tr:eq(0) td:eq(0)').html() == "No matching records found"; }

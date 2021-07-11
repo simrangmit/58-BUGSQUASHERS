@@ -1,19 +1,17 @@
-// DATA_TEMPLATE: empty_table
+// DATA_TEMPLATE: dom_data
 oTest.fnStart( "bPaginate" );
 
 $(document).ready( function () {
 	/* Check the default */
-	$('#example').dataTable( {
-		"sAjaxSource": "../../../examples/ajax/sources/arrays.txt"
-	} );
+	$('#example').dataTable();
 	
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
 		"Pagiantion div exists by default",
 		null,
 		function () { return document.getElementById('example_paginate') != null; }
 	);
 	
-	oTest.fnWaitTest(
+	oTest.fnTest(
 		"Information div takes paging into account",
 		null,
 		function () { return document.getElementById('example_info').innerHTML == 
@@ -21,19 +19,18 @@ $(document).ready( function () {
 	);
 	
 	/* Check can disable */
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
 		"Pagiantion can be disabled",
 		function () {
 			oSession.fnRestore();
 			$('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
 				"bPaginate": false
 			} );
 		},
 		function () { return document.getElementById('example_paginate') == null; }
 	);
 	
-	oTest.fnWaitTest(
+	oTest.fnTest(
 		"Information div takes paging disabled into account",
 		null,
 		function () { return document.getElementById('example_info').innerHTML == 
@@ -41,12 +38,11 @@ $(document).ready( function () {
 	);
 	
 	/* Enable makes no difference */
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
 		"Pagiantion enabled override",
 		function () {
 			oSession.fnRestore();
 			$('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
 				"bPaginate": true
 			} );
 		},

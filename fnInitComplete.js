@@ -1,4 +1,4 @@
-// DATA_TEMPLATE: empty_table
+// DATA_TEMPLATE: js_data
 oTest.fnStart( "fnInitComplete" );
 
 /* Fairly boring function compared to the others! */
@@ -6,42 +6,42 @@ oTest.fnStart( "fnInitComplete" );
 $(document).ready( function () {
 	/* Check the default */
 	var oTable = $('#example').dataTable( {
-		"sAjaxSource": "../../../examples/ajax/sources/arrays.txt"
+		"aaData": gaaData
 	} );
 	var oSettings = oTable.fnSettings();
 	var mPass;
 	
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
 		"Default should be null",
 		null,
 		function () { return oSettings.fnInitComplete == null; }
 	);
 	
 	
-	oTest.fnWaitTest( 
-		"Two arguments passed (for Ajax!)",
+	oTest.fnTest( 
+		"Two arguments passed",
 		function () {
 			oSession.fnRestore();
 			
 			mPass = -1;
 			$('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"aaData": gaaData,
 				"fnInitComplete": function ( ) {
-					mPass = arguments.length;
+					mPass = arguments.length===2 && arguments[1]===undefined;
 				}
 			} );
 		},
-		function () { return mPass == 2; }
+		function () { return mPass; }
 	);
 	
 	
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
 		"That one argument is the settings object",
 		function () {
 			oSession.fnRestore();
 			
 			oTable = $('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"aaData": gaaData,
 				"fnInitComplete": function ( oSettings ) {
 					mPass = oSettings;
 				}
@@ -51,14 +51,14 @@ $(document).ready( function () {
 	);
 	
 	
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
 		"fnInitComplete called once on first draw",
 		function () {
 			oSession.fnRestore();
 			
 			mPass = 0;
 			$('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"aaData": gaaData,
 				"fnInitComplete": function ( ) {
 					mPass++;
 				}
@@ -67,7 +67,7 @@ $(document).ready( function () {
 		function () { return mPass == 1; }
 	);
 	
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
 		"fnInitComplete never called there after",
 		function () {
 			$('#example_next').click();
@@ -75,23 +75,6 @@ $(document).ready( function () {
 			$('#example_next').click();
 		},
 		function () { return mPass == 1; }
-	);
-	
-	
-	oTest.fnWaitTest( 
-		"10 rows in the table on complete",
-		function () {
-			oSession.fnRestore();
-			
-			mPass = 0;
-			$('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
-				"fnInitComplete": function ( ) {
-					mPass = $('#example tbody tr').length;
-				}
-			} );
-		},
-		function () { return mPass == 10; }
 	);
 	
 	

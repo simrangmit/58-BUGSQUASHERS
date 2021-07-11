@@ -1,25 +1,22 @@
-// DATA_TEMPLATE: empty_table
+// DATA_TEMPLATE: dom_data
 oTest.fnStart( "bInfo" );
 
 $(document).ready( function () {
 	/* Check the default */
-	$('#example').dataTable( {
-		"sAjaxSource": "../../../examples/ajax/sources/arrays.txt"
-	} );
+	$('#example').dataTable();
 	
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
 		"Info div exists by default",
 		null,
 		function () { return document.getElementById('example_info') != null; }
 	);
 	
 	/* Check can disable */
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
 		"Info can be disabled",
 		function () {
 			oSession.fnRestore();
 			$('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
 				"bInfo": false
 			} );
 		},
@@ -27,12 +24,11 @@ $(document).ready( function () {
 	);
 	
 	/* Enable makes no difference */
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
 		"Info enabled override",
 		function () {
 			oSession.fnRestore();
 			$('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
 				"bInfo": true
 			} );
 		},

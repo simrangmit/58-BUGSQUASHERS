@@ -1,50 +1,48 @@
-// DATA_TEMPLATE: empty_table
+// DATA_TEMPLATE: dom_data
 oTest.fnStart( "sPaginationType" );
 
 $(document).ready( function () {
 	/* Check the default */
-	var oTable = $('#example').dataTable( {
-		"sAjaxSource": "../../../examples/ajax/sources/arrays.txt"
-	} );
+	var oTable = $('#example').dataTable();
 	var oSettings = oTable.fnSettings();
 	
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
 		"Check two button paging is the default",
 		null,
 		function () { return oSettings.sPaginationType == "two_button"; }
 	);
 	
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
 		"Check class is applied",
 		null,
 		function () { return $('#example_paginate').hasClass('paging_two_button'); }
 	);
 	
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
 		"Two A elements are in the wrapper",
 		null,
 		function () { return $('#example_paginate a').length == 2; }
 	);
 	
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
 		"We have the previous button",
 		null,
 		function () { return document.getElementById('example_previous'); }
 	);
 	
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
 		"We have the next button",
 		null,
 		function () { return document.getElementById('example_next'); }
 	);
 	
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
 		"Previous button is disabled",
 		null,
 		function () { return $('#example_previous').hasClass('paginate_disabled_previous'); }
 	);
 	
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
 		"Next button is enabled",
 		null,
 		function () { return $('#example_next').hasClass('paginate_enabled_next'); }
@@ -54,29 +52,19 @@ $(document).ready( function () {
 	
 	
 	/* Two buttons paging */
-	var bComplete = false;
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
 		"Can enabled full numbers paging",
 		function () {
 			oSession.fnRestore();
 			oTable = $('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
-				"sPaginationType": "full_numbers",
-				"fnInitComplete": function () {
-					bComplete = true;
-				}
+				"sPaginationType": "full_numbers"
 			} );
 			oSettings = oTable.fnSettings();
 		},
-		function () {
-			if ( bComplete )
-				return oSettings.sPaginationType == "full_numbers";
-			else
-				return false;
-		}
+		function () { return oSettings.sPaginationType == "full_numbers"; }
 	);
 	
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
 		"Check full numbers class is applied",
 		null,
 		function () { return $('#example_paginate').hasClass('paging_full_numbers'); }
@@ -84,7 +72,7 @@ $(document).ready( function () {
 	
 	
 	var nFirst, nPrevious, nNext, nLast;
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
 		"Jump to last page",
 		function () {
 			nFirst = $('div.dataTables_paginate a.first');
@@ -98,7 +86,7 @@ $(document).ready( function () {
 		}
 	);
 	
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
 		"Go to two pages previous",
 		function () {
 			nPrevious.click();
@@ -109,7 +97,7 @@ $(document).ready( function () {
 		}
 	);
 	
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
 		"Next (second last) page",
 		function () {
 			nNext.click();
@@ -119,7 +107,7 @@ $(document).ready( function () {
 		}
 	);
 	
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
 		"Jump to first page",
 		function () {
 			nFirst.click();

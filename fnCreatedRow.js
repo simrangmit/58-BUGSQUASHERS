@@ -1,18 +1,17 @@
-// DATA_TEMPLATE: empty_table
+// DATA_TEMPLATE: js_data
 oTest.fnStart( "fnCreatedRow tests" );
 
 $(document).ready( function () {
 	var tmp = 0;
-	var complete = false;
 
 	$('#example').dataTable( {
-		"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+		"aaData": gaaData,
 		fnCreatedRow: function () {
 			tmp++;
 		}
 	} );
 	
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
 		"Row created is called once for each row on init",
 		null,
 		function () { return tmp===57; }
@@ -24,116 +23,96 @@ $(document).ready( function () {
 		function () { return tmp===57; }
 	);
 
-	oTest.fnWaitTest(
+	oTest.fnTest(
 		"Three arguments for the function",
 		function () { 
 			oSession.fnRestore();
 			tmp = true;
-			complete = false;
 
 			$('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"aaData": gaaData,
 				fnCreatedRow: function () {
 					if ( arguments.length !== 3 ) {
 						tmp = false;
 					}
-				},
-				fnInitComplete: function () {
-					complete = true;
 				}
 			} );
 		},
-		function () { return (tmp && complete); }
+		function () { return tmp; }
 	);
 
-	oTest.fnWaitTest(
+	oTest.fnTest(
 		"First argument is a TR element",
 		function () { 
 			oSession.fnRestore();
 			tmp = true;
-			complete = false;
 
 			$('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"aaData": gaaData,
 				fnCreatedRow: function () {
 					if ( arguments[0].nodeName !== "TR" ) {
 						tmp = false;
 					}
-				},
-				fnInitComplete: function () {
-					complete = true;
 				}
 			} );
 		},
-		function () { return (tmp && complete); }
+		function () { return tmp; }
 	);
 
-	oTest.fnWaitTest(
+	oTest.fnTest(
 		"Second argument is an array with 5 elements",
 		function () { 
 			oSession.fnRestore();
 			tmp = true;
-			complete = false;
 
 			$('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"aaData": gaaData,
 				fnCreatedRow: function () {
 					if ( arguments[1].length !== 5 ) {
 						tmp = false;
 					}
-				},
-				fnInitComplete: function () {
-					complete = true;
 				}
 			} );
 		},
-		function () { return (tmp && complete); }
+		function () { return tmp; }
 	);
 
-	oTest.fnWaitTest(
+	oTest.fnTest(
 		"Third argument is the data source for the row",
 		function () { 
 			oSession.fnRestore();
 			tmp = true;
-			complete = false;
 
 			$('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"aaData": gaaData,
 				fnCreatedRow: function () {
 					if ( arguments[1] !== this.fnSettings().aoData[ arguments[2] ]._aData ) {
 						tmp = false;
 					}
-				},
-				fnInitComplete: function () {
-					complete = true;
 				}
 			} );
 		},
-		function () { return (tmp && complete); }
+		function () { return tmp; }
 	);
 
-	oTest.fnWaitTest(
+	oTest.fnTest(
 		"TR element is tied to the correct data",
 		function () { 
 			oSession.fnRestore();
 			tmp = false;
-			complete = false;
 
 			$('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"aaData": gaaData,
 				fnCreatedRow: function (tr, data, index) {
 					if ( data[1] === "Firefox 1.0" ) {
 						if ( $('td:eq(3)', tr).html() == "1.7" ) {
 							tmp = true;
 						}
 					}
-				},
-				fnInitComplete: function () {
-					complete = true;
 				}
 			} );
 		},
-		function () { return (tmp && complete); }
+		function () { return tmp; }
 	);
 	
 	

@@ -1,4 +1,4 @@
-// DATA_TEMPLATE: empty_table
+// DATA_TEMPLATE: dom_data
 oTest.fnStart( "aoColumns.sWidth" );
 
 /* NOTE - we need to disable the auto width for the majority of these test in order to preform 
@@ -9,7 +9,6 @@ oTest.fnStart( "aoColumns.sWidth" );
 $(document).ready( function () {
 	/* Check the default */
 	var oTable = $('#example').dataTable( {
-		"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
 		"bAutoWidth": false,
 		"aoColumns": [
 			null,
@@ -21,18 +20,17 @@ $(document).ready( function () {
 	} );
 	var oSettings = oTable.fnSettings();
 	
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
 		"With auto width disabled the width for one column is appled",
 		null,
 		function () { return $('#example thead th:eq(1)')[0].style.width == "40%"; }
 	);
 	
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
 		"With auto width disabled the width for one column is appled",
 		function () {
 			oSession.fnRestore();
 			oTable = $('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
 				"bAutoWidth": false,
 				"aoColumns": [
 					null,
@@ -52,12 +50,11 @@ $(document).ready( function () {
 	);
 	
 	
-	oTest.fnWaitTest( 
+	oTest.fnTest( 
 		"With auto width, it will make the smallest column the largest with percentage width given",
 		function () {
 			oSession.fnRestore();
 			oTable = $('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
 				"aoColumns": [
 					null,
 					null,
