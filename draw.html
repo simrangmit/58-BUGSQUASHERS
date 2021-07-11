@@ -17,13 +17,18 @@
 				var oSettings = oTable.fnSettings();
 				var iStart = new Date().getTime();
 				
-				//for ( var i=0, iLen=100 ; i<iLen ; i++ )
+				//console.profile();
+				//for ( var i=0, iLen=1000 ; i<iLen ; i++ )
 				//{
-				console.profile( );
-					oTable.fnPageChange( "next" );
-					oTable.fnPageChange( "previous" );
-				console.profileEnd( );
+				//	oSettings._iDisplayLength = 100;
+				//	oTable.oApi._fnCalculateEnd( oSettings );
+				//	oTable.oApi._fnDraw( oSettings );
+				//	
+				//	oSettings._iDisplayLength = 10;
+				//	oTable.oApi._fnCalculateEnd( oSettings );
+				//	oTable.oApi._fnDraw( oSettings );
 				//}
+				//console.profileEnd();
 				
 				var iEnd = new Date().getTime();
 				document.getElementById('output').innerHTML = "Test took "+(iEnd-iStart)+"mS";

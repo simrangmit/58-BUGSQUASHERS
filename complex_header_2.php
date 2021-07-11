@@ -1,53 +1,77 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<?php
+	header( 'Expires: Sat, 26 Jul 1997 05:00:00 GMT' ); 
+	header( 'Last-Modified: ' . gmdate( 'D, d M Y H:i:s' ) . ' GMT' ); 
+	header( 'Cache-Control: no-store, no-cache, must-revalidate' ); 
+	header( 'Cache-Control: post-check=0, pre-check=0', false ); 
+	header( 'Pragma: no-cache' ); 
+?><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-		<link rel="shortcut icon" type="image/ico" href="http://www.datatables.net/favicon.ico" />
+		<link rel="shortcut icon" type="image/ico" href="http://www.sprymedia.co.uk/media/images/favicon.ico" />
 		
-		<title>DataTables example</title>
+		<title>DataTables unit testing</title>
 		<style type="text/css" title="currentStyle">
 			@import "../../css/demo_page.css";
 			@import "../../css/demo_table.css";
 		</style>
 		<script type="text/javascript" language="javascript" src="../../js/jquery.js"></script>
 		<script type="text/javascript" language="javascript" src="../../js/jquery.dataTables.js"></script>
-		<script type="text/javascript" charset="utf-8">
-			$(document).ready(function() {
-				var oTable = $('#example').dataTable();
-				var oSettings = oTable.fnSettings();
-				var iStart = new Date().getTime();
-				
-				//for ( var i=0, iLen=100 ; i<iLen ; i++ )
-				//{
-				console.profile( );
-					oTable.fnPageChange( "next" );
-					oTable.fnPageChange( "previous" );
-				console.profileEnd( );
-				//}
-				
-				var iEnd = new Date().getTime();
-				document.getElementById('output').innerHTML = "Test took "+(iEnd-iStart)+"mS";
-			} );
-		</script>
+		<script type="text/javascript" language="javascript" src="../unit_test.js"></script>
+		<?php
+			$aScripts = explode( ":", $_GET['scripts'] );
+			for ( $i=0 ; $i<count($aScripts) ; $i++ )
+			{
+				echo '<script type="text/javascript" language="javascript" src="../'.$aScripts[$i].'?rand='.rand().'"></script>'."\n";
+			}
+		?>
 	</head>
 	<body id="dt_example">
 		<div id="container">
 			<div class="full_width big">
-				<i>DataTables</i> performance test - draw
+				<i>DataTables</i> unit test template for reading DOM data
 			</div>
-			<div id="output"></div>
 			
 			<div id="demo">
 <table cellpadding="0" cellspacing="0" border="0" class="display" id="example">
 	<thead>
 		<tr>
-			<th>Rendering engine</th>
-			<th>Browser</th>
-			<th>Platform(s)</th>
-			<th>Engine version</th>
-			<th>CSS grade</th>
+			<th class="bl bt">1</th>
+			<th colspan="3" rowspan="2" class="bl br bt">2</th>
+			<th class="br bt">3</th>
+		</tr>
+		<tr>
+			<th class="bl br" rowspan="3">4</th>
+			<td class="bl br">5</td>
+		</tr>
+		<tr>
+			<th class="bl br" colspan="2">6</th>
+			<th class="br" rowspan="3">7</th>
+			<th class="br bt" rowspan="3">8</th>
+		</tr>
+		<tr>
+			<th class="bl br">9</th>
+			<th class="bl br">10</th>
+		</tr>
+		<tr>
+			<th class="bl br" colspan="2">11</th>
+			<th class="bl br">12</th>
 		</tr>
 	</thead>
+	<tfoot>
+		<tr>
+			<th class="bl bt">1</th>
+			<th colspan="3" rowspan="2" class="bl br bt">2</th>
+			<th class="br bt">3</th>
+		</tr>
+		<tr>
+			<th class="bl br">4</th>
+			<th class="bl br">5</th>
+		</tr>
+		<tr>
+			<th class="bl br" colspan="5">6</th>
+		</tr>
+	</tfoot>
 	<tbody>
 		<tr class="gradeX">
 			<td>Trident</td>
@@ -453,25 +477,9 @@
 			<td class="center">U</td>
 		</tr>
 	</tbody>
-	<tfoot>
-		<tr>
-			<th>Rendering engine</th>
-			<th>Browser</th>
-			<th>Platform(s)</th>
-			<th>Engine version</th>
-			<th>CSS grade</th>
-		</tr>
-	</tfoot>
 </table>
 			</div>
 			<div class="spacer"></div>
-			
-			
-			<div id="footer" style="text-align:center;">
-				<span style="font-size:10px;">
-					DataTables &copy; Allan Jardine 2008-2009.
-				</span>
-			</div>
 		</div>
 	</body>
 </html>
