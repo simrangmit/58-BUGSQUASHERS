@@ -1,1 +1,106 @@
-(function(e){"function"==typeof define&&define.amd?define(["jquery","moment"],e):e(jQuery,moment)})(function(e,t){var a={words:{m:["jedan minut","jedne minute"],mm:["minut","minute","minuta"],h:["jedan sat","jednog sata"],hh:["sat","sata","sati"],dd:["dan","dana","dana"],MM:["mesec","meseca","meseci"],yy:["godina","godine","godina"]},correctGrammaticalCase:function(e,t){return 1===e?t[0]:e>=2&&4>=e?t[1]:t[2]},translate:function(e,t,n){var r=a.words[n];return 1===n.length?t?r[0]:r[1]:e+" "+a.correctGrammaticalCase(e,r)}};t.lang("sr",{months:["januar","februar","mart","april","maj","jun","jul","avgust","septembar","oktobar","novembar","decembar"],monthsShort:["jan.","feb.","mar.","apr.","maj","jun","jul","avg.","sep.","okt.","nov.","dec."],weekdays:["nedelja","ponedeljak","utorak","sreda","četvrtak","petak","subota"],weekdaysShort:["ned.","pon.","uto.","sre.","čet.","pet.","sub."],weekdaysMin:["ne","po","ut","sr","če","pe","su"],longDateFormat:{LT:"H:mm",L:"DD. MM. YYYY",LL:"D. MMMM YYYY",LLL:"D. MMMM YYYY LT",LLLL:"dddd, D. MMMM YYYY LT"},calendar:{sameDay:"[danas u] LT",nextDay:"[sutra u] LT",nextWeek:function(){switch(this.day()){case 0:return"[u] [nedelju] [u] LT";case 3:return"[u] [sredu] [u] LT";case 6:return"[u] [subotu] [u] LT";case 1:case 2:case 4:case 5:return"[u] dddd [u] LT"}},lastDay:"[juče u] LT",lastWeek:function(){var e=["[prošle] [nedelje] [u] LT","[prošlog] [ponedeljka] [u] LT","[prošlog] [utorka] [u] LT","[prošle] [srede] [u] LT","[prošlog] [četvrtka] [u] LT","[prošlog] [petka] [u] LT","[prošle] [subote] [u] LT"];return e[this.day()]},sameElse:"L"},relativeTime:{future:"za %s",past:"pre %s",s:"nekoliko sekundi",m:a.translate,mm:a.translate,h:a.translate,hh:a.translate,d:"dan",dd:a.translate,M:"mesec",MM:a.translate,y:"godinu",yy:a.translate},ordinal:"%d.",week:{dow:1,doy:7}}),e.fullCalendar.datepickerLang("sr","sr",{closeText:"Затвори",prevText:"&#x3C;",nextText:"&#x3E;",currentText:"Данас",monthNames:["Јануар","Фебруар","Март","Април","Мај","Јун","Јул","Август","Септембар","Октобар","Новембар","Децембар"],monthNamesShort:["Јан","Феб","Мар","Апр","Мај","Јун","Јул","Авг","Сеп","Окт","Нов","Дец"],dayNames:["Недеља","Понедељак","Уторак","Среда","Четвртак","Петак","Субота"],dayNamesShort:["Нед","Пон","Уто","Сре","Чет","Пет","Суб"],dayNamesMin:["Не","По","Ут","Ср","Че","Пе","Су"],weekHeader:"Сед",dateFormat:"dd.mm.yy",firstDay:1,isRTL:!1,showMonthAfterYear:!1,yearSuffix:""}),e.fullCalendar.lang("sr",{defaultButtonText:{month:"Месец",week:"Недеља",day:"Дан",list:"Планер"},allDayText:"Цео дан"})});
+// moment.js language configuration
+// language : Serbian-latin (sr)
+// author : Milan Janačković<milanjanackovic@gmail.com> : https://github.com/milan-j
+
+(function (factory) {
+    if (typeof define === 'function' && define.amd) {
+        define(['moment'], factory); // AMD
+    } else if (typeof exports === 'object') {
+        module.exports = factory(require('../moment')); // Node
+    } else {
+        factory(window.moment); // Browser global
+    }
+}(function (moment) {
+
+    var translator = {
+        words: { //Different grammatical cases
+            m: ['jedan minut', 'jedne minute'],
+            mm: ['minut', 'minute', 'minuta'],
+            h: ['jedan sat', 'jednog sata'],
+            hh: ['sat', 'sata', 'sati'],
+            dd: ['dan', 'dana', 'dana'],
+            MM: ['mesec', 'meseca', 'meseci'],
+            yy: ['godina', 'godine', 'godina']
+        },
+        correctGrammaticalCase: function (number, wordKey) {
+            return number === 1 ? wordKey[0] : (number >= 2 && number <= 4 ? wordKey[1] : wordKey[2]);
+        },
+        translate: function (number, withoutSuffix, key) {
+            var wordKey = translator.words[key];
+            if (key.length === 1) {
+                return withoutSuffix ? wordKey[0] : wordKey[1];
+            } else {
+                return number + ' ' + translator.correctGrammaticalCase(number, wordKey);
+            }
+        }
+    };
+
+    return moment.lang('sr', {
+        months: ['januar', 'februar', 'mart', 'april', 'maj', 'jun', 'jul', 'avgust', 'septembar', 'oktobar', 'novembar', 'decembar'],
+        monthsShort: ['jan.', 'feb.', 'mar.', 'apr.', 'maj', 'jun', 'jul', 'avg.', 'sep.', 'okt.', 'nov.', 'dec.'],
+        weekdays: ['nedelja', 'ponedeljak', 'utorak', 'sreda', 'četvrtak', 'petak', 'subota'],
+        weekdaysShort: ['ned.', 'pon.', 'uto.', 'sre.', 'čet.', 'pet.', 'sub.'],
+        weekdaysMin: ['ne', 'po', 'ut', 'sr', 'če', 'pe', 'su'],
+        longDateFormat: {
+            LT: "H:mm",
+            L: "DD. MM. YYYY",
+            LL: "D. MMMM YYYY",
+            LLL: "D. MMMM YYYY LT",
+            LLLL: "dddd, D. MMMM YYYY LT"
+        },
+        calendar: {
+            sameDay: '[danas u] LT',
+            nextDay: '[sutra u] LT',
+
+            nextWeek: function () {
+                switch (this.day()) {
+                case 0:
+                    return '[u] [nedelju] [u] LT';
+                case 3:
+                    return '[u] [sredu] [u] LT';
+                case 6:
+                    return '[u] [subotu] [u] LT';
+                case 1:
+                case 2:
+                case 4:
+                case 5:
+                    return '[u] dddd [u] LT';
+                }
+            },
+            lastDay  : '[juče u] LT',
+            lastWeek : function () {
+                var lastWeekDays = [
+                    '[prošle] [nedelje] [u] LT',
+                    '[prošlog] [ponedeljka] [u] LT',
+                    '[prošlog] [utorka] [u] LT',
+                    '[prošle] [srede] [u] LT',
+                    '[prošlog] [četvrtka] [u] LT',
+                    '[prošlog] [petka] [u] LT',
+                    '[prošle] [subote] [u] LT'
+                ];
+                return lastWeekDays[this.day()];
+            },
+            sameElse : 'L'
+        },
+        relativeTime : {
+            future : "za %s",
+            past   : "pre %s",
+            s      : "nekoliko sekundi",
+            m      : translator.translate,
+            mm     : translator.translate,
+            h      : translator.translate,
+            hh     : translator.translate,
+            d      : "dan",
+            dd     : translator.translate,
+            M      : "mesec",
+            MM     : translator.translate,
+            y      : "godinu",
+            yy     : translator.translate
+        },
+        ordinal : '%d.',
+        week : {
+            dow : 1, // Monday is the first day of the week.
+            doy : 7  // The week that contains Jan 1st is the first week of the year.
+        }
+    });
+}));
