@@ -1,11 +1,10 @@
-// DATA_TEMPLATE: js_data
+// DATA_TEMPLATE: dom_data
 oTest.fnStart( "fnCreatedCell tests" );
 
 $(document).ready( function () {
 	var tmp = 0;
 
 	$('#example').dataTable( {
-		"aaData": gaaData,
 		"aoColumnDefs": [ {
 			fnCreatedCell: function () {
 				tmp++;
@@ -33,7 +32,6 @@ $(document).ready( function () {
 			tmp = true;
 
 			$('#example').dataTable( {
-				"aaData": gaaData,
 				"aoColumnDefs": [ {
 					fnCreatedRow: function () {
 						if ( arguments.length !== 4 ) {
@@ -54,7 +52,6 @@ $(document).ready( function () {
 			tmp = true;
 
 			$('#example').dataTable( {
-				"aaData": gaaData,
 				"aoColumnDefs": [ {
 					fnCreatedRow: function () {
 						if ( arguments[0].nodeName !== "TD" ) {
@@ -75,7 +72,6 @@ $(document).ready( function () {
 			tmp = true;
 
 			$('#example').dataTable( {
-				"aaData": gaaData,
 				"aoColumnDefs": [ {
 					fnCreatedRow: function () {
 						if ( arguments[1] != $('td').html() ) {
@@ -96,7 +92,6 @@ $(document).ready( function () {
 			tmp = true;
 
 			$('#example').dataTable( {
-				"aaData": gaaData,
 				"aoColumnDefs": [ {
 					fnCreatedRow: function () {
 						if ( arguments[2].length !== 5 ) {
@@ -117,7 +112,6 @@ $(document).ready( function () {
 			tmp = true;
 
 			$('#example').dataTable( {
-				"aaData": gaaData,
 				"aoColumnDefs": [ {
 					fnCreatedRow: function () {
 						if ( arguments[2] !== this.fnSettings().aoData[ arguments[2] ]._aData ) {
@@ -138,7 +132,6 @@ $(document).ready( function () {
 			tmp = true;
 
 			$('#example').dataTable( {
-				"aaData": gaaData,
 				"aoColumnDefs": [ {
 					fnCreatedRow: function () {
 						if ( arguments[1] != $('td:eq('+arguments[4]+')', arguments[0].parentNode).html() ) {

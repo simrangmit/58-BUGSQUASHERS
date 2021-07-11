@@ -1,10 +1,9 @@
-// DATA_TEMPLATE: js_data
+// DATA_TEMPLATE: dom_data
 oTest.fnStart( "oLanguage.sProcessing" );
 
 $(document).ready( function () {
 	/* Check the default */
 	var oTable = $('#example').dataTable( {
-		"aaData": gaaData,
 		"bProcessing": true
 	} );
 	var oSettings = oTable.fnSettings();
@@ -27,7 +26,6 @@ $(document).ready( function () {
 		function () {
 			oSession.fnRestore();
 			oTable = $('#example').dataTable( {
-				"aaData": gaaData,
 				"bProcessing": true,
 				"oLanguage": {
 					"sProcessing": "unit test"

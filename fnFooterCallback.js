@@ -1,11 +1,9 @@
-// DATA_TEMPLATE: js_data
+// DATA_TEMPLATE: dom_data
 oTest.fnStart( "fnFooterCallback" );
 
 $(document).ready( function () {
 	/* Check the default */
-	var oTable = $('#example').dataTable( {
-		"aaData": gaaData
-	} );
+	var oTable = $('#example').dataTable();
 	var oSettings = oTable.fnSettings();
 	var mPass;
 	
@@ -23,7 +21,6 @@ $(document).ready( function () {
 			
 			mPass = -1;
 			$('#example').dataTable( {
-				"aaData": gaaData,
 				"fnFooterCallback": function ( ) {
 					mPass = arguments.length;
 				}
@@ -40,7 +37,6 @@ $(document).ready( function () {
 			
 			mPass = 0;
 			$('#example').dataTable( {
-				"aaData": gaaData,
 				"fnFooterCallback": function ( nFoot, aasData, iStart, iEnd, aiDisplay ) {
 					mPass++;
 				}
@@ -61,7 +57,6 @@ $(document).ready( function () {
 		function () {
 			oSession.fnRestore();
 			$('#example').dataTable( {
-				"aaData": gaaData,
 				"fnFooterCallback": function ( nFoot, aasData, iStart, iEnd, aiDisplay ) {
 					nFoot.getElementsByTagName('th')[0].innerHTML = "Displaying "+(iEnd-iStart)+" records";
 				}
@@ -78,7 +73,6 @@ $(document).ready( function () {
 			
 			mPass = true;
 			$('#example').dataTable( {
-				"aaData": gaaData,
 				"fnFooterCallback": function ( nFoot, aasData, iStart, iEnd, aiDisplay ) {
 					if ( aasData.length != 57 )
 					{
@@ -97,7 +91,6 @@ $(document).ready( function () {
 			
 			mPass = true;
 			$('#example').dataTable( {
-				"aaData": gaaData,
 				"fnFooterCallback": function ( nFoot, aasData, iStart, iEnd, aiDisplay ) {
 					for ( var i=0, iLen=aasData.length ; i<iLen ; i++ )
 					{
@@ -120,7 +113,6 @@ $(document).ready( function () {
 			
 			mPass = true;
 			$('#example').dataTable( {
-				"aaData": gaaData,
 				"fnFooterCallback": function ( nFoot, aasData, iStart, iEnd, aiDisplay ) {
 					if ( iStart != 0 )
 					{
@@ -140,7 +132,6 @@ $(document).ready( function () {
 			
 			mPass = false;
 			$('#example').dataTable( {
-				"aaData": gaaData,
 				"fnFooterCallback": function ( nFoot, aasData, iStart, iEnd, aiDisplay ) {
 					if ( iStart == 10 )
 					{
@@ -161,7 +152,6 @@ $(document).ready( function () {
 			
 			mPass = true;
 			$('#example').dataTable( {
-				"aaData": gaaData,
 				"fnFooterCallback": function ( nFoot, aasData, iStart, iEnd, aiDisplay ) {
 					if ( iEnd != 10 )
 					{
@@ -181,7 +171,6 @@ $(document).ready( function () {
 			
 			mPass = false;
 			$('#example').dataTable( {
-				"aaData": gaaData,
 				"fnFooterCallback": function ( nFoot, aasData, iStart, iEnd, aiDisplay ) {
 					if ( iEnd == 20 )
 					{
@@ -202,7 +191,6 @@ $(document).ready( function () {
 			
 			mPass = false;
 			$('#example').dataTable( {
-				"aaData": gaaData,
 				"fnFooterCallback": function ( nFoot, aasData, iStart, iEnd, aiDisplay ) {
 					if ( aiDisplay.length == 57 )
 					{
@@ -221,7 +209,6 @@ $(document).ready( function () {
 			
 			mPass = false;
 			oTable = $('#example').dataTable( {
-				"aaData": gaaData,
 				"fnFooterCallback": function ( nFoot, aasData, iStart, iEnd, aiDisplay ) {
 					if ( aiDisplay.length == 9 )
 					{

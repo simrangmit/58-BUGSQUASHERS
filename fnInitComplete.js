@@ -1,13 +1,11 @@
-// DATA_TEMPLATE: js_data
+// DATA_TEMPLATE: dom_data
 oTest.fnStart( "fnInitComplete" );
 
 /* Fairly boring function compared to the others! */
 
 $(document).ready( function () {
 	/* Check the default */
-	var oTable = $('#example').dataTable( {
-		"aaData": gaaData
-	} );
+	var oTable = $('#example').dataTable();
 	var oSettings = oTable.fnSettings();
 	var mPass;
 	
@@ -25,7 +23,6 @@ $(document).ready( function () {
 			
 			mPass = -1;
 			$('#example').dataTable( {
-				"aaData": gaaData,
 				"fnInitComplete": function ( ) {
 					mPass = arguments.length===2 && arguments[1]===undefined;
 				}
@@ -41,7 +38,6 @@ $(document).ready( function () {
 			oSession.fnRestore();
 			
 			oTable = $('#example').dataTable( {
-				"aaData": gaaData,
 				"fnInitComplete": function ( oSettings ) {
 					mPass = oSettings;
 				}
@@ -58,7 +54,6 @@ $(document).ready( function () {
 			
 			mPass = 0;
 			$('#example').dataTable( {
-				"aaData": gaaData,
 				"fnInitComplete": function ( ) {
 					mPass++;
 				}
@@ -75,6 +70,22 @@ $(document).ready( function () {
 			$('#example_next').click();
 		},
 		function () { return mPass == 1; }
+	);
+	
+	
+	oTest.fnWaitTest( 
+		"10 rows in the table on complete",
+		function () {
+			oSession.fnRestore();
+			
+			mPass = 0;
+			$('#example').dataTable( {
+				"fnInitComplete": function ( ) {
+					mPass = $('#example tbody tr').length;
+				}
+			} );
+		},
+		function () { return mPass == 10; }
 	);
 	
 	

@@ -1,13 +1,11 @@
-// DATA_TEMPLATE: js_data
+// DATA_TEMPLATE: dom_data
 oTest.fnStart( "fnRowCallback" );
 
 /* Note - fnRowCallback MUST return the first arguments (modified or not) */
 
 $(document).ready( function () {
 	/* Check the default */
-	var oTable = $('#example').dataTable( {
-		"aaData": gaaData
-	} );
+	var oTable = $('#example').dataTable();
 	var oSettings = oTable.fnSettings();
 	var mPass;
 	
@@ -25,7 +23,6 @@ $(document).ready( function () {
 			
 			mPass = -1;
 			$('#example').dataTable( {
-				"aaData": gaaData,
 				"fnRowCallback": function ( nTr ) {
 					mPass = arguments.length;
 					return nTr;
@@ -43,7 +40,6 @@ $(document).ready( function () {
 			
 			mPass = 0;
 			$('#example').dataTable( {
-				"aaData": gaaData,
 				"fnRowCallback": function ( nTr, asData, iDrawIndex, iDataIndex ) {
 					mPass++;
 					return nTr;
@@ -58,7 +54,6 @@ $(document).ready( function () {
 		function () {
 			oSession.fnRestore();
 			$('#example').dataTable( {
-				"aaData": gaaData,
 				"fnRowCallback": function ( nTr, asData, iDrawIndex, iDataIndex ) {
 					$(nTr).addClass('unit_test');
 					return nTr;
@@ -75,7 +70,6 @@ $(document).ready( function () {
 			
 			mPass = true;
 			$('#example').dataTable( {
-				"aaData": gaaData,
 				"fnRowCallback": function ( nTr, asData, iDrawIndex, iDataIndex ) {
 					if ( asData.length != 5 )
 						mPass = false;
@@ -94,7 +88,6 @@ $(document).ready( function () {
 			mPass = true;
 			var iCount = 0;
 			$('#example').dataTable( {
-				"aaData": gaaData,
 				"fnRowCallback": function ( nTr, asData, iDrawIndex, iDataIndex ) {
 					if ( iCount != iDrawIndex )
 						mPass = false;

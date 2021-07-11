@@ -1,11 +1,9 @@
-// DATA_TEMPLATE: js_data
+// DATA_TEMPLATE: dom_data
 oTest.fnStart( "iDisplayLength" );
 
 $(document).ready( function () {
 	/* Check the default */
-	$('#example').dataTable( {
-		"aaData": gaaData
-	} );
+	$('#example').dataTable();
 	
 	oTest.fnTest( 
 		"Default length is ten",
@@ -25,7 +23,6 @@ $(document).ready( function () {
 		function () {
 			oSession.fnRestore();
 			$('#example').dataTable( {
-				"aaData": gaaData,
 				"iDisplayLength": 25
 			} );
 		},
@@ -44,7 +41,6 @@ $(document).ready( function () {
 		function () {
 			oSession.fnRestore();
 			$('#example').dataTable( {
-				"aaData": gaaData,
 				"iDisplayLength": 100
 			} );
 		},
@@ -63,7 +59,6 @@ $(document).ready( function () {
 		function () {
 			oSession.fnRestore();
 			$('#example').dataTable( {
-				"aaData": gaaData,
 				"iDisplayLength": 23
 			} );
 		},

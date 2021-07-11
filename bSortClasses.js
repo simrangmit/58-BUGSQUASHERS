@@ -1,11 +1,9 @@
-// DATA_TEMPLATE: js_data
+// DATA_TEMPLATE: dom_data
 oTest.fnStart( "bSortClasses" );
 
 $(document).ready( function () {
 	/* Check the default */
-	$('#example').dataTable( {
-		"aaData": gaaData
-	} );
+	$('#example').dataTable();
 	
 	oTest.fnTest( 
 		"Sorting classes are applied by default",
@@ -85,7 +83,6 @@ $(document).ready( function () {
 		function () {
 			oSession.fnRestore();
 			$('#example').dataTable( {
-				"aaData": gaaData,
 				"bSortClasses": false
 			} );
 		},
@@ -120,7 +117,6 @@ $(document).ready( function () {
 		function () {
 			oSession.fnRestore();
 			$('#example').dataTable( {
-				"aaData": gaaData,
 				"bSortClasses": true
 			} );
 		},

@@ -1,11 +1,9 @@
-// DATA_TEMPLATE: js_data
+// DATA_TEMPLATE: dom_data
 oTest.fnStart( "oLanguage.sSearch" );
 
 $(document).ready( function () {
 	/* Check the default */
-	var oTable = $('#example').dataTable( {
-		"aaData": gaaData
-	} );
+	var oTable = $('#example').dataTable();
 	var oSettings = oTable.fnSettings();
 	
 	oTest.fnTest( 
@@ -33,7 +31,6 @@ $(document).ready( function () {
 		function () {
 			oSession.fnRestore();
 			oTable = $('#example').dataTable( {
-				"aaData": gaaData,
 				"oLanguage": {
 					"sSearch": "unit test"
 				}
@@ -55,7 +52,6 @@ $(document).ready( function () {
 		function () {
 			oSession.fnRestore();
 			oTable = $('#example').dataTable( {
-				"aaData": gaaData,
 				"oLanguage": {
 					"sSearch": ""
 				}

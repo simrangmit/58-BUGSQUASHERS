@@ -1,11 +1,10 @@
-// DATA_TEMPLATE: js_data
+// DATA_TEMPLATE: dom_data
 oTest.fnStart( "fnCreatedRow tests" );
 
 $(document).ready( function () {
 	var tmp = 0;
 
 	$('#example').dataTable( {
-		"aaData": gaaData,
 		fnCreatedRow: function () {
 			tmp++;
 		}
@@ -30,7 +29,6 @@ $(document).ready( function () {
 			tmp = true;
 
 			$('#example').dataTable( {
-				"aaData": gaaData,
 				fnCreatedRow: function () {
 					if ( arguments.length !== 3 ) {
 						tmp = false;
@@ -48,7 +46,6 @@ $(document).ready( function () {
 			tmp = true;
 
 			$('#example').dataTable( {
-				"aaData": gaaData,
 				fnCreatedRow: function () {
 					if ( arguments[0].nodeName !== "TR" ) {
 						tmp = false;
@@ -66,7 +63,6 @@ $(document).ready( function () {
 			tmp = true;
 
 			$('#example').dataTable( {
-				"aaData": gaaData,
 				fnCreatedRow: function () {
 					if ( arguments[1].length !== 5 ) {
 						tmp = false;
@@ -84,7 +80,6 @@ $(document).ready( function () {
 			tmp = true;
 
 			$('#example').dataTable( {
-				"aaData": gaaData,
 				fnCreatedRow: function () {
 					if ( arguments[1] !== this.fnSettings().aoData[ arguments[2] ]._aData ) {
 						tmp = false;
@@ -102,7 +97,6 @@ $(document).ready( function () {
 			tmp = false;
 
 			$('#example').dataTable( {
-				"aaData": gaaData,
 				fnCreatedRow: function (tr, data, index) {
 					if ( data[1] === "Firefox 1.0" ) {
 						if ( $('td:eq(3)', tr).html() == "1.7" ) {
