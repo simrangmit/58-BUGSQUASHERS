@@ -4,8 +4,8 @@ oTest.fnStart( "bLengthChange" );
 $(document).ready( function () {
 	/* Check the default */
 	$('#example').dataTable( {
-		"bServerSide": true,
-		"sAjaxSource": "../../../examples/server_side/scripts/server_processing.php"
+		"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+		"bDeferRender": true
 	} );
 	
 	oTest.fnWaitTest( 
@@ -43,8 +43,8 @@ $(document).ready( function () {
 		function () {
 			oSession.fnRestore();
 			$('#example').dataTable( {
-				"bServerSide": true,
-		"sAjaxSource": "../../../examples/server_side/scripts/server_processing.php",
+				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"bDeferRender": true,
 				"bLengthChange": false
 			} );
 		},
@@ -64,8 +64,8 @@ $(document).ready( function () {
 		function () {
 			oSession.fnRestore();
 			$('#example').dataTable( {
-				"bServerSide": true,
-		"sAjaxSource": "../../../examples/server_side/scripts/server_processing.php",
+				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"bDeferRender": true,
 				"bLengthChange": true
 			} );
 		},

@@ -6,8 +6,8 @@ oTest.fnStart( "aoColumns.sName" );
 $(document).ready( function () {
 	/* Check the default */
 	var oTable = $('#example').dataTable( {
-		"bServerSide": true,
-		"sAjaxSource": "../../../examples/server_side/scripts/server_processing.php",
+		"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+		"bDeferRender": true,
 		"aoColumns": [
 			null,
 			null,

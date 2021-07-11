@@ -4,8 +4,8 @@ oTest.fnStart( "oLanguage.sZeroRecords" );
 $(document).ready( function () {
 	/* Check the default */
 	var oTable = $('#example').dataTable( {
-		"bServerSide": true,
-		"sAjaxSource": "../../../examples/server_side/scripts/server_processing.php"
+		"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+		"bDeferRender": true
 	} );
 	var oSettings = oTable.fnSettings();
 	
@@ -18,11 +18,7 @@ $(document).ready( function () {
 	oTest.fnWaitTest(
 		"Text is shown when empty table (after filtering)",
 		function () { oTable.fnFilter('nothinghere'); },
-		function () {
-			if ( $('#example tbody tr td').length == 0 )
-				return false;
-			return $('#example tbody tr td')[0].innerHTML == "No matching records found";
-		}
+		function () { return $('#example tbody tr td')[0].innerHTML == "No matching records found" }
 	);
 	
 	
@@ -32,8 +28,8 @@ $(document).ready( function () {
 		function () {
 			oSession.fnRestore();
 			oTable = $('#example').dataTable( {
-				"bServerSide": true,
-		"sAjaxSource": "../../../examples/server_side/scripts/server_processing.php",
+				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"bDeferRender": true,
 				"oLanguage": {
 					"sZeroRecords": "unit test"
 				}
@@ -46,11 +42,7 @@ $(document).ready( function () {
 	oTest.fnWaitTest(
 		"Text is shown when empty table (after filtering)",
 		function () { oTable.fnFilter('nothinghere2'); },
-		function () {
-			if ( $('#example tbody tr td').length == 0 )
-				return false;
-			return $('#example tbody tr td')[0].innerHTML == "unit test"
-		}
+		function () { return $('#example tbody tr td')[0].innerHTML == "unit test" }
 	);
 	
 	

@@ -4,8 +4,8 @@ oTest.fnStart( "oLanguage.sInfo" );
 $(document).ready( function () {
 	/* Check the default */
 	var oTable = $('#example').dataTable( {
-		"bServerSide": true,
-		"sAjaxSource": "../../../examples/server_side/scripts/server_processing.php"
+		"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+		"bDeferRender": true
 	} );
 	var oSettings = oTable.fnSettings();
 	
@@ -27,8 +27,8 @@ $(document).ready( function () {
 		function () {
 			oSession.fnRestore();
 			oTable = $('#example').dataTable( {
-				"bServerSide": true,
-		"sAjaxSource": "../../../examples/server_side/scripts/server_processing.php",
+				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"bDeferRender": true,
 				"oLanguage": {
 					"sInfo": "unit test"
 				}
@@ -49,8 +49,8 @@ $(document).ready( function () {
 		function () {
 			oSession.fnRestore();
 			$('#example').dataTable( {
-				"bServerSide": true,
-		"sAjaxSource": "../../../examples/server_side/scripts/server_processing.php",
+				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"bDeferRender": true,
 				"oLanguage": {
 					"sInfo": "unit _START_ test"
 				}
@@ -64,8 +64,8 @@ $(document).ready( function () {
 		function () {
 			oSession.fnRestore();
 			$('#example').dataTable( {
-				"bServerSide": true,
-		"sAjaxSource": "../../../examples/server_side/scripts/server_processing.php",
+				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"bDeferRender": true,
 				"oLanguage": {
 					"sInfo": "unit _END_ test"
 				}
@@ -79,8 +79,8 @@ $(document).ready( function () {
 		function () {
 			oSession.fnRestore();
 			$('#example').dataTable( {
-				"bServerSide": true,
-		"sAjaxSource": "../../../examples/server_side/scripts/server_processing.php",
+				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"bDeferRender": true,
 				"oLanguage": {
 					"sInfo": "unit _END_ test"
 				}
@@ -94,8 +94,8 @@ $(document).ready( function () {
 		function () {
 			oSession.fnRestore();
 			$('#example').dataTable( {
-				"bServerSide": true,
-		"sAjaxSource": "../../../examples/server_side/scripts/server_processing.php",
+				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"bDeferRender": true,
 				"oLanguage": {
 					"sInfo": "unit _START_ _END_ test"
 				}
@@ -109,8 +109,8 @@ $(document).ready( function () {
 		function () {
 			oSession.fnRestore();
 			$('#example').dataTable( {
-				"bServerSide": true,
-		"sAjaxSource": "../../../examples/server_side/scripts/server_processing.php",
+				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"bDeferRender": true,
 				"oLanguage": {
 					"sInfo": "unit _START_ _END_ _TOTAL_ test"
 				}

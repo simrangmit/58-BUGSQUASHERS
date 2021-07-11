@@ -4,20 +4,36 @@ oTest.fnStart( "fnInitComplete" );
 /* Fairly boring function compared to the others! */
 
 $(document).ready( function () {
+	/* Check the default */
+	var oTable = $('#example').dataTable( {
+		"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+		"bDeferRender": true
+	} );
+	var oSettings = oTable.fnSettings();
+	var mPass;
+	
 	oTest.fnWaitTest( 
-		"Two arguments passed",
+		"Default should be null",
+		null,
+		function () { return oSettings.fnInitComplete == null; }
+	);
+	
+	
+	oTest.fnWaitTest( 
+		"Two arguments passed (for Ajax!)",
 		function () {
+			oSession.fnRestore();
 			
 			mPass = -1;
 			$('#example').dataTable( {
-				"bServerSide": true,
-		"sAjaxSource": "../../../examples/server_side/scripts/server_processing.php",
+				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"bDeferRender": true,
 				"fnInitComplete": function ( ) {
-					mPass = arguments.length===2 && arguments[1]===undefined;
+					mPass = arguments.length;
 				}
 			} );
 		},
-		function () { return mPass; }
+		function () { return mPass == 2; }
 	);
 	
 	
@@ -27,14 +43,14 @@ $(document).ready( function () {
 			oSession.fnRestore();
 			
 			oTable = $('#example').dataTable( {
-				"bServerSide": true,
-		"sAjaxSource": "../../../examples/server_side/scripts/server_processing.php",
+				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"bDeferRender": true,
 				"fnInitComplete": function ( oSettings ) {
 					mPass = oSettings;
 				}
 			} );
 		},
-		function () { console.log( oTable.fnSettings(), mPass );return oTable.fnSettings() === mPass; }
+		function () { return oTable.fnSettings() == mPass; }
 	);
 	
 	
@@ -45,8 +61,8 @@ $(document).ready( function () {
 			
 			mPass = 0;
 			$('#example').dataTable( {
-				"bServerSide": true,
-				"sAjaxSource": "../../../examples/server_side/scripts/server_processing.php",
+				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"bDeferRender": true,
 				"fnInitComplete": function ( ) {
 					mPass++;
 				}
@@ -73,8 +89,8 @@ $(document).ready( function () {
 			
 			mPass = 0;
 			$('#example').dataTable( {
-				"bServerSide": true,
-				"sAjaxSource": "../../../examples/server_side/scripts/server_processing.php",
+				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"bDeferRender": true,
 				"fnInitComplete": function ( ) {
 					mPass = $('#example tbody tr').length;
 				}

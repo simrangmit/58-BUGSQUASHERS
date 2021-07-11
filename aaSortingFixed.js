@@ -4,8 +4,8 @@ oTest.fnStart( "aaSortingFixed" );
 $(document).ready( function () {
 	/* Check the default */
 	var oTable = $('#example').dataTable( {
-		"bServerSide": true,
-		"sAjaxSource": "../../../examples/server_side/scripts/server_processing.php"
+		"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+		"bDeferRender": true
 	} );
 	var oSettings = oTable.fnSettings();
 	
@@ -23,11 +23,14 @@ $(document).ready( function () {
 		function () {
 			oSession.fnRestore();
 			$('#example').dataTable( {
-				"bServerSide": true,
-		"sAjaxSource": "../../../examples/server_side/scripts/server_processing.php",
-				"aaSortingFixed": [['0','asc']]
+				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"bDeferRender": true,
+				"aaSortingFixed": [['0','asc']],
+				"fnInitComplete": function () {
+					$('#example thead th:eq(1)').click();
+				}
 			} );
-			$('#example thead th:eq(1)').click();
+			//
 		},
 		function () { return $('#example tbody td:eq(1)').html() == "Camino 1.0"; }
 	);
@@ -45,8 +48,8 @@ $(document).ready( function () {
 		function () {
 			oSession.fnRestore();
 			$('#example').dataTable( {
-				"bServerSide": true,
-		"sAjaxSource": "../../../examples/server_side/scripts/server_processing.php",
+				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"bDeferRender": true,
 				"aaSortingFixed": [['3','asc']]
 			} );
 			$('#example thead th:eq(1)').click();

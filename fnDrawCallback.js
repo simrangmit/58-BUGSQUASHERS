@@ -6,11 +6,11 @@ oTest.fnStart( "fnDrawCallback" );
 $(document).ready( function () {
 	/* Check the default */
 	var oTable = $('#example').dataTable( {
-		"bServerSide": true,
-		"sAjaxSource": "../../../examples/server_side/scripts/server_processing.php"
+		"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+		"bDeferRender": true
 	} );
 	var oSettings = oTable.fnSettings();
-	var mPass;
+	var mPass, bInit;
 	
 	oTest.fnWaitTest( 
 		"Default should be null",
@@ -25,15 +25,19 @@ $(document).ready( function () {
 			oSession.fnRestore();
 			
 			mPass = -1;
+			bInit = false;
 			$('#example').dataTable( {
-				"bServerSide": true,
-		"sAjaxSource": "../../../examples/server_side/scripts/server_processing.php",
+				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"bDeferRender": true,
 				"fnDrawCallback": function ( ) {
 					mPass = arguments.length;
+				},
+				"fnInitComplete": function () {
+					bInit = true;
 				}
 			} );
 		},
-		function () { return mPass == 1; }
+		function () { return mPass == 1 && bInit; }
 	);
 	
 	
@@ -42,33 +46,42 @@ $(document).ready( function () {
 		function () {
 			oSession.fnRestore();
 			
+			bInit = false;
 			oTable = $('#example').dataTable( {
-				"bServerSide": true,
-		"sAjaxSource": "../../../examples/server_side/scripts/server_processing.php",
+				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"bDeferRender": true,
 				"fnDrawCallback": function ( oSettings ) {
 					mPass = oSettings;
+				},
+				"fnInitComplete": function () {
+					bInit = true;
 				}
 			} );
 		},
-		function () { return oTable.fnSettings() == mPass; }
+		function () { return oTable.fnSettings() == mPass && bInit; }
 	);
 	
 	
+	/* The draw callback is called once for the init and then when the data is added */
 	oTest.fnWaitTest( 
 		"fnRowCallback called once on first draw",
 		function () {
 			oSession.fnRestore();
 			
 			mPass = 0;
+			bInit = false;
 			$('#example').dataTable( {
-				"bServerSide": true,
-		"sAjaxSource": "../../../examples/server_side/scripts/server_processing.php",
+				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"bDeferRender": true,
 				"fnDrawCallback": function ( ) {
 					mPass++;
+				},
+				"fnInitComplete": function () {
+					bInit = true;
 				}
 			} );
 		},
-		function () { return mPass == 1; }
+		function () { return mPass == 2 && bInit; }
 	);
 	
 	oTest.fnWaitTest( 
@@ -78,7 +91,7 @@ $(document).ready( function () {
 			$('#example_next').click();
 			$('#example_next').click();
 		},
-		function () { return mPass > 1; }
+		function () { return mPass == 5; }
 	);
 	
 	

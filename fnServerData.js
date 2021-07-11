@@ -9,6 +9,7 @@ $(document).ready( function () {
 		function () {
 			$('#example').dataTable( {
 				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"bDeferRender": true,
 				"fnServerData": function () {
 					mPass = arguments.length;
 				}
@@ -23,6 +24,7 @@ $(document).ready( function () {
 			$('#example').dataTable( {
 				"bDestroy": true,
 				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"bDeferRender": true,
 				"fnServerData": function (sUrl, aoData, fnCallback, oSettings) {
 					mPass = sUrl == "../../../examples/ajax/sources/arrays.txt";
 				}
@@ -37,6 +39,7 @@ $(document).ready( function () {
 			$('#example').dataTable( {
 				"bDestroy": true,
 				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"bDeferRender": true,
 				"fnServerData": function (sUrl, aoData, fnCallback, oSettings) {
 					mPass = aoData.length==0;
 				}
@@ -51,6 +54,7 @@ $(document).ready( function () {
 			$('#example').dataTable( {
 				"bDestroy": true,
 				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"bDeferRender": true,
 				"fnServerData": function (sUrl, aoData, fnCallback, oSettings) {
 					mPass = typeof fnCallback == 'function';
 				}

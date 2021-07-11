@@ -4,8 +4,8 @@ oTest.fnStart( "aoColumns.bSortable" );
 $(document).ready( function () {
 	/* Check the default */
 	var oTable = $('#example').dataTable( {
-		"bServerSide": true,
-		"sAjaxSource": "../../../examples/server_side/scripts/server_processing.php"
+		"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+		"bDeferRender": true
 	} );
 	var oSettings = oTable.fnSettings();
 	
@@ -20,8 +20,8 @@ $(document).ready( function () {
 		function () {
 			oSession.fnRestore();
 			$('#example').dataTable( {
-				"bServerSide": true,
-		"sAjaxSource": "../../../examples/server_side/scripts/server_processing.php",
+				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"bDeferRender": true,
 				"aoColumns": [
 					null,
 					{ "bSortable": false },
@@ -32,7 +32,7 @@ $(document).ready( function () {
 			} );
 			$('#example thead th:eq(1)').click();
 		},
-		function () { return $('#example tbody tr:eq(0) td:eq(1)').html() == "Firefox 1.0"; }
+		function () { return $('#example tbody tr:eq(0) td:eq(1)').html() != "All others"; }
 	);
 	
 	oTest.fnWaitTest( 
@@ -47,7 +47,7 @@ $(document).ready( function () {
 			$('#example thead th:eq(4)').click();
 			$('#example thead th:eq(4)').click();
 		},
-		function () { return $('#example tbody tr:eq(0) td:eq(1)').html() == "Internet Explorer 4.0"; }
+		function () { return $('#example tbody tr:eq(0) td:eq(4)').html() == "X"; }
 	);
 	
 	oTest.fnWaitTest( 
@@ -55,8 +55,8 @@ $(document).ready( function () {
 		function () {
 			oSession.fnRestore();
 			$('#example').dataTable( {
-				"bServerSide": true,
-		"sAjaxSource": "../../../examples/server_side/scripts/server_processing.php",
+				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"bDeferRender": true,
 				"aoColumns": [
 					null,
 					{ "bSortable": false },
@@ -79,7 +79,7 @@ $(document).ready( function () {
 		function () {
 			$('#example thead th:eq(1)').click();
 		},
-		function () { return $('#example tbody tr:eq(0) td:eq(1)').html() == "Firefox 1.0"; }
+		function () { return $('#example tbody tr:eq(0) td:eq(1)').html() != "All others"; }
 	);
 	
 	oTest.fnWaitTest( 
@@ -87,7 +87,7 @@ $(document).ready( function () {
 		function () {
 			$('#example thead th:eq(3)').click();
 		},
-		function () { return $('#example tbody tr:eq(0) td:eq(1)').html() == "Firefox 1.0"; }
+		function () { return $('#example tbody tr:eq(0) td:eq(3)').html() != "-"; }
 	);
 	
 	oTest.fnWaitTest( 
@@ -95,7 +95,7 @@ $(document).ready( function () {
 		function () {
 			$('#example thead th:eq(3)').click();
 		},
-		function () { return $('#example tbody tr:eq(0) td:eq(1)').html() == "Firefox 1.0"; }
+		function () { return $('#example tbody tr:eq(0) td:eq(3)').html() != "-"; }
 	);
 	
 	oTest.fnWaitTest( 
@@ -104,7 +104,7 @@ $(document).ready( function () {
 			$('#example thead th:eq(4)').click();
 			$('#example thead th:eq(4)').click();
 		},
-		function () { return $('#example tbody tr:eq(0) td:eq(1)').html() == "Internet Explorer 4.0"; }
+		function () { return $('#example tbody tr:eq(0) td:eq(4)').html() == "X"; }
 	);
 	
 	

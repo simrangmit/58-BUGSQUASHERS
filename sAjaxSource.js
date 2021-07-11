@@ -6,8 +6,8 @@ oTest.fnStart( "sAjaxSource" );
 $(document).ready( function () {
 	/* Check the default */
 	var oTable = $('#example').dataTable( {
-		"bServerSide": true,
-		"sAjaxSource": "../../../examples/server_side/scripts/server_processing.php"
+		"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+		"bDeferRender": true
 	} );
 	var oSettings = oTable.fnSettings();
 	
@@ -15,7 +15,7 @@ $(document).ready( function () {
 		"Server side is off by default",
 		null,
 		function () { 
-			return oSettings.sAjaxSource == "../../../examples/server_side/scripts/server_processing.php";
+			return oSettings.sAjaxSource == "../../../examples/ajax/sources/arrays.txt";
 		}
 	);
 	

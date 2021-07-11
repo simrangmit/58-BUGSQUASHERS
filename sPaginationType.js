@@ -4,8 +4,8 @@ oTest.fnStart( "sPaginationType" );
 $(document).ready( function () {
 	/* Check the default */
 	var oTable = $('#example').dataTable( {
-		"bServerSide": true,
-		"sAjaxSource": "../../../examples/server_side/scripts/server_processing.php"
+		"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+		"bDeferRender": true
 	} );
 	var oSettings = oTable.fnSettings();
 	
@@ -61,13 +61,11 @@ $(document).ready( function () {
 		function () {
 			oSession.fnRestore();
 			oTable = $('#example').dataTable( {
-				"bServerSide": true,
-		"sAjaxSource": "../../../examples/server_side/scripts/server_processing.php",
+				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"bDeferRender": true,
 				"sPaginationType": "full_numbers",
 				"fnInitComplete": function () {
-					setTimeout( function () {
-						bComplete = true;
-					}, 500 );
+					bComplete = true;
 				}
 			} );
 			oSettings = oTable.fnSettings();

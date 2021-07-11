@@ -7,6 +7,7 @@ $(document).ready( function () {
 	 */
 	var oTable = $('#example').dataTable( {
 		"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+		"bDeferRender": true,
 		"aoColumns": [
 			null,
 			{ "iDataSort": 4 },
@@ -49,6 +50,7 @@ $(document).ready( function () {
 			oSession.fnRestore();
 			oTable = $('#example').dataTable( {
 				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"bDeferRender": true,
 				"aoColumns": [
 					null,
 					{ "iDataSort": 4 },
