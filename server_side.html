@@ -16,7 +16,7 @@
 				$('#example').dataTable( {
 					"bProcessing": true,
 					"bServerSide": true,
-					"sAjaxSource": "scripts/server_processing.php"
+					"sAjaxSource": "../server_side/scripts/server_processing.php"
 				} );
 			} );
 		</script>
@@ -67,17 +67,18 @@
 	$('#example').dataTable( {
 		"bProcessing": true,
 		"bServerSide": true,
-		"sAjaxSource": "scripts/server_processing.php"
+		"sAjaxSource": "../server_side/scripts/server_processing.php"
 	} );
 } );</pre>
-		<style type="text/css">
-			@import "../examples_support/syntax/css/shCore.css";
-		</style>
+			<style type="text/css">
+				@import "../examples_support/syntax/css/shCore.css";
+			</style>
 			<script type="text/javascript" language="javascript" src="../examples_support/syntax/js/shCore.js"></script>
-			
+
 			<h1>Server response</h1>
 			<p>The code below shows the latest JSON data that has been returned from the server in response to the Ajax request made by DataTables. This will update as further requests are made.</p>
 			<pre id="latest_xhr" class="brush: js;"></pre>
+			
 			
 			<h1>Server side (PHP) code</h1>
 			<pre>&lt;?php
@@ -112,27 +113,13 @@
 	 */
 	
 	/* 
-	 * Local functions
-	 */
-	function fatal_error ( $sErrorMessage = '' )
-	{
-		header( $_SERVER['SERVER_PROTOCOL'] .' 500 Internal Server Error' );
-		die( $sErrorMessage );
-	}
-
-	
-	/* 
 	 * MySQL connection
 	 */
-	if ( ! $gaSql['link'] = mysql_pconnect( $gaSql['server'], $gaSql['user'], $gaSql['password']  ) )
-	{
-		fatal_error( 'Could not open connection to server' );
-	}
-
-	if ( ! mysql_select_db( $gaSql['db'], $gaSql['link'] ) )
-	{
-		fatal_error( 'Could not select database ' );
-	}
+	$gaSql['link'] =  mysql_pconnect( $gaSql['server'], $gaSql['user'], $gaSql['password']  ) or
+		die( 'Could not open connection to server' );
+	
+	mysql_select_db( $gaSql['db'], $gaSql['link'] ) or 
+		die( 'Could not select database '. $gaSql['db'] );
 	
 	
 	/* 
@@ -217,13 +204,13 @@
 		$sOrder
 		$sLimit
 		";
-	$rResult = mysql_query( $sQuery, $gaSql['link'] ) or fatal_error( 'MySQL Error: ' . mysql_errno() );
+	$rResult = mysql_query( $sQuery, $gaSql['link'] ) or die(mysql_error());
 	
 	/* Data set length after filtering */
 	$sQuery = "
 		SELECT FOUND_ROWS()
 	";
-	$rResultFilterTotal = mysql_query( $sQuery, $gaSql['link'] ) or fatal_error( 'MySQL Error: ' . mysql_errno() );
+	$rResultFilterTotal = mysql_query( $sQuery, $gaSql['link'] ) or die(mysql_error());
 	$aResultFilterTotal = mysql_fetch_array($rResultFilterTotal);
 	$iFilteredTotal = $aResultFilterTotal[0];
 	
@@ -232,7 +219,7 @@
 		SELECT COUNT(`".$sIndexColumn."`)
 		FROM   $sTable
 	";
-	$rResultTotal = mysql_query( $sQuery, $gaSql['link'] ) or fatal_error( 'MySQL Error: ' . mysql_errno() );
+	$rResultTotal = mysql_query( $sQuery, $gaSql['link'] ) or die(mysql_error());
 	$aResultTotal = mysql_fetch_array($rResultTotal);
 	$iTotal = $aResultTotal[0];
 	

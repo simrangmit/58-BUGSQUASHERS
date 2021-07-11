@@ -1,548 +1,680 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <!--
-        ===
-        This comment should NOT be removed.
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<link rel="shortcut icon" type="image/ico" href="http://www.datatables.net/media/images/favicon.ico" />
+		
+		<title>DataTables example</title>
+		<style type="text/css" title="currentStyle">
+			@import "../../media/css/demo_page.css";
+			@import "../../media/css/demo_table.css";
+		</style>
+		<script type="text/javascript" language="javascript" src="../../media/js/jquery.js"></script>
+		<script type="text/javascript" language="javascript" src="../../media/js/jquery.dataTables.js"></script>
+		<script type="text/javascript" charset="utf-8">
+			var oTable;
+			
+			$(document).ready(function() {
+				$('#form').submit( function() {
+					var sData = oTable.$('input').serialize();
+					alert( "The following data would have been submitted to the server: \n\n"+sData );
+					return false;
+				} );
+				
+				oTable = $('#example').dataTable();
+			} );
+		</script>
+	</head>
+	<body id="dt_example">
+		<div id="container">
+			<div class="full_width big">
+				DataTables with form elements example
+			</div>
+			
+			<h1>Preamble</h1>
+			<p>The following example shows how form elements can be used within a DataTables enhanced table. The trick here is that DataTables does not include the DOM elements which are not currently being displayed, therefore you need to add a submit event handler to gather together all of the input elements from the table, and then use the handy jQuery <b>serialize()</b> function to string together the data. It can then be posted to the server as you wish.</p>
+			
+			<h1>Live example</h1>
+			<div id="demo">
+				<form id="form">
+					<div style="text-align:right; padding-bottom:1em;">
+						<button type="submit">Submit form</button>
+					</div>
+<table cellpadding="0" cellspacing="0" border="0" class="display" id="example">
+	<thead>
+		<tr>
+			<th>Rendering engine</th>
+			<th>Browser</th>
+			<th>Platform(s)</th>
+			<th>Engine version</th>
+			<th>CSS grade</th>
+			<th>Check</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr class="gradeX">
+			<td>Trident</td>
+			<td>Internet
+				 Explorer 4.0</td>
+			<td>Win 95+</td>
+			<td class="center">4</td>
+			<td class="center">X</td>
+			<td class="center"><input type="checkbox" name="check1" value="1"></td>
+		</tr>
+		<tr class="gradeC">
+			<td>Trident</td>
+			<td>Internet
+				 Explorer 5.0</td>
+			<td>Win 95+</td>
+			<td class="center">5</td>
+			<td class="center">C</td>
+			<td class="center"><input type="checkbox" name="check2" value="2"></td>
+		</tr>
+		<tr class="gradeA">
+			<td>Trident</td>
+			<td>Internet
+				 Explorer 5.5</td>
+			<td>Win 95+</td>
+			<td class="center">5.5</td>
+			<td class="center">A</td>
+			<td class="center"><input type="checkbox" name="check3" value="3"></td>
+		</tr>
+		<tr class="gradeA">
+			<td>Trident</td>
+			<td>Internet
+				 Explorer 6</td>
+			<td>Win 98+</td>
+			<td class="center">6</td>
+			<td class="center">A</td>
+			<td class="center"><input type="checkbox" name="check4" value="4"></td>
+		</tr>
+		<tr class="gradeA">
+			<td>Trident</td>
+			<td>Internet Explorer 7</td>
+			<td>Win XP SP2+</td>
+			<td class="center">7</td>
+			<td class="center">A</td>
+			<td class="center"><input type="checkbox" name="check5" value="5"></td>
+		</tr>
+		<tr class="gradeA">
+			<td>Trident</td>
+			<td>AOL browser (AOL desktop)</td>
+			<td>Win XP</td>
+			<td class="center">6</td>
+			<td class="center">A</td>
+			<td class="center"><input type="checkbox" name="check6" value="6"></td>
+		</tr>
+		<tr class="gradeA">
+			<td>Gecko</td>
+			<td>Firefox 1.0</td>
+			<td>Win 98+ / OSX.2+</td>
+			<td class="center">1.7</td>
+			<td class="center">A</td>
+			<td class="center"><input type="checkbox" name="check7" value="7"></td>
+		</tr>
+		<tr class="gradeA">
+			<td>Gecko</td>
+			<td>Firefox 1.5</td>
+			<td>Win 98+ / OSX.2+</td>
+			<td class="center">1.8</td>
+			<td class="center">A</td>
+			<td class="center"><input type="checkbox" name="check8" value="8"></td>
+		</tr>
+		<tr class="gradeA">
+			<td>Gecko</td>
+			<td>Firefox 2.0</td>
+			<td>Win 98+ / OSX.2+</td>
+			<td class="center">1.8</td>
+			<td class="center">A</td>
+			<td class="center"><input type="checkbox" name="check9" value="9"></td>
+		</tr>
+		<tr class="gradeA">
+			<td>Gecko</td>
+			<td>Firefox 3.0</td>
+			<td>Win 2k+ / OSX.3+</td>
+			<td class="center">1.9</td>
+			<td class="center">A</td>
+			<td class="center"><input type="checkbox" name="check10" value="10"></td>
+		</tr>
+		<tr class="gradeA">
+			<td>Gecko</td>
+			<td>Camino 1.0</td>
+			<td>OSX.2+</td>
+			<td class="center">1.8</td>
+			<td class="center">A</td>
+			<td class="center"><input type="checkbox" name="check11" value="11"></td>
+		</tr>
+		<tr class="gradeA">
+			<td>Gecko</td>
+			<td>Camino 1.5</td>
+			<td>OSX.3+</td>
+			<td class="center">1.8</td>
+			<td class="center">A</td>
+			<td class="center"><input type="checkbox" name="check12" value="12"></td>
+		</tr>
+		<tr class="gradeA">
+			<td>Gecko</td>
+			<td>Netscape 7.2</td>
+			<td>Win 95+ / Mac OS 8.6-9.2</td>
+			<td class="center">1.7</td>
+			<td class="center">A</td>
+			<td class="center"><input type="checkbox" name="check13" value="13"></td>
+		</tr>
+		<tr class="gradeA">
+			<td>Gecko</td>
+			<td>Netscape Browser 8</td>
+			<td>Win 98SE+</td>
+			<td class="center">1.7</td>
+			<td class="center">A</td>
+			<td class="center"><input type="checkbox" name="check14" value="14"></td>
+		</tr>
+		<tr class="gradeA">
+			<td>Gecko</td>
+			<td>Netscape Navigator 9</td>
+			<td>Win 98+ / OSX.2+</td>
+			<td class="center">1.8</td>
+			<td class="center">A</td>
+			<td class="center"><input type="checkbox" name="check15" value="15"></td>
+		</tr>
+		<tr class="gradeA">
+			<td>Gecko</td>
+			<td>Mozilla 1.0</td>
+			<td>Win 95+ / OSX.1+</td>
+			<td class="center">1</td>
+			<td class="center">A</td>
+			<td class="center"><input type="checkbox" name="check16" value="16"></td>
+		</tr>
+		<tr class="gradeA">
+			<td>Gecko</td>
+			<td>Mozilla 1.1</td>
+			<td>Win 95+ / OSX.1+</td>
+			<td class="center">1.1</td>
+			<td class="center">A</td>
+			<td class="center"><input type="checkbox" name="check17" value="17"></td>
+		</tr>
+		<tr class="gradeA">
+			<td>Gecko</td>
+			<td>Mozilla 1.2</td>
+			<td>Win 95+ / OSX.1+</td>
+			<td class="center">1.2</td>
+			<td class="center">A</td>
+			<td class="center"><input type="checkbox" name="check18" value="18"></td>
+		</tr>
+		<tr class="gradeA">
+			<td>Gecko</td>
+			<td>Mozilla 1.3</td>
+			<td>Win 95+ / OSX.1+</td>
+			<td class="center">1.3</td>
+			<td class="center">A</td>
+			<td class="center"><input type="checkbox" name="check19" value="19"></td>
+		</tr>
+		<tr class="gradeA">
+			<td>Gecko</td>
+			<td>Mozilla 1.4</td>
+			<td>Win 95+ / OSX.1+</td>
+			<td class="center">1.4</td>
+			<td class="center">A</td>
+			<td class="center"><input type="checkbox" name="check20" value="20"></td>
+		</tr>
+		<tr class="gradeA">
+			<td>Gecko</td>
+			<td>Mozilla 1.5</td>
+			<td>Win 95+ / OSX.1+</td>
+			<td class="center">1.5</td>
+			<td class="center">A</td>
+			<td class="center"><input type="checkbox" name="check21" value="21"></td>
+		</tr>
+		<tr class="gradeA">
+			<td>Gecko</td>
+			<td>Mozilla 1.6</td>
+			<td>Win 95+ / OSX.1+</td>
+			<td class="center">1.6</td>
+			<td class="center">A</td>
+			<td class="center"><input type="checkbox" name="check22" value="22"></td>
+		</tr>
+		<tr class="gradeA">
+			<td>Gecko</td>
+			<td>Mozilla 1.7</td>
+			<td>Win 98+ / OSX.1+</td>
+			<td class="center">1.7</td>
+			<td class="center">A</td>
+			<td class="center"><input type="checkbox" name="check23" value="23"></td>
+		</tr>
+		<tr class="gradeA">
+			<td>Gecko</td>
+			<td>Mozilla 1.8</td>
+			<td>Win 98+ / OSX.1+</td>
+			<td class="center">1.8</td>
+			<td class="center">A</td>
+			<td class="center"><input type="checkbox" name="check24" value="24"></td>
+		</tr>
+		<tr class="gradeA">
+			<td>Gecko</td>
+			<td>Seamonkey 1.1</td>
+			<td>Win 98+ / OSX.2+</td>
+			<td class="center">1.8</td>
+			<td class="center">A</td>
+			<td class="center"><input type="checkbox" name="check25" value="25"></td>
+		</tr>
+		<tr class="gradeA">
+			<td>Gecko</td>
+			<td>Epiphany 2.20</td>
+			<td>Gnome</td>
+			<td class="center">1.8</td>
+			<td class="center">A</td>
+			<td class="center"><input type="checkbox" name="check26" value="26"></td>
+		</tr>
+		<tr class="gradeA">
+			<td>Webkit</td>
+			<td>Safari 1.2</td>
+			<td>OSX.3</td>
+			<td class="center">125.5</td>
+			<td class="center">A</td>
+			<td class="center"><input type="checkbox" name="check27" value="27"></td>
+		</tr>
+		<tr class="gradeA">
+			<td>Webkit</td>
+			<td>Safari 1.3</td>
+			<td>OSX.3</td>
+			<td class="center">312.8</td>
+			<td class="center">A</td>
+			<td class="center"><input type="checkbox" name="check28" value="28"></td>
+		</tr>
+		<tr class="gradeA">
+			<td>Webkit</td>
+			<td>Safari 2.0</td>
+			<td>OSX.4+</td>
+			<td class="center">419.3</td>
+			<td class="center">A</td>
+			<td class="center"><input type="checkbox" name="check29" value="29"></td>
+		</tr>
+		<tr class="gradeA">
+			<td>Webkit</td>
+			<td>Safari 3.0</td>
+			<td>OSX.4+</td>
+			<td class="center">522.1</td>
+			<td class="center">A</td>
+			<td class="center"><input type="checkbox" name="check30" value="30"></td>
+		</tr>
+		<tr class="gradeA">
+			<td>Webkit</td>
+			<td>OmniWeb 5.5</td>
+			<td>OSX.4+</td>
+			<td class="center">420</td>
+			<td class="center">A</td>
+			<td class="center"><input type="checkbox" name="check31" value="31"></td>
+		</tr>
+		<tr class="gradeA">
+			<td>Webkit</td>
+			<td>iPod Touch / iPhone</td>
+			<td>iPod</td>
+			<td class="center">420.1</td>
+			<td class="center">A</td>
+			<td class="center"><input type="checkbox" name="check32" value="32"></td>
+		</tr>
+		<tr class="gradeA">
+			<td>Webkit</td>
+			<td>S60</td>
+			<td>S60</td>
+			<td class="center">413</td>
+			<td class="center">A</td>
+			<td class="center"><input type="checkbox" name="check33" value="33"></td>
+		</tr>
+		<tr class="gradeA">
+			<td>Presto</td>
+			<td>Opera 7.0</td>
+			<td>Win 95+ / OSX.1+</td>
+			<td class="center">-</td>
+			<td class="center">A</td>
+			<td class="center"><input type="checkbox" name="check34" value="34"></td>
+		</tr>
+		<tr class="gradeA">
+			<td>Presto</td>
+			<td>Opera 7.5</td>
+			<td>Win 95+ / OSX.2+</td>
+			<td class="center">-</td>
+			<td class="center">A</td>
+			<td class="center"><input type="checkbox" name="check35" value="35"></td>
+		</tr>
+		<tr class="gradeA">
+			<td>Presto</td>
+			<td>Opera 8.0</td>
+			<td>Win 95+ / OSX.2+</td>
+			<td class="center">-</td>
+			<td class="center">A</td>
+			<td class="center"><input type="checkbox" name="check36" value="36"></td>
+		</tr>
+		<tr class="gradeA">
+			<td>Presto</td>
+			<td>Opera 8.5</td>
+			<td>Win 95+ / OSX.2+</td>
+			<td class="center">-</td>
+			<td class="center">A</td>
+			<td class="center"><input type="checkbox" name="check37" value="37"></td>
+		</tr>
+		<tr class="gradeA">
+			<td>Presto</td>
+			<td>Opera 9.0</td>
+			<td>Win 95+ / OSX.3+</td>
+			<td class="center">-</td>
+			<td class="center">A</td>
+			<td class="center"><input type="checkbox" name="check38" value="38"></td>
+		</tr>
+		<tr class="gradeA">
+			<td>Presto</td>
+			<td>Opera 9.2</td>
+			<td>Win 88+ / OSX.3+</td>
+			<td class="center">-</td>
+			<td class="center">A</td>
+			<td class="center"><input type="checkbox" name="check39" value="39"></td>
+		</tr>
+		<tr class="gradeA">
+			<td>Presto</td>
+			<td>Opera 9.5</td>
+			<td>Win 88+ / OSX.3+</td>
+			<td class="center">-</td>
+			<td class="center">A</td>
+			<td class="center"><input type="checkbox" name="check40" value="40"></td>
+		</tr>
+		<tr class="gradeA">
+			<td>Presto</td>
+			<td>Opera for Wii</td>
+			<td>Wii</td>
+			<td class="center">-</td>
+			<td class="center">A</td>
+			<td class="center"><input type="checkbox" name="check41" value="41"></td>
+		</tr>
+		<tr class="gradeA">
+			<td>Presto</td>
+			<td>Nokia N800</td>
+			<td>N800</td>
+			<td class="center">-</td>
+			<td class="center">A</td>
+			<td class="center"><input type="checkbox" name="check42" value="42"></td>
+		</tr>
+		<tr class="gradeA">
+			<td>Presto</td>
+			<td>Nintendo DS browser</td>
+			<td>Nintendo DS</td>
+			<td class="center">8.5</td>
+			<td class="center">C/A<sup>1</sup></td>
+			<td class="center"><input type="checkbox" name="check43" value="43"></td>
+		</tr>
+		<tr class="gradeC">
+			<td>KHTML</td>
+			<td>Konqureror 3.1</td>
+			<td>KDE 3.1</td>
+			<td class="center">3.1</td>
+			<td class="center">C</td>
+			<td class="center"><input type="checkbox" name="check44" value="44"></td>
+		</tr>
+		<tr class="gradeA">
+			<td>KHTML</td>
+			<td>Konqureror 3.3</td>
+			<td>KDE 3.3</td>
+			<td class="center">3.3</td>
+			<td class="center">A</td>
+			<td class="center"><input type="checkbox" name="check45" value="45"></td>
+		</tr>
+		<tr class="gradeA">
+			<td>KHTML</td>
+			<td>Konqureror 3.5</td>
+			<td>KDE 3.5</td>
+			<td class="center">3.5</td>
+			<td class="center">A</td>
+			<td class="center"><input type="checkbox" name="check46" value="46"></td>
+		</tr>
+		<tr class="gradeX">
+			<td>Tasman</td>
+			<td>Internet Explorer 4.5</td>
+			<td>Mac OS 8-9</td>
+			<td class="center">-</td>
+			<td class="center">X</td>
+			<td class="center"><input type="checkbox" name="check47" value="47"></td>
+		</tr>
+		<tr class="gradeC">
+			<td>Tasman</td>
+			<td>Internet Explorer 5.1</td>
+			<td>Mac OS 7.6-9</td>
+			<td class="center">1</td>
+			<td class="center">C</td>
+			<td class="center"><input type="checkbox" name="check48" value="48"></td>
+		</tr>
+		<tr class="gradeC">
+			<td>Tasman</td>
+			<td>Internet Explorer 5.2</td>
+			<td>Mac OS 8-X</td>
+			<td class="center">1</td>
+			<td class="center">C</td>
+			<td class="center"><input type="checkbox" name="check49" value="49"></td>
+		</tr>
+		<tr class="gradeA">
+			<td>Misc</td>
+			<td>NetFront 3.1</td>
+			<td>Embedded devices</td>
+			<td class="center">-</td>
+			<td class="center">C</td>
+			<td class="center"><input type="checkbox" name="check50" value="50"></td>
+		</tr>
+		<tr class="gradeA">
+			<td>Misc</td>
+			<td>NetFront 3.4</td>
+			<td>Embedded devices</td>
+			<td class="center">-</td>
+			<td class="center">A</td>
+			<td class="center"><input type="checkbox" name="check51" value="51"></td>
+		</tr>
+		<tr class="gradeX">
+			<td>Misc</td>
+			<td>Dillo 0.8</td>
+			<td>Embedded devices</td>
+			<td class="center">-</td>
+			<td class="center">X</td>
+			<td class="center"><input type="checkbox" name="check52" value="52"></td>
+		</tr>
+		<tr class="gradeX">
+			<td>Misc</td>
+			<td>Links</td>
+			<td>Text only</td>
+			<td class="center">-</td>
+			<td class="center">X</td>
+			<td class="center"><input type="checkbox" name="check53" value="53"></td>
+		</tr>
+		<tr class="gradeX">
+			<td>Misc</td>
+			<td>Lynx</td>
+			<td>Text only</td>
+			<td class="center">-</td>
+			<td class="center">X</td>
+			<td class="center"><input type="checkbox" name="check54" value="54"></td>
+		</tr>
+		<tr class="gradeC">
+			<td>Misc</td>
+			<td>IE Mobile</td>
+			<td>Windows Mobile 6</td>
+			<td class="center">-</td>
+			<td class="center">C</td>
+			<td class="center"><input type="checkbox" name="check55" value="55"></td>
+		</tr>
+		<tr class="gradeC">
+			<td>Misc</td>
+			<td>PSP browser</td>
+			<td>PSP</td>
+			<td class="center">-</td>
+			<td class="center">C</td>
+			<td class="center"><input type="checkbox" name="check56" value="56"></td>
+		</tr>
+		<tr class="gradeU">
+			<td>Other browsers</td>
+			<td>All others</td>
+			<td>-</td>
+			<td class="center">-</td>
+			<td class="center">U</td>
+			<td class="center"><input type="checkbox" name="check57" value="57"></td>
+		</tr>
+	</tbody>
+	<tfoot>
+		<tr>
+			<th>Rendering engine</th>
+			<th>Browser</th>
+			<th>Platform(s)</th>
+			<th>Engine version</th>
+			<th>CSS grade</th>
+			<th>Check</th>
+		</tr>
+	</tfoot>
+</table>
+				</form>
+			</div>
+			<div class="spacer"></div>
+			
+			
+			<h1>Initialisation code</h1>
+			<pre class="brush: js;">var oTable;
 
-        Charisma v2.0.0
-
-        Copyright 2012-2014 Muhammad Usman
-        Licensed under the Apache License v2.0
-        http://www.apache.org/licenses/LICENSE-2.0
-
-        http://usman.it
-        http://twitter.com/halalit_usman
-        ===
-    -->
-    <meta charset="utf-8">
-    <title>Free HTML5 Bootstrap Admin Template</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Charisma, a fully featured, responsive, HTML5, Bootstrap admin template.">
-    <meta name="author" content="Muhammad Usman">
-
-    <!-- The styles -->
-    <link id="bs-css" href="css/bootstrap-cerulean.min.css" rel="stylesheet">
-
-    <link href="css/charisma-app.css" rel="stylesheet">
-    <link href='bower_components/fullcalendar/dist/fullcalendar.css' rel='stylesheet'>
-    <link href='bower_components/fullcalendar/dist/fullcalendar.print.css' rel='stylesheet' media='print'>
-    <link href='bower_components/chosen/chosen.min.css' rel='stylesheet'>
-    <link href='bower_components/colorbox/example3/colorbox.css' rel='stylesheet'>
-    <link href='bower_components/responsive-tables/responsive-tables.css' rel='stylesheet'>
-    <link href='bower_components/bootstrap-tour/build/css/bootstrap-tour.min.css' rel='stylesheet'>
-    <link href='css/jquery.noty.css' rel='stylesheet'>
-    <link href='css/noty_theme_default.css' rel='stylesheet'>
-    <link href='css/elfinder.min.css' rel='stylesheet'>
-    <link href='css/elfinder.theme.css' rel='stylesheet'>
-    <link href='css/jquery.iphone.toggle.css' rel='stylesheet'>
-    <link href='css/uploadify.css' rel='stylesheet'>
-    <link href='css/animate.min.css' rel='stylesheet'>
-
-    <!-- jQuery -->
-    <script src="bower_components/jquery/jquery.min.js"></script>
-
-    <!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-
-    <!-- The fav icon -->
-    <link rel="shortcut icon" href="img/favicon.ico">
-
-</head>
-
-<body>
-    <!-- topbar starts -->
-    <div class="navbar navbar-default" role="navigation">
-
-        <div class="navbar-inner">
-            <button type="button" class="navbar-toggle pull-left animated flip">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="index.html"> <img alt="Charisma Logo" src="img/logo20.png" class="hidden-xs"/>
-                <span>Charisma</span></a>
-
-            <!-- user dropdown starts -->
-            <div class="btn-group pull-right">
-                <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                    <i class="glyphicon glyphicon-user"></i><span class="hidden-sm hidden-xs"> admin</span>
-                    <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu">
-                    <li><a href="#">Profile</a></li>
-                    <li class="divider"></li>
-                    <li><a href="login.html">Logout</a></li>
-                </ul>
-            </div>
-            <!-- user dropdown ends -->
-
-            <!-- theme selector starts -->
-            <div class="btn-group pull-right theme-container animated tada">
-                <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                    <i class="glyphicon glyphicon-tint"></i><span
-                        class="hidden-sm hidden-xs"> Change Theme / Skin</span>
-                    <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" id="themes">
-                    <li><a data-value="classic" href="#"><i class="whitespace"></i> Classic</a></li>
-                    <li><a data-value="cerulean" href="#"><i class="whitespace"></i> Cerulean</a></li>
-                    <li><a data-value="cyborg" href="#"><i class="whitespace"></i> Cyborg</a></li>
-                    <li><a data-value="simplex" href="#"><i class="whitespace"></i> Simplex</a></li>
-                    <li><a data-value="darkly" href="#"><i class="whitespace"></i> Darkly</a></li>
-                    <li><a data-value="lumen" href="#"><i class="whitespace"></i> Lumen</a></li>
-                    <li><a data-value="slate" href="#"><i class="whitespace"></i> Slate</a></li>
-                    <li><a data-value="spacelab" href="#"><i class="whitespace"></i> Spacelab</a></li>
-                    <li><a data-value="united" href="#"><i class="whitespace"></i> United</a></li>
-                </ul>
-            </div>
-            <!-- theme selector ends -->
-
-            <ul class="collapse navbar-collapse nav navbar-nav top-menu">
-                <li><a href="#"><i class="glyphicon glyphicon-globe"></i> Visit Site</a></li>
-                <li class="dropdown">
-                    <a href="#" data-toggle="dropdown"><i class="glyphicon glyphicon-star"></i> Dropdown <span
-                            class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">One more separated link</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <form class="navbar-search pull-left">
-                        <input placeholder="Search" class="search-query form-control col-md-10" name="query"
-                               type="text">
-                    </form>
-                </li>
-            </ul>
-
-        </div>
-    </div>
-    <!-- topbar ends -->
-<div class="ch-container">
-    <div class="row">
-        
-        <!-- left menu starts -->
-        <div class="col-sm-2 col-lg-2">
-            <div class="sidebar-nav">
-                <div class="nav-canvas">
-                    <div class="nav-sm nav nav-stacked">
-
-                    </div>
-                    <ul class="nav nav-pills nav-stacked main-menu">
-                        <li class="nav-header">Main</li>
-                        <li><a class="ajax-link" href="index.html"><i class="glyphicon glyphicon-home"></i><span> Dashboard</span></a>
-                        </li>
-                        <li><a class="ajax-link" href="ui.html"><i class="glyphicon glyphicon-eye-open"></i><span> UI Features</span></a>
-                        </li>
-                        <li><a class="ajax-link" href="form.html"><i
-                                    class="glyphicon glyphicon-edit"></i><span> Forms</span></a></li>
-                        <li><a class="ajax-link" href="chart.html"><i class="glyphicon glyphicon-list-alt"></i><span> Charts</span></a>
-                        </li>
-                        <li><a class="ajax-link" href="typography.html"><i class="glyphicon glyphicon-font"></i><span> Typography</span></a>
-                        </li>
-                        <li><a class="ajax-link" href="gallery.html"><i class="glyphicon glyphicon-picture"></i><span> Gallery</span></a>
-                        </li>
-                        <li class="nav-header hidden-md">Sample Section</li>
-                        <li><a class="ajax-link" href="table.html"><i
-                                    class="glyphicon glyphicon-align-justify"></i><span> Tables</span></a></li>
-                        <li class="accordion">
-                            <a href="#"><i class="glyphicon glyphicon-plus"></i><span> Accordion Menu</span></a>
-                            <ul class="nav nav-pills nav-stacked">
-                                <li><a href="#">Child Menu 1</a></li>
-                                <li><a href="#">Child Menu 2</a></li>
-                            </ul>
-                        </li>
-                        <li><a class="ajax-link" href="calendar.html"><i class="glyphicon glyphicon-calendar"></i><span> Calendar</span></a>
-                        </li>
-                        <li><a class="ajax-link" href="grid.html"><i
-                                    class="glyphicon glyphicon-th"></i><span> Grid</span></a></li>
-                        <li><a href="tour.html"><i class="glyphicon glyphicon-globe"></i><span> Tour</span></a></li>
-                        <li><a class="ajax-link" href="icon.html"><i
-                                    class="glyphicon glyphicon-star"></i><span> Icons</span></a></li>
-                        <li><a href="error.html"><i class="glyphicon glyphicon-ban-circle"></i><span> Error Page</span></a>
-                        </li>
-                        <li><a href="login.html"><i class="glyphicon glyphicon-lock"></i><span> Login Page</span></a>
-                        </li>
-                    </ul>
-                    <label id="for-is-ajax" for="is-ajax"><input id="is-ajax" type="checkbox"> Ajax on menu</label>
-                </div>
-            </div>
-        </div>
-        <!--/span-->
-        <!-- left menu ends -->
-
-        <noscript>
-            <div class="alert alert-block col-md-12">
-                <h4 class="alert-heading">Warning!</h4>
-
-                <p>You need to have <a href="http://en.wikipedia.org/wiki/JavaScript" target="_blank">JavaScript</a>
-                    enabled to use this site.</p>
-            </div>
-        </noscript>
-
-        <div id="content" class="col-lg-10 col-sm-10">
-            <!-- content starts -->
-            <div>
-    <ul class="breadcrumb">
-        <li>
-            <a href="#">Home</a>
-        </li>
-        <li>
-            <a href="#">Forms</a>
-        </li>
-    </ul>
-</div>
-
-<div class="row">
-    <div class="box col-md-12">
-        <div class="box-inner">
-            <div class="box-header well" data-original-title="">
-                <h2><i class="glyphicon glyphicon-edit"></i> Form Elements</h2>
-
-                <div class="box-icon">
-                    <a href="#" class="btn btn-setting btn-round btn-default"><i
-                            class="glyphicon glyphicon-cog"></i></a>
-                    <a href="#" class="btn btn-minimize btn-round btn-default"><i
-                            class="glyphicon glyphicon-chevron-up"></i></a>
-                    <a href="#" class="btn btn-close btn-round btn-default"><i
-                            class="glyphicon glyphicon-remove"></i></a>
-                </div>
-            </div>
-            <div class="box-content">
-                <div class="control-group">
-                    <label class="control-label" for="selectError">Modern Select</label>
-
-                    <div class="controls">
-                        <select id="selectError" data-rel="chosen">
-                            <option>Option 1</option>
-                            <option>Option 2</option>
-                            <option>Option 3</option>
-                            <option>Option 4</option>
-                            <option>Option 5</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="control-group">
-                    <label class="control-label" for="selectError1">Multiple Select / Tags</label>
-
-                    <div class="controls">
-                        <select id="selectError1" multiple class="form-control" data-rel="chosen">
-                            <option>Option 1</option>
-                            <option>Option 2</option>
-                            <option>Option 3</option>
-                            <option>Option 4</option>
-                            <option>Option 5</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="control-group">
-                    <label class="control-label" for="selectError2">Group Select</label>
-
-                    <div class="controls">
-                        <select data-placeholder="Your Favorite Football Team" id="selectError2" data-rel="chosen">
-                            <option value=""></option>
-                            <optgroup label="NFC EAST">
-                                <option>Dallas Cowboys</option>
-                                <option>New York Giants</option>
-                                <option>Philadelphia Eagles</option>
-                                <option>Washington Redskins</option>
-                            </optgroup>
-                            <optgroup label="NFC NORTH">
-                                <option>Chicago Bears</option>
-                                <option>Detroit Lions</option>
-                                <option>Green Bay Packers</option>
-                                <option>Minnesota Vikings</option>
-                            </optgroup>
-                            <optgroup label="NFC SOUTH">
-                                <option>Atlanta Falcons</option>
-                                <option>Carolina Panthers</option>
-                                <option>New Orleans Saints</option>
-                                <option>Tampa Bay Buccaneers</option>
-                            </optgroup>
-                            <optgroup label="NFC WEST">
-                                <option>Arizona Cardinals</option>
-                                <option>St. Louis Rams</option>
-                                <option>San Francisco 49ers</option>
-                                <option>Seattle Seahawks</option>
-                            </optgroup>
-                            <optgroup label="AFC EAST">
-                                <option>Buffalo Bills</option>
-                                <option>Miami Dolphins</option>
-                                <option>New England Patriots</option>
-                                <option>New York Jets</option>
-                            </optgroup>
-                            <optgroup label="AFC NORTH">
-                                <option>Baltimore Ravens</option>
-                                <option>Cincinnati Bengals</option>
-                                <option>Cleveland Browns</option>
-                                <option>Pittsburgh Steelers</option>
-                            </optgroup>
-                            <optgroup label="AFC SOUTH">
-                                <option>Houston Texans</option>
-                                <option>Indianapolis Colts</option>
-                                <option>Jacksonville Jaguars</option>
-                                <option>Tennessee Titans</option>
-                            </optgroup>
-                            <optgroup label="AFC WEST">
-                                <option>Denver Broncos</option>
-                                <option>Kansas City Chiefs</option>
-                                <option>Oakland Raiders</option>
-                                <option>San Diego Chargers</option>
-                            </optgroup>
-                        </select>
-                    </div>
-                </div>
-                <br>
-
-
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox" value="">
-                        Option one is this and that&mdash;be sure to include why it's great
-                    </label>
-                </div>
-                <div class="checkbox disabled">
-                    <label>
-                        <input type="checkbox" value="" disabled>
-                        Option two is disabled
-                    </label>
-                </div>
-
-                <div class="radio">
-                    <label>
-                        <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-                        Option one is this and that&mdash;be sure to include why it's great
-                    </label>
-                </div>
-                <div class="radio">
-                    <label>
-                        <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-                        Option two can be something else and selecting it will deselect option one
-                    </label>
-                </div>
-                <div class="radio disabled">
-                    <label>
-                        <input type="radio" name="optionsRadios" id="optionsRadios3" value="option3" disabled>
-                        Option three is disabled
-                    </label>
-                </div>
-
-                <label class="checkbox-inline">
-                    <input type="checkbox" id="inlineCheckbox1" value="option1"> 1
-                </label>
-                <label class="checkbox-inline">
-                    <input type="checkbox" id="inlineCheckbox2" value="option2"> 2
-                </label>
-                <label class="checkbox-inline">
-                    <input type="checkbox" id="inlineCheckbox3" value="option3"> 3
-                </label>
-
-                <label class="radio-inline">
-                    <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> 1
-                </label>
-                <label class="radio-inline">
-                    <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> 2
-                </label>
-                <label class="radio-inline">
-                    <input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3"> 3
-                </label>
-
-                <br>
-                <br>
-                <br>
-
-                <div class="form-group has-success col-md-4">
-                    <label class="control-label" for="inputSuccess1">Input with success</label>
-                    <input type="text" class="form-control" id="inputSuccess1">
-                </div>
-                <div class="form-group has-warning col-md-4">
-                    <label class="control-label" for="inputWarning1">Input with warning</label>
-                    <input type="text" class="form-control" id="inputWarning1">
-                </div>
-                <div class="form-group has-error col-md-4">
-                    <label class="control-label" for="inputError1">Input with error</label>
-                    <input type="text" class="form-control" id="inputError1">
-                </div>
-
-                <form class="form-inline" role="form">
-                    <div class="form-group has-success has-feedback">
-                        <label class="control-label" for="inputSuccess4">Input with success</label>
-                        <input type="text" class="form-control" id="inputSuccess4">
-                        <span class="glyphicon glyphicon-ok form-control-feedback"></span>
-                    </div>
-                </form>
-
-                <br>
-                <div class="input-group col-md-4">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-user red"></i></span>
-                    <input type="text" class="form-control" placeholder="Username">
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--/span-->
-
-</div><!--/row-->
-
-<div class="row">
-    <div class="box col-md-12">
-        <div class="box-inner">
-            <div class="box-header well" data-original-title="">
-                <h2><i class="glyphicon glyphicon-edit"></i> Form Elements</h2>
-
-                <div class="box-icon">
-                    <a href="#" class="btn btn-setting btn-round btn-default"><i
-                            class="glyphicon glyphicon-cog"></i></a>
-                    <a href="#" class="btn btn-minimize btn-round btn-default"><i
-                            class="glyphicon glyphicon-chevron-up"></i></a>
-                    <a href="#" class="btn btn-close btn-round btn-default"><i
-                            class="glyphicon glyphicon-remove"></i></a>
-                </div>
-            </div>
-            <div class="box-content">
-                <form role="form">
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Email address</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Password</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputFile">File input</label>
-                        <input type="file" id="exampleInputFile">
-
-                        <p class="help-block">Example block-level help text here.</p>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox"> Check me out
-                        </label>
-                    </div>
-                    <button type="submit" class="btn btn-default">Submit</button>
-                </form>
-
-            </div>
-        </div>
-    </div>
-    <!--/span-->
-
-</div><!--/row-->
-
-    <!-- content ends -->
-    </div><!--/#content.col-md-0-->
-</div><!--/fluid-row-->
-
-    <!-- Ad, you can remove it -->
-    <div class="row">
-        <div class="col-md-9 col-lg-9 col-xs-9 hidden-xs">
-            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <!-- Charisma Demo 2 -->
-            <ins class="adsbygoogle"
-                 style="display:inline-block;width:728px;height:90px"
-                 data-ad-client="ca-pub-5108790028230107"
-                 data-ad-slot="3193373905"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-        </div>
-        <div class="col-md-2 col-lg-3 col-sm-12 col-xs-12 email-subscription-footer">
-            <div class="mc_embed_signup">
-                <form action="//halalit.us3.list-manage.com/subscribe/post?u=444b176aa3c39f656c66381f6&amp;id=eeb0c04e84" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-                    <div>
-                        <label>Keep up with my work</label>
-                        <input type="email" value="" name="EMAIL" class="email" placeholder="Email address" required>
-
-                        <div class="power_field"><input type="text" name="b_444b176aa3c39f656c66381f6_eeb0c04e84" tabindex="-1" value=""></div>
-                        <div class="clear"><input type="submit" value="Subscribe" name="subscribe" class="button"></div>
-                    </div>
-                </form>
-            </div>
-
-            <!--End mc_embed_signup-->
-        </div>
-
-    </div>
-    <!-- Ad ends -->
-
-    <hr>
-
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-         aria-hidden="true">
-
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">×</button>
-                    <h3>Settings</h3>
-                </div>
-                <div class="modal-body">
-                    <p>Here settings can be configured...</p>
-                </div>
-                <div class="modal-footer">
-                    <a href="#" class="btn btn-default" data-dismiss="modal">Close</a>
-                    <a href="#" class="btn btn-primary" data-dismiss="modal">Save changes</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <footer class="row">
-        <p class="col-md-9 col-sm-9 col-xs-12 copyright">&copy; <a href="http://usman.it" target="_blank">Muhammad
-                Usman</a> 2012 - 2015</p>
-
-        <p class="col-md-3 col-sm-3 col-xs-12 powered-by">Powered by: <a
-                href="http://usman.it/free-responsive-admin-template">Charisma</a></p>
-    </footer>
-
-</div><!--/.fluid-container-->
-
-<!-- external javascript -->
-
-<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-
-<!-- library for cookie management -->
-<script src="js/jquery.cookie.js"></script>
-<!-- calender plugin -->
-<script src='bower_components/moment/min/moment.min.js'></script>
-<script src='bower_components/fullcalendar/dist/fullcalendar.min.js'></script>
-<!-- data table plugin -->
-<script src='js/jquery.dataTables.min.js'></script>
-
-<!-- select or dropdown enhancer -->
-<script src="bower_components/chosen/chosen.jquery.min.js"></script>
-<!-- plugin for gallery image view -->
-<script src="bower_components/colorbox/jquery.colorbox-min.js"></script>
-<!-- notification plugin -->
-<script src="js/jquery.noty.js"></script>
-<!-- library for making tables responsive -->
-<script src="bower_components/responsive-tables/responsive-tables.js"></script>
-<!-- tour plugin -->
-<script src="bower_components/bootstrap-tour/build/js/bootstrap-tour.min.js"></script>
-<!-- star rating plugin -->
-<script src="js/jquery.raty.min.js"></script>
-<!-- for iOS style toggle switch -->
-<script src="js/jquery.iphone.toggle.js"></script>
-<!-- autogrowing textarea plugin -->
-<script src="js/jquery.autogrow-textarea.js"></script>
-<!-- multiple file upload plugin -->
-<script src="js/jquery.uploadify-3.1.min.js"></script>
-<!-- history.js for cross-browser state change on ajax -->
-<script src="js/jquery.history.js"></script>
-<!-- application script for Charisma demo -->
-<script src="js/charisma.js"></script>
-
-
-</body>
+$(document).ready(function() {
+	$('#form').submit( function() {
+		var sData = oTable.$('input').serialize();
+		alert( "The following data would have been submitted to the server: \n\n"+sData );
+		return false;
+	} );
+	
+	oTable = $('#example').dataTable();
+} );</pre>
+			<style type="text/css">
+				@import "../examples_support/syntax/css/shCore.css";
+			</style>
+			<script type="text/javascript" language="javascript" src="../examples_support/syntax/js/shCore.js"></script>
+			
+			
+			<h1>Other examples</h1>
+			<div class="demo_links">
+				<h2>Basic initialisation</h2>
+				<ul>
+					<li><a href="../basic_init/zero_config.html">Zero configuration</a></li>
+					<li><a href="../basic_init/filter_only.html">Feature enablement</a></li>
+					<li><a href="../basic_init/table_sorting.html">Sorting data</a></li>
+					<li><a href="../basic_init/multi_col_sort.html">Multi-column sorting</a></li>
+					<li><a href="../basic_init/multiple_tables.html">Multiple tables</a></li>
+					<li><a href="../basic_init/hidden_columns.html">Hidden columns</a></li>
+					<li><a href="../basic_init/complex_header.html">Complex headers - grouping with colspan</a></li>
+					<li><a href="../basic_init/dom.html">DOM positioning</a></li>
+					<li><a href="../basic_init/flexible_width.html">Flexible table width</a></li>
+					<li><a href="../basic_init/state_save.html">State saving</a></li>
+					<li><a href="../basic_init/alt_pagination.html">Alternative pagination styles</a></li>
+					<li>Scrolling: <br>
+						<a href="../basic_init/scroll_x.html">Horizontal</a> / 
+						<a href="../basic_init/scroll_y.html">Vertical</a> / 
+						<a href="../basic_init/scroll_xy.html">Both</a> / 
+						<a href="../basic_init/scroll_y_theme.html">Themed</a> / 
+						<a href="../basic_init/scroll_y_infinite.html">Infinite</a>
+					</li>
+					<li><a href="../basic_init/language.html">Change language information (internationalisation)</a></li>
+					<li><a href="../basic_init/themes.html">ThemeRoller themes (Smoothness)</a></li>
+				</ul>
+				
+				<h2>Advanced initialisation</h2>
+				<ul>
+					<li>Events: <br>
+						<a href="../advanced_init/events_live.html">Live events</a> / 
+						<a href="../advanced_init/events_pre_init.html">Pre-init</a> / 
+						<a href="../advanced_init/events_post_init.html">Post-init</a>
+					</li>
+					<li><a href="../advanced_init/column_render.html">Column rendering</a></li>
+					<li><a href="../advanced_init/html_sort.html">Sorting without HTML tags</a></li>
+					<li><a href="../advanced_init/dom_multiple_elements.html">Multiple table controls (sDom)</a></li>
+					<li><a href="../advanced_init/length_menu.html">Defining length menu options</a></li>
+					<li><a href="../advanced_init/complex_header.html">Complex headers and hidden columns</a></li>
+					<li><a href="../advanced_init/dom_toolbar.html">Custom toolbar (element) around table</a></li>
+					<li><a href="../advanced_init/highlight.html">Row highlighting with CSS</a></li>
+					<li><a href="../advanced_init/row_grouping.html">Row grouping</a></li>
+					<li><a href="../advanced_init/row_callback.html">Row callback</a></li>
+					<li><a href="../advanced_init/footer_callback.html">Footer callback</a></li>
+					<li><a href="../advanced_init/sorting_control.html">Control sorting direction of columns</a></li>
+					<li><a href="../advanced_init/language_file.html">Change language information from a file (internationalisation)</a></li>
+					<li><a href="../advanced_init/defaults.html">Setting defaults</a></li>
+					<li><a href="../advanced_init/localstorage.html">State saving with localStorage</a></li>
+					<li><a href="../advanced_init/dt_events.html">Custom events</a></li>
+				</ul>
+				
+				<h2>API</h2>
+				<ul>
+					<li><a href="../api/add_row.html">Dynamically add a new row</a></li>
+					<li><a href="../api/multi_filter.html">Individual column filtering (using "input" elements)</a></li>
+					<li><a href="../api/multi_filter_select.html">Individual column filtering (using "select" elements)</a></li>
+					<li><a href="../api/highlight.html">Highlight rows and columns</a></li>
+					<li><a href="../api/row_details.html">Show and hide details about a particular record</a></li>
+					<li><a href="../api/select_row.html">User selectable rows (multiple rows)</a></li>
+					<li><a href="../api/select_single_row.html">User selectable rows (single row) and delete rows</a></li>
+					<li><a href="../api/editable.html">Editable rows (with jEditable)</a></li>
+					<li><a href="../api/form.html">Submit form with elements in table</a></li>
+					<li><a href="../api/counter_column.html">Index column (static number column)</a></li>
+					<li><a href="../api/show_hide.html">Show and hide columns dynamically</a></li>
+					<li><a href="../api/api_in_init.html">API function use in initialisation object (callback)</a></li>
+					<li><a href="../api/tabs_and_scrolling.html">DataTables scrolling and tabs</a></li>
+					<li><a href="../api/regex.html">Regular expression filtering</a></li>
+				</ul>
+			</div>
+			
+			<div class="demo_links">
+				<h2>Data sources</h2>
+				<ul>
+					<li><a href="../data_sources/dom.html">DOM</a></li>
+					<li><a href="../data_sources/js_array.html">Javascript array</a></li>
+					<li><a href="../data_sources/ajax.html">Ajax source</a></li>
+					<li><a href="../data_sources/server_side.html">Server side processing</a></li>
+				</ul>
+				
+				<h2>Server-side processing</h2>
+				<ul>
+					<li><a href="../server_side/server_side.html">Obtain server-side data</a></li>
+					<li><a href="../server_side/custom_vars.html">Add extra HTTP variables</a></li>
+					<li><a href="../server_side/post.html">Use HTTP POST</a></li>
+					<li><a href="../server_side/ids.html">Automatic addition of IDs and classes to rows</a></li>
+					<li><a href="../server_side/object_data.html">Reading table data from objects</a></li>
+					<li><a href="../server_side/row_details.html">Show and hide details about a particular record</a></li>
+					<li><a href="../server_side/select_rows.html">User selectable rows (multiple rows)</a></li>
+					<li><a href="../server_side/jsonp.html">JSONP for a cross domain data source</a></li>
+					<li><a href="../server_side/editable.html">jEditable integration with DataTables</a></li>
+					<li><a href="../server_side/defer_loading.html">Deferred loading of Ajax data</a></li>
+					<li><a href="../server_side/pipeline.html">Pipelining data (reduce Ajax calls for paging)</a></li>
+				</ul>
+				
+				<h2>Ajax data source</h2>
+				<ul>
+					<li><a href="../ajax/ajax.html">Ajax sourced data (array of arrays)</a></li>
+					<li><a href="../ajax/objects.html">Ajax sourced data (array of objects)</a></li>
+					<li><a href="../ajax/defer_render.html">Deferred DOM creation for extra speed</a></li>
+					<li><a href="../ajax/null_data_source.html">Empty data source columns</a></li>
+					<li><a href="../ajax/custom_data_property.html">Use a data source other than aaData (the default)</a></li>
+					<li><a href="../ajax/objects_subarrays.html">Read column data from sub-arrays</a></li>
+					<li><a href="../ajax/deep.html">Read column data from deeply nested properties</a></li>
+				</ul>
+				
+				<h2>Plug-ins</h2>
+				<ul>
+					<li><a href="../plug-ins/plugin_api.html">Add custom API functions</a></li>
+					<li><a href="../plug-ins/sorting_plugin.html">Sorting and automatic type detection</a></li>
+					<li><a href="../plug-ins/sorting_sType.html">Sorting without automatic type detection</a></li>
+					<li><a href="../plug-ins/paging_plugin.html">Custom pagination controls</a></li>
+					<li><a href="../plug-ins/range_filtering.html">Range filtering / custom filtering</a></li>
+					<li><a href="../plug-ins/dom_sort.html">Live DOM sorting</a></li>
+					<li><a href="../plug-ins/html_sort.html">Automatic HTML type detection</a></li>
+				</ul>
+			</div>
+			
+			
+			<div id="footer" class="clear" style="text-align:center;">
+				<p>
+					Please refer to the <a href="http://www.datatables.net/usage">DataTables documentation</a> for full information about its API properties and methods.<br>
+					Additionally, there are a wide range of <a href="http://www.datatables.net/extras">extras</a> and <a href="http://www.datatables.net/plug-ins">plug-ins</a> which extend the capabilities of DataTables.
+				</p>
+				
+				<span style="font-size:10px;">
+					DataTables designed and created by <a href="http://www.sprymedia.co.uk">Allan Jardine</a> &copy; 2007-2011<br>
+					DataTables is dual licensed under the <a href="http://www.datatables.net/license_gpl2">GPL v2 license</a> or a <a href="http://www.datatables.net/license_bsd">BSD (3-point) license</a>.
+				</span>
+			</div>
+		</div>
+	</body>
 </html>
-

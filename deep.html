@@ -15,7 +15,14 @@
 			$(document).ready(function() {
 				var oTable = $('#example').dataTable( {
 					"bProcessing": true,
-					"sAjaxSource": '../ajax/sources/arrays.txt'
+					"sAjaxSource": "sources/deep.txt",
+					"aoColumns": [
+						{ "mData": "engine" },
+						{ "mData": "browser" },
+						{ "mData": "platform.inner" },
+						{ "mData": "platform.details.0" },
+						{ "mData": "platform.details.1" }
+					]
 				} );
 			} );
 		</script>
@@ -23,11 +30,11 @@
 	<body id="dt_example">
 		<div id="container">
 			<div class="full_width big">
-				DataTables AJAX source example
+				DataTables AJAX source example - deep property reading for a data source
 			</div>
 			
 			<h1>Preamble</h1>
-			<p>Although DataTables is built from the principle of progressive enhancement, it is often useful to be able to construct a table from an AJAX source. This can be done in one of two ways - either using the <b>aaData</b> initialisation parameter which takes an array of data, or using the <b>sAjaxSource</b> initialisation parameter which will have DataTables go to that source with an XHR call and load data from there. This example shows the latter method in action. DataTables expects an object with an array called "aaData" with the data source.</p>
+			<p>The ability of DataTables to read arbitrary object properties as a column data source is extended to <i>n</i> levels of objects, through the use of standard Javascript dotted object notation. For example in this example "platform.details.0" refers to the first element of the array "details", of the object "platform", for each column. Any level of 'dots' can be used.</p>
 			
 			<h1>Live example</h1>
 			<div id="dynamic">
@@ -60,9 +67,16 @@
 			
 			<h1>Initialisation code</h1>
 			<pre class="brush: js;">$(document).ready(function() {
-	$('#example').dataTable( {
+	var oTable = $('#example').dataTable( {
 		"bProcessing": true,
-		"sAjaxSource": '../ajax/sources/arrays.txt'
+		"sAjaxSource": "sources/deep.txt",
+		"aoColumns": [
+			{ "mData": "engine" },
+			{ "mData": "browser" },
+			{ "mData": "platform.inner" },
+			{ "mData": "platform.details.0" },
+			{ "mData": "platform.details.1" }
+		]
 	} );
 } );</pre>
 			<style type="text/css">

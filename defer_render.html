@@ -15,7 +15,8 @@
 			$(document).ready(function() {
 				var oTable = $('#example').dataTable( {
 					"bProcessing": true,
-					"sAjaxSource": '../ajax/sources/arrays.txt'
+					"sAjaxSource": "sources/arrays.txt",
+					"bDeferRender": true
 				} );
 			} );
 		</script>
@@ -23,11 +24,11 @@
 	<body id="dt_example">
 		<div id="container">
 			<div class="full_width big">
-				DataTables AJAX source example
+				DataTables AJAX source example - with deferred rendering
 			</div>
 			
 			<h1>Preamble</h1>
-			<p>Although DataTables is built from the principle of progressive enhancement, it is often useful to be able to construct a table from an AJAX source. This can be done in one of two ways - either using the <b>aaData</b> initialisation parameter which takes an array of data, or using the <b>sAjaxSource</b> initialisation parameter which will have DataTables go to that source with an XHR call and load data from there. This example shows the latter method in action. DataTables expects an object with an array called "aaData" with the data source.</p>
+			<p>When working with large data sources, you might seek to improve the speed at which DataTables runs. One method to do this is to make use of the build in deferred rendering. Rather than have DataTables create all TR and TD nodes required for the table when the data is loaded, when deferred rendering is enabled, DataTables will only create the nodes required for each individual display - these nodes are then retained incase they are needed again. This can give a significant performance increase, since a lot less work is done at initialisation time.</p>
 			
 			<h1>Live example</h1>
 			<div id="dynamic">
@@ -62,7 +63,8 @@
 			<pre class="brush: js;">$(document).ready(function() {
 	$('#example').dataTable( {
 		"bProcessing": true,
-		"sAjaxSource": '../ajax/sources/arrays.txt'
+		"sAjaxSource": "sources/arrays.txt",
+		"bDeferRender": true
 	} );
 } );</pre>
 			<style type="text/css">

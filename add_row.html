@@ -12,67 +12,80 @@
 		<script type="text/javascript" language="javascript" src="../../media/js/jquery.js"></script>
 		<script type="text/javascript" language="javascript" src="../../media/js/jquery.dataTables.js"></script>
 		<script type="text/javascript" charset="utf-8">
+			/* Global var for counter */
+			var giCount = 1;
+			
 			$(document).ready(function() {
-				var oTable = $('#example').dataTable( {
-					"bProcessing": true,
-					"sAjaxSource": '../ajax/sources/arrays.txt'
-				} );
+				$('#example').dataTable();
 			} );
+			
+			function fnClickAddRow() {
+				$('#example').dataTable().fnAddData( [
+					giCount+".1",
+					giCount+".2",
+					giCount+".3",
+					giCount+".4" ] );
+				
+				giCount++;
+			}
 		</script>
 	</head>
 	<body id="dt_example">
 		<div id="container">
 			<div class="full_width big">
-				DataTables AJAX source example
+				DataTables add row example
 			</div>
-			
+
 			<h1>Preamble</h1>
-			<p>Although DataTables is built from the principle of progressive enhancement, it is often useful to be able to construct a table from an AJAX source. This can be done in one of two ways - either using the <b>aaData</b> initialisation parameter which takes an array of data, or using the <b>sAjaxSource</b> initialisation parameter which will have DataTables go to that source with an XHR call and load data from there. This example shows the latter method in action. DataTables expects an object with an array called "aaData" with the data source.</p>
+			<p>DataTables adding rows in DataTables is done by assigning the DataTables jQuery object to a variable when initialising it, and then using it's API methods to add a new row. Deleting rows can be done in a similar manner.</p>
 			
 			<h1>Live example</h1>
-			<div id="dynamic">
+			<p><a href="javascript:void(0);" onclick="fnClickAddRow();">Click to add a new row</a></p>
+			
+			<div id="demo">
 <table cellpadding="0" cellspacing="0" border="0" class="display" id="example">
 	<thead>
 		<tr>
-			<th width="20%">Rendering engine</th>
-			<th width="25%">Browser</th>
-			<th width="25%">Platform(s)</th>
-			<th width="15%">Engine version</th>
-			<th width="15%">CSS grade</th>
+			<th>Column 1</th>
+			<th>Column 2</th>
+			<th>Column 3</th>
+			<th>Column 4</th>
 		</tr>
 	</thead>
 	<tbody>
-		
-	</tbody>
-	<tfoot>
 		<tr>
-			<th>Rendering engine</th>
-			<th>Browser</th>
-			<th>Platform(s)</th>
-			<th>Engine version</th>
-			<th>CSS grade</th>
+			<td>allan</td>
+			<td>allan</td>
+			<td>allan</td>
+			<td>allan</td>
 		</tr>
-	</tfoot>
+	</tbody>
 </table>
 			</div>
 			<div class="spacer"></div>
 			
 			
 			<h1>Initialisation code</h1>
-			<pre class="brush: js;">$(document).ready(function() {
-	$('#example').dataTable( {
-		"bProcessing": true,
-		"sAjaxSource": '../ajax/sources/arrays.txt'
-	} );
-} );</pre>
+			<pre class="brush: js;">/* Global var for counter */
+var giCount = 1;
+
+$(document).ready(function() {
+	$('#example').dataTable();
+} );
+
+function fnClickAddRow() {
+	$('#example').dataTable().fnAddData( [
+		giCount+".1",
+		giCount+".2",
+		giCount+".3",
+		giCount+".4" ] );
+	
+	giCount++;
+}</pre>
 			<style type="text/css">
 				@import "../examples_support/syntax/css/shCore.css";
 			</style>
 			<script type="text/javascript" language="javascript" src="../examples_support/syntax/js/shCore.js"></script>
-
-			<h1>Server response</h1>
-			<p>The code below shows the latest JSON data that has been returned from the server in response to the Ajax request made by DataTables. This will update as further requests are made.</p>
-			<pre id="latest_xhr" class="brush: js;"></pre>
 			
 			
 			<h1>Other examples</h1>

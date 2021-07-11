@@ -12,12 +12,6 @@
 		<script type="text/javascript" language="javascript" src="../../media/js/jquery.js"></script>
 		<script type="text/javascript" language="javascript" src="../../media/js/jquery.dataTables.js"></script>
 		<script type="text/javascript" charset="utf-8">
-			jQuery.fn.dataTableExt.aTypes.push(
-				function ( sData ) {
-					return 'html';
-				}
-			);
-			
 			$(document).ready(function() {
 				$('#example').dataTable();
 			} );
@@ -26,11 +20,12 @@
 	<body id="dt_example">
 		<div id="container">
 			<div class="full_width big">
-				DataTables HTML sorting auto-detection example
+				DataTables HTML sorting example
 			</div>
 
 			<h1>Preamble</h1>
-			<p>It can be very useful to have DataTables default to it's built in type of HTML, rather than string, which a column does not fit the requirements of any other type. The way this method works is to put the 'html' type at the end of aTypes, which means it will be set as that type only if none of the other types match the data in question.</p>
+			<p>DataTables will attempt to automatically detect the data types that your table contains, allowing it to accurately sort and filter this data. This example shows automatic type detection of HTML information - note that the sorting is correct on the second column for the visible information. Additional data types can be added through <a href="http://datatables.net/plug-ins/">plug-ins</a>.
+			<p>Note that prior to DataTables 1.7 the HTML type was not automatically detected, and it was necessary to specify the sType for the column - this is now not needed as seen in this example. If you do want to be able to sort and filter on the HTML information you can specify the sType for the column as 'string'.</p>
 			
 			<h1>Live example</h1>
 			<div id="demo">
@@ -60,13 +55,7 @@
 			
 			
 			<h1>Initialisation code</h1>
-			<pre class="brush: js;">jQuery.fn.dataTableExt.aTypes.push(
-	function ( sData ) {
-		return 'html';
-	}
-);
-
-$(document).ready(function() {
+			<pre class="brush: js;">$(document).ready(function() {
 	$('#example').dataTable();
 } );</pre>
 			<style type="text/css">

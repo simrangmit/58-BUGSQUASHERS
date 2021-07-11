@@ -15,7 +15,8 @@
 			$(document).ready(function() {
 				var oTable = $('#example').dataTable( {
 					"bProcessing": true,
-					"sAjaxSource": '../ajax/sources/arrays.txt'
+					"sAjaxSource": "sources/custom_prop.txt",
+					"sAjaxDataProp": "demo"
 				} );
 			} );
 		</script>
@@ -23,11 +24,11 @@
 	<body id="dt_example">
 		<div id="container">
 			<div class="full_width big">
-				DataTables AJAX source example
+				DataTables AJAX source example - reading an arbitrary data source property
 			</div>
 			
 			<h1>Preamble</h1>
-			<p>Although DataTables is built from the principle of progressive enhancement, it is often useful to be able to construct a table from an AJAX source. This can be done in one of two ways - either using the <b>aaData</b> initialisation parameter which takes an array of data, or using the <b>sAjaxSource</b> initialisation parameter which will have DataTables go to that source with an XHR call and load data from there. This example shows the latter method in action. DataTables expects an object with an array called "aaData" with the data source.</p>
+			<p>By default DataTables will read the data to show in the table from the <i>aaData</i> property of the object returned from the server. By using the initialisation option <b>sAjaxDataProp</b> you can customise this to whatever you wish. This examples shows it being set to 'demo'. Note that this option will also work with server-side processing. Additionally, it is possible to set <b>sAjaxDataProp</b> to be an empty string, which results in DataTables treating the given data source as the table data array (rather than as property of an object).</p>
 			
 			<h1>Live example</h1>
 			<div id="dynamic">
@@ -62,7 +63,8 @@
 			<pre class="brush: js;">$(document).ready(function() {
 	$('#example').dataTable( {
 		"bProcessing": true,
-		"sAjaxSource": '../ajax/sources/arrays.txt'
+		"sAjaxSource": "sources/custom_prop.txt",
+		"sAjaxDataProp": "demo"
 	} );
 } );</pre>
 			<style type="text/css">

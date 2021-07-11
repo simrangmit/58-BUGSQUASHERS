@@ -15,7 +15,14 @@
 			$(document).ready(function() {
 				var oTable = $('#example').dataTable( {
 					"bProcessing": true,
-					"sAjaxSource": '../ajax/sources/arrays.txt'
+					"sAjaxSource": "sources/objects.txt",
+					"aoColumns": [
+						{ "mData": "engine" },
+						{ "mData": "browser" },
+						{ "mData": "platform" },
+						{ "mData": "version" },
+						{ "mData": "grade" }
+					]
 				} );
 			} );
 		</script>
@@ -23,11 +30,11 @@
 	<body id="dt_example">
 		<div id="container">
 			<div class="full_width big">
-				DataTables AJAX source example
+				DataTables AJAX source example - array of objects as a data source
 			</div>
 			
 			<h1>Preamble</h1>
-			<p>Although DataTables is built from the principle of progressive enhancement, it is often useful to be able to construct a table from an AJAX source. This can be done in one of two ways - either using the <b>aaData</b> initialisation parameter which takes an array of data, or using the <b>sAjaxSource</b> initialisation parameter which will have DataTables go to that source with an XHR call and load data from there. This example shows the latter method in action. DataTables expects an object with an array called "aaData" with the data source.</p>
+			<p>By default, DataTables will expect an array of arrays for its data source, with each cell in the table being exactly described in the data source. However, this can often be quite limiting, or not suitable for a particular data source, so it is possible to specify which property of a source object that DataTables should read for each column. In this example the Ajax source returns an array of objects (one object for each row), and will then read the required property for each column.</p>
 			
 			<h1>Live example</h1>
 			<div id="dynamic">
@@ -60,9 +67,16 @@
 			
 			<h1>Initialisation code</h1>
 			<pre class="brush: js;">$(document).ready(function() {
-	$('#example').dataTable( {
+	var oTable = $('#example').dataTable( {
 		"bProcessing": true,
-		"sAjaxSource": '../ajax/sources/arrays.txt'
+		"sAjaxSource": "sources/objects.txt",
+		"aoColumns": [
+			{ "mData": "engine" },
+			{ "mData": "browser" },
+			{ "mData": "platform" },
+			{ "mData": "version" },
+			{ "mData": "grade" }
+		]
 	} );
 } );</pre>
 			<style type="text/css">
