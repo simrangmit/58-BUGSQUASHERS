@@ -1,11 +1,7 @@
 {
-	"name": "Flot",
-	"version": "0.8.2",
-	"main": "jquery.flot.js",
-	"scripts": {
-		"test": "make test"
-	},
-	"devDependencies": {
-		"jshint": "0.9.1"
-	}
+  "name": "components-jquery",
+  "version": "2.0.3",
+  "description": "jQuery component",
+  "keywords": ["jquery"],
+  "main": "./jquery.js"
 }

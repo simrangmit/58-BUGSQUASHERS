@@ -1,8 +1,15 @@
 {
-	"name": "Flot",
-	"version": "0.8.2",
-	"main": "jquery.flot.js",
-	"dependencies": {
-		"jquery": ">= 1.2.6"
-	}
+  "name": "jquery",
+  "repo": "components/jquery",
+  "version": "2.0.3",
+  "description": "jQuery component",
+  "keywords": [
+    "jquery",
+    "component"
+  ],
+  "main": "jquery.js",
+  "scripts": [
+    "jquery.js"
+  ],
+  "license": "MIT"
 }
