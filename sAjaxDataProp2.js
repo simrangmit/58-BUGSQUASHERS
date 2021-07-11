@@ -5,7 +5,6 @@ oTest.fnStart( "Custom data source property - array only" );
 $(document).ready( function () {
 	var oInit = {
 		"sAjaxSource": "../../../examples/ajax/sources/array_only.txt",
-		"bDeferRender": true,
 		"sAjaxDataProp": ""
 	};
 	$('#example').dataTable( oInit );

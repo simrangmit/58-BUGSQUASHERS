@@ -1,7 +1,7 @@
 // DATA_TEMPLATE: empty_table
-oTest.fnStart( "sAjaxSource" );
+oTest.fnStart( "bServerSide" );
 
-/* Sanitfy check really - all the other tests blast this */
+/* Not interested in server-side processing here other than to check that it is off */
 
 $(document).ready( function () {
 	/* Check the default */
@@ -13,9 +13,7 @@ $(document).ready( function () {
 	oTest.fnWaitTest( 
 		"Server side is off by default",
 		null,
-		function () { 
-			return oSettings.sAjaxSource == "../../../examples/ajax/sources/arrays.txt";
-		}
+		function () { return oSettings.oFeatures.bServerSide == false; }
 	);
 	
 	oTest.fnComplete();

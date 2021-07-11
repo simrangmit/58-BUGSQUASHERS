@@ -11,11 +11,10 @@ $(document).ready( function () {
 	
 	var oTable = $('#example').dataTable( {
 		"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
-		"bDeferRender": true,
 		"aoColumns": [
 			null,
 			{ "fnRender": function (a) {
-				if ( a.iDataRow == 0 ) {
+				if ( mTmp == 0 ) {
 					mTmp++;
 					return "aaa";
 				} else
@@ -41,13 +40,12 @@ $(document).ready( function () {
 			oSession.fnRestore();
 			oTable = $('#example').dataTable( {
 				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
-				"bDeferRender": true,
 				"aoColumns": [
 					null,
 					{ 
 						"bUseRendered": false,
 						"fnRender": function (a) {
-							if ( a.iDataRow == 0 ) {
+							if ( mTmp == 0 ) {
 								mTmp++;
 								return "aaa";
 							} else {
@@ -76,11 +74,10 @@ $(document).ready( function () {
 			oSession.fnRestore();
 			oTable = $('#example').dataTable( {
 				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
-				"bDeferRender": true,
 				"aoColumns": [
 					{
 						"fnRender": function (a) {
-							if ( a.iDataRow == 0 ) {
+							if ( mTmp == 0 ) {
 								mTmp++;
 								return "aaa1";
 							} else {
@@ -91,7 +88,7 @@ $(document).ready( function () {
 					{ 
 						"bUseRendered": false,
 						"fnRender": function (a) {
-							if ( a.iDataRow == 0 ) {
+							if ( mTmp2 == 0 ) {
 								mTmp2++;
 								return "aaa2";
 							} else {
@@ -101,7 +98,7 @@ $(document).ready( function () {
 					},
 					{
 						"fnRender": function (a) {
-							if ( a.iDataRow == 0 ) {
+							if ( mTmp3 == 0 ) {
 								mTmp3++;
 								return "zzz3";
 							} else {

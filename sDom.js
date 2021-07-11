@@ -6,8 +6,7 @@ oTest.fnStart( "sDom" );
 $(document).ready( function () {
 	/* Check the default */
 	var oTable = $('#example').dataTable( {
-		"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
-		"bDeferRender": true
+		"sAjaxSource": "../../../examples/ajax/sources/arrays.txt"
 	} );
 	var oSettings = oTable.fnSettings();
 	
@@ -46,7 +45,6 @@ $(document).ready( function () {
 			oSession.fnRestore();
 			oTable = $('#example').dataTable( {
 				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
-				"bDeferRender": true,
 				"sDom": '<"wrapper"flipt>'
 			} );
 			oSettings = oTable.fnSettings();
@@ -97,7 +95,6 @@ $(document).ready( function () {
 			oSession.fnRestore();
 			$('#example').dataTable( {
 				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
-				"bDeferRender": true,
 				"sDom": '<lf<t>ip>'
 			} );
 		},
@@ -148,7 +145,6 @@ $(document).ready( function () {
 			oSession.fnRestore();
 			$('#example').dataTable( {
 				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
-				"bDeferRender": true,
 				"sDom": 'frtip'
 			} );
 		},
@@ -178,7 +174,6 @@ $(document).ready( function () {
 			oSession.fnRestore();
 			$('#example').dataTable( {
 				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
-				"bDeferRender": true,
 				"sDom": 'lrtip'
 			} );
 		},
@@ -210,7 +205,6 @@ $(document).ready( function () {
 			oSession.fnRestore();
 			$('#example').dataTable( {
 				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
-				"bDeferRender": true,
 				"sDom": 'lfrtp'
 			} );
 		},
@@ -240,7 +234,6 @@ $(document).ready( function () {
 			oSession.fnRestore();
 			$('#example').dataTable( {
 				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
-				"bDeferRender": true,
 				"sDom": 'lfrti'
 			} );
 		},

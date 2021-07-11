@@ -8,8 +8,7 @@ oTest.fnStart( "oLanguage.sUrl" );
 $(document).ready( function () {
 	/* Check the default */
 	var oTable = $('#example').dataTable( {
-		"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
-		"bDeferRender": true
+		"sAjaxSource": "../../../examples/ajax/sources/arrays.txt"
 	} );
 	var oSettings = oTable.fnSettings();
 	
@@ -26,7 +25,6 @@ $(document).ready( function () {
 			oSession.fnRestore();
 			oTable = $('#example').dataTable( {
 				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
-				"bDeferRender": true,
 				"oLanguage": {
 					"sUrl": "../../../examples/examples_support/de_DE.txt"
 				}

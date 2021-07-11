@@ -4,8 +4,7 @@ oTest.fnStart( "aaSortingFixed" );
 $(document).ready( function () {
 	/* Check the default */
 	var oTable = $('#example').dataTable( {
-		"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
-		"bDeferRender": true
+		"sAjaxSource": "../../../examples/ajax/sources/arrays.txt"
 	} );
 	var oSettings = oTable.fnSettings();
 	
@@ -24,7 +23,6 @@ $(document).ready( function () {
 			oSession.fnRestore();
 			$('#example').dataTable( {
 				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
-				"bDeferRender": true,
 				"aaSortingFixed": [['0','asc']],
 				"fnInitComplete": function () {
 					$('#example thead th:eq(1)').click();
@@ -49,7 +47,6 @@ $(document).ready( function () {
 			oSession.fnRestore();
 			$('#example').dataTable( {
 				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
-				"bDeferRender": true,
 				"aaSortingFixed": [['3','asc']]
 			} );
 			$('#example thead th:eq(1)').click();

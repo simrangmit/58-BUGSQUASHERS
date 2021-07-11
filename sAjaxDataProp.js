@@ -5,7 +5,6 @@ oTest.fnStart( "Custom data source property - property given" );
 $(document).ready( function () {
 	var oInit = {
 		"sAjaxSource": "../../../examples/ajax/sources/custom_prop.txt",
-		"bDeferRender": true,
 		"sAjaxDataProp": "demo"
 	};
 	$('#example').dataTable( oInit );
