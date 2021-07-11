@@ -1,12 +1,14 @@
-// DATA_TEMPLATE: dom_data
+// DATA_TEMPLATE: empty_table
 oTest.fnStart( "oLanguage.sSearch" );
 
 $(document).ready( function () {
 	/* Check the default */
-	var oTable = $('#example').dataTable();
+	var oTable = $('#example').dataTable( {
+		"sAjaxSource": "../../../examples/ajax/sources/arrays.txt"
+	} );
 	var oSettings = oTable.fnSettings();
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"Search language is 'Search:' by default",
 		null,
 		function () { return oSettings.oLanguage.sSearch == "Search:"; }
@@ -26,11 +28,12 @@ $(document).ready( function () {
 	);
 	
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"Search language can be defined",
 		function () {
 			oSession.fnRestore();
 			oTable = $('#example').dataTable( {
+				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
 				"oLanguage": {
 					"sSearch": "unit test"
 				}
@@ -47,11 +50,12 @@ $(document).ready( function () {
 	);
 	
 	
-	oTest.fnTest( 
-		"Blank search has a no (separator) inserted",
+	oTest.fnWaitTest( 
+		"Blank search has a no space (separator) inserted",
 		function () {
 			oSession.fnRestore();
 			oTable = $('#example').dataTable( {
+				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
 				"oLanguage": {
 					"sSearch": ""
 				}

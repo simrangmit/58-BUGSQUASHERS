@@ -1,4 +1,4 @@
-// DATA_TEMPLATE: dom_data
+// DATA_TEMPLATE: empty_table
 oTest.fnStart( "aoColumns.sName" );
 
 /* This has no effect at all in DOM methods - so we just check that it has applied the name */
@@ -6,6 +6,7 @@ oTest.fnStart( "aoColumns.sName" );
 $(document).ready( function () {
 	/* Check the default */
 	var oTable = $('#example').dataTable( {
+		"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
 		"aoColumns": [
 			null,
 			null,
@@ -16,7 +17,7 @@ $(document).ready( function () {
 	} );
 	var oSettings = oTable.fnSettings();
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"Names are stored in the columns object",
 		null,
 		function () { return oSettings.aoColumns[3].sName =="unit test"; }

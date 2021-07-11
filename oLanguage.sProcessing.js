@@ -1,14 +1,15 @@
-// DATA_TEMPLATE: dom_data
+// DATA_TEMPLATE: empty_table
 oTest.fnStart( "oLanguage.sProcessing" );
 
 $(document).ready( function () {
 	/* Check the default */
 	var oTable = $('#example').dataTable( {
+		"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
 		"bProcessing": true
 	} );
 	var oSettings = oTable.fnSettings();
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"Processing language is 'Processing...' by default",
 		null,
 		function () { return oSettings.oLanguage.sProcessing == "Processing..."; }
@@ -21,11 +22,12 @@ $(document).ready( function () {
 	);
 	
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"Processing language can be defined",
 		function () {
 			oSession.fnRestore();
 			oTable = $('#example').dataTable( {
+				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
 				"bProcessing": true,
 				"oLanguage": {
 					"sProcessing": "unit test"

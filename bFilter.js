@@ -1,22 +1,25 @@
-// DATA_TEMPLATE: dom_data
+// DATA_TEMPLATE: empty_table
 oTest.fnStart( "bFilter" );
 
 $(document).ready( function () {
 	/* Check the default */
-	$('#example').dataTable();
+	$('#example').dataTable( {
+		"sAjaxSource": "../../../examples/ajax/sources/arrays.txt"
+	} );
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"Filtering div exists by default",
 		null,
 		function () { return document.getElementById('example_filter') != null; }
 	);
 	
 	/* Check can disable */
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"Fltering can be disabled",
 		function () {
 			oSession.fnRestore();
 			$('#example').dataTable( {
+				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
 				"bFilter": false
 			} );
 		},
@@ -24,11 +27,12 @@ $(document).ready( function () {
 	);
 	
 	/* Enable makes no difference */
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"Filtering enabled override",
 		function () {
 			oSession.fnRestore();
 			$('#example').dataTable( {
+				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
 				"bFilter": true
 			} );
 		},

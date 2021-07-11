@@ -1,12 +1,14 @@
-// DATA_TEMPLATE: dom_data
+// DATA_TEMPLATE: empty_table
 oTest.fnStart( "oLanguage.sInfo" );
 
 $(document).ready( function () {
 	/* Check the default */
-	var oTable = $('#example').dataTable();
+	var oTable = $('#example').dataTable( {
+		"sAjaxSource": "../../../examples/ajax/sources/arrays.txt"
+	} );
 	var oSettings = oTable.fnSettings();
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"Info language is 'Showing _START_ to _END_ of _TOTAL_ entries' by default",
 		null,
 		function () { return oSettings.oLanguage.sInfo == "Showing _START_ to _END_ of _TOTAL_ entries"; }
@@ -19,11 +21,12 @@ $(document).ready( function () {
 	);
 	
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"Info language can be defined - without any macros",
 		function () {
 			oSession.fnRestore();
 			oTable = $('#example').dataTable( {
+				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
 				"oLanguage": {
 					"sInfo": "unit test"
 				}
@@ -39,11 +42,12 @@ $(document).ready( function () {
 		function () { return document.getElementById('example_info').innerHTML = "unit test"; }
 	);
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"Info language can be defined - with macro _START_ only",
 		function () {
 			oSession.fnRestore();
 			$('#example').dataTable( {
+				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
 				"oLanguage": {
 					"sInfo": "unit _START_ test"
 				}
@@ -52,11 +56,12 @@ $(document).ready( function () {
 		function () { return document.getElementById('example_info').innerHTML = "unit 1 test"; }
 	);
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"Info language can be defined - with macro _END_ only",
 		function () {
 			oSession.fnRestore();
 			$('#example').dataTable( {
+				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
 				"oLanguage": {
 					"sInfo": "unit _END_ test"
 				}
@@ -65,11 +70,12 @@ $(document).ready( function () {
 		function () { return document.getElementById('example_info').innerHTML = "unit 10 test"; }
 	);
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"Info language can be defined - with macro _TOTAL_ only",
 		function () {
 			oSession.fnRestore();
 			$('#example').dataTable( {
+				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
 				"oLanguage": {
 					"sInfo": "unit _END_ test"
 				}
@@ -78,11 +84,12 @@ $(document).ready( function () {
 		function () { return document.getElementById('example_info').innerHTML = "unit 57 test"; }
 	);
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"Info language can be defined - with macros _START_ and _END_",
 		function () {
 			oSession.fnRestore();
 			$('#example').dataTable( {
+				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
 				"oLanguage": {
 					"sInfo": "unit _START_ _END_ test"
 				}
@@ -91,11 +98,12 @@ $(document).ready( function () {
 		function () { return document.getElementById('example_info').innerHTML = "unit 1 10 test"; }
 	);
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"Info language can be defined - with macros _START_, _END_ and _TOTAL_",
 		function () {
 			oSession.fnRestore();
 			$('#example').dataTable( {
+				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
 				"oLanguage": {
 					"sInfo": "unit _START_ _END_ _TOTAL_ test"
 				}

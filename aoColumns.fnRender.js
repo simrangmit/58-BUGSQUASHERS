@@ -1,10 +1,11 @@
-// DATA_TEMPLATE: dom_data
+// DATA_TEMPLATE: empty_table
 oTest.fnStart( "aoColumns.fnRender" );
 
 $(document).ready( function () {
 	/* Check the default */
 	var mTmp = 0;
 	var oTable = $('#example').dataTable( {
+		"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
 		"aoColumns": [
 			null,
 			{ "fnRender": function (a) {
@@ -18,21 +19,22 @@ $(document).ready( function () {
 	} );
 	var oSettings = oTable.fnSettings();
 	
-	oTest.fnTest( 
-		"Single column - fnRender is called once for each row",
+	oTest.fnWaitTest( 
+		"Single column - fnRender is called twice for each row",
 		null,
 		function () { return mTmp == 57; }
 	);
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"Confirm that fnRender passes two arguments with four parameters",
 		function () {
 			mTmp = true;
 			oSession.fnRestore();
 			oTable = $('#example').dataTable( {
+				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
 				"aoColumns": [
 					null,
-					{ "fnRender": function (a, v) {
+					{ "fnRender": function (a) {
 						if ( arguments.length != 2 || typeof a.iDataRow=='undefined' ||
 						 	typeof a.iDataColumn=='undefined' || typeof a.aData=='undefined' ||
 						 	typeof a.mDataProp=='undefined' )
@@ -50,38 +52,13 @@ $(document).ready( function () {
 		function () { return mTmp; }
 	);
 	
-	oTest.fnTest( 
-		"fnRender iDataColumn is row number",
-		function () {
-			var iCount = 0;
-			mTmp = true;
-			oSession.fnRestore();
-			oTable = $('#example').dataTable( {
-				"aoColumns": [
-					null,
-					{ "fnRender": function (a) {
-						if ( iCount != a.iDataRow )
-						{
-							mTmp = false;
-						}
-						iCount++;
-						return a.aData[a.iDataColumn];
-					} },
-					null,
-					null,
-					null
-				]
-			} );
-		},
-		function () { return mTmp; }
-	);
-	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"fnRender iDataColumn is the column",
 		function () {
 			mTmp = true;
 			oSession.fnRestore();
 			oTable = $('#example').dataTable( {
+				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
 				"aoColumns": [
 					null,
 					{ "fnRender": function (a) {
@@ -100,12 +77,13 @@ $(document).ready( function () {
 		function () { return mTmp; }
 	);
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"fnRender aData is data array of correct size",
 		function () {
 			mTmp = true;
 			oSession.fnRestore();
 			oTable = $('#example').dataTable( {
+				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
 				"aoColumns": [
 					null,
 					{ "fnRender": function (a) {
@@ -124,11 +102,12 @@ $(document).ready( function () {
 		function () { return mTmp; }
 	);
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"Passed back data is put into the DOM",
 		function () {
 			oSession.fnRestore();
 			oTable = $('#example').dataTable( {
+				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
 				"aoColumns": [
 					null,
 					{ "fnRender": function (a) {
@@ -143,11 +122,12 @@ $(document).ready( function () {
 		function () { return $('#example tbody tr:eq(0) td:eq(1)').html() == 'unittest'; }
 	);
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"Passed back data is put into the DOM",
 		function () {
 			oSession.fnRestore();
 			oTable = $('#example').dataTable( {
+				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
 				"aoColumns": [
 					null,
 					null,

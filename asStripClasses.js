@@ -1,11 +1,13 @@
-// DATA_TEMPLATE: dom_data
+// DATA_TEMPLATE: empty_table
 oTest.fnStart( "asStripeClasses" );
 
 $(document).ready( function () {
 	/* Check the default */
-	$('#example').dataTable();
+	$('#example').dataTable( {
+		"sAjaxSource": "../../../examples/ajax/sources/arrays.txt"
+	} );
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"Default row striping is applied",
 		null,
 		function () {
@@ -16,18 +18,7 @@ $(document).ready( function () {
 		}
 	);
 	
-	oTest.fnTest( 
-		"Row striping does not effect current classes",
-		null,
-		function () {
-			return $('#example tbody tr:eq(0)').hasClass('gradeA') &&
-			       $('#example tbody tr:eq(1)').hasClass('gradeA') &&
-			       $('#example tbody tr:eq(2)').hasClass('gradeA') &&
-			       $('#example tbody tr:eq(3)').hasClass('gradeA');
-		}
-	);
-	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"Row striping on the second page",
 		function () { $('#example_next').click(); },
 		function () {
@@ -39,28 +30,35 @@ $(document).ready( function () {
 	);
 	
 	/* No striping */
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"No row striping",
 		function () {
 			oSession.fnRestore();
 			$('#example').dataTable( {
+				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
 				"asStripeClasses": []
 			} );
 		},
 		function () {
-			return $('#example tbody tr:eq(0)')[0].className == "gradeA" &&
-			       $('#example tbody tr:eq(1)')[0].className == "gradeA" &&
-			       $('#example tbody tr:eq(2)')[0].className == "gradeA" &&
-			       $('#example tbody tr:eq(3)')[0].className == "gradeA";
+			if ( typeof $('#example tbody tr:eq(1)')[0] == 'undefined' )
+			{
+				/* Use the 'wait for' to allow this to become true */
+				return false;
+			}
+			return $('#example tbody tr:eq(0)')[0].className == "" &&
+			       $('#example tbody tr:eq(1)')[0].className == "" &&
+			       $('#example tbody tr:eq(2)')[0].className == "" &&
+			       $('#example tbody tr:eq(3)')[0].className == "";
 		}
 	);
 	
 	/* Custom striping */
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"Custom striping [2]",
 		function () {
 			oSession.fnRestore();
 			$('#example').dataTable( {
+				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
 				"asStripeClasses": [ 'test1', 'test2' ]
 			} );
 		},
@@ -74,11 +72,12 @@ $(document).ready( function () {
 	
 	
 	/* long array of striping */
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"Custom striping [4]",
 		function () {
 			oSession.fnRestore();
 			$('#example').dataTable( {
+				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
 				"asStripeClasses": [ 'test1', 'test2', 'test3', 'test4' ]
 			} );
 		},
@@ -90,7 +89,7 @@ $(document).ready( function () {
 		}
 	);
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"Custom striping is restarted on second page [2]",
 		function () { $('#example_next').click(); },
 		function () {

@@ -1,62 +1,76 @@
-// DATA_TEMPLATE: dom_data
+// DATA_TEMPLATE: empty_table
 oTest.fnStart( "fnHeaderCallback" );
 
 $(document).ready( function () {
 	/* Check the default */
-	var oTable = $('#example').dataTable();
+	var oTable = $('#example').dataTable( {
+		"sAjaxSource": "../../../examples/ajax/sources/arrays.txt"
+	} );
 	var oSettings = oTable.fnSettings();
-	var mPass;
+	var mPass, bInit;
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"Default should be null",
 		null,
 		function () { return oSettings.fnHeaderCallback == null; }
 	);
 	
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"Five arguments passed",
 		function () {
 			oSession.fnRestore();
 			
 			mPass = -1;
+			bInit = false;
 			$('#example').dataTable( {
+				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
 				"fnHeaderCallback": function ( ) {
 					mPass = arguments.length;
+				},
+				"fnInitComplete": function () {
+					bInit = true;
 				}
 			} );
 		},
-		function () { return mPass == 5; }
+		function () { return mPass == 5 && bInit; }
 	);
 	
 	
-	oTest.fnTest( 
-		"fnRowCallback called once per draw",
+	/* The header callback is called once for the init and then when the data is added */
+	oTest.fnWaitTest( 
+		"fnHeaderCallback called once per draw",
 		function () {
 			oSession.fnRestore();
 			
 			mPass = 0;
+			bInit = false;
 			$('#example').dataTable( {
+				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
 				"fnHeaderCallback": function ( nHead, aasData, iStart, iEnd, aiDisplay ) {
 					mPass++;
+				},
+				"fnInitComplete": function () {
+					bInit = true;
 				}
 			} );
 		},
-		function () { return mPass == 1; }
+		function () { return mPass == 2 && bInit; }
 	);
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"fnRowCallback called on paging (i.e. another draw)",
 		function () { $('#example_next').click(); },
-		function () { return mPass == 2; }
+		function () { return mPass == 3; }
 	);
 	
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"fnRowCallback allows us to alter row information",
 		function () {
 			oSession.fnRestore();
 			$('#example').dataTable( {
+				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
 				"fnHeaderCallback": function ( nHead, aasData, iStart, iEnd, aiDisplay ) {
 					nHead.getElementsByTagName('th')[0].innerHTML = "Displaying "+(iEnd-iStart)+" records";
 				}
@@ -66,53 +80,14 @@ $(document).ready( function () {
 	);
 	
 	
-	oTest.fnTest( 
-		"Data array has length matching original data",
-		function () {
-			oSession.fnRestore();
-			
-			mPass = true;
-			$('#example').dataTable( {
-				"fnHeaderCallback": function ( nHead, aasData, iStart, iEnd, aiDisplay ) {
-					if ( aasData.length != 57 )
-					{
-						mPass = false;
-					}
-				}
-			} );
-		},
-		function () { return mPass; }
-	);
-	
-	oTest.fnTest( 
-		"Data array's column lengths match original data",
-		function () {
-			oSession.fnRestore();
-			
-			mPass = true;
-			$('#example').dataTable( {
-				"fnHeaderCallback": function ( nHead, aasData, iStart, iEnd, aiDisplay ) {
-					for ( var i=0, iLen=aasData.length ; i<iLen ; i++ )
-					{
-						if ( aasData[i].length != 5 )
-						{
-							mPass = false;
-						}
-					}
-				}
-			} );
-		},
-		function () { return mPass; }
-	);
-	
-	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"iStart correct on first page",
 		function () {
 			oSession.fnRestore();
 			
 			mPass = true;
 			$('#example').dataTable( {
+				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
 				"fnHeaderCallback": function ( nHead, aasData, iStart, iEnd, aiDisplay ) {
 					if ( iStart != 0 )
 					{
@@ -125,38 +100,22 @@ $(document).ready( function () {
 	);
 	
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"iStart correct on second page",
 		function () {
 			oSession.fnRestore();
 			
 			mPass = false;
 			$('#example').dataTable( {
+				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
 				"fnHeaderCallback": function ( nHead, aasData, iStart, iEnd, aiDisplay ) {
 					if ( iStart == 10 )
 					{
 						mPass = true;
 					}
-				}
-			} );
-			$('#example_next').click();
-		},
-		function () { return mPass; }
-	);
-	
-	
-	oTest.fnTest( 
-		"iEnd correct on first page",
-		function () {
-			oSession.fnRestore();
-			
-			mPass = true;
-			$('#example').dataTable( {
-				"fnHeaderCallback": function ( nHead, aasData, iStart, iEnd, aiDisplay ) {
-					if ( iEnd != 10 )
-					{
-						mPass = false;
-					}
+				},
+				"fnInitComplete": function () {
+					$('#example_next').click();
 				}
 			} );
 		},
@@ -164,33 +123,37 @@ $(document).ready( function () {
 	);
 	
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"iEnd correct on second page",
 		function () {
 			oSession.fnRestore();
 			
 			mPass = false;
 			$('#example').dataTable( {
+				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
 				"fnHeaderCallback": function ( nHead, aasData, iStart, iEnd, aiDisplay ) {
 					if ( iEnd == 20 )
 					{
 						mPass = true;
 					}
+				},
+				"fnInitComplete": function () {
+					$('#example_next').click();
 				}
 			} );
-			$('#example_next').click();
 		},
 		function () { return mPass; }
 	);
 	
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"aiDisplay length is full data when not filtered",
 		function () {
 			oSession.fnRestore();
 			
 			mPass = false;
 			$('#example').dataTable( {
+				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
 				"fnHeaderCallback": function ( nHead, aasData, iStart, iEnd, aiDisplay ) {
 					if ( aiDisplay.length == 57 )
 					{
@@ -202,13 +165,14 @@ $(document).ready( function () {
 		function () { return mPass; }
 	);
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"aiDisplay length is 9 when filtering on 'Mozilla'",
 		function () {
 			oSession.fnRestore();
 			
 			mPass = false;
 			oTable = $('#example').dataTable( {
+				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
 				"fnHeaderCallback": function ( nHead, aasData, iStart, iEnd, aiDisplay ) {
 					if ( aiDisplay.length == 9 )
 					{

@@ -1,13 +1,15 @@
-// DATA_TEMPLATE: dom_data
+// DATA_TEMPLATE: empty_table
 oTest.fnStart( "aoColumns.sTitle" );
 
 $(document).ready( function () {
 	/* Check the default */
-	var oTable = $('#example').dataTable();
+	var oTable = $('#example').dataTable( {
+		"sAjaxSource": "../../../examples/ajax/sources/arrays.txt"
+	} );
 	var oSettings = oTable.fnSettings();
 	
-	oTest.fnTest( 
-		"Column names are read from the DOM by default",
+	oTest.fnWaitTest( 
+		"If not given, then the columns titles are empty",
 		null,
 		function () {
 			var jqNodes = $('#example thead tr:eq(0) th');
@@ -21,11 +23,12 @@ $(document).ready( function () {
 		}
 	);
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"Can set a single column title - and others are read from DOM",
 		function () {
 			oSession.fnRestore();
 			$('#example').dataTable( {
+				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
 				"aoColumns": [
 					null,
 					{ "sTitle": 'unit test' },
@@ -47,11 +50,12 @@ $(document).ready( function () {
 		}
 	);
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"Can set multiple column titles",
 		function () {
 			oSession.fnRestore();
 			$('#example').dataTable( {
+				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
 				"aoColumns": [
 					null,
 					{ "sTitle": 'unit test 1' },

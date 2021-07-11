@@ -1,20 +1,22 @@
-// DATA_TEMPLATE: dom_data
+// DATA_TEMPLATE: empty_table
 oTest.fnStart( "sDom" );
 
 /* This is going to be brutal on the browser! There is a lot that can be tested here... */
 
 $(document).ready( function () {
 	/* Check the default */
-	var oTable = $('#example').dataTable();
+	var oTable = $('#example').dataTable( {
+		"sAjaxSource": "../../../examples/ajax/sources/arrays.txt"
+	} );
 	var oSettings = oTable.fnSettings();
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"Default DOM varaible",
 		null,
 		function () { return oSettings.sDom == "lfrtip"; }
 	);
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"Default DOM in document",
 		null,
 		function () {
@@ -37,11 +39,12 @@ $(document).ready( function () {
 		}
 	);
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"Check example 1 in code propagates",
 		function () {
 			oSession.fnRestore();
 			oTable = $('#example').dataTable( {
+				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
 				"sDom": '<"wrapper"flipt>'
 			} );
 			oSettings = oTable.fnSettings();
@@ -49,7 +52,7 @@ $(document).ready( function () {
 		function () { return oSettings.sDom == '<"wrapper"flipt>'; }
 	);
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"Check example 1 in DOM",
 		null,
 		function () {
@@ -86,11 +89,12 @@ $(document).ready( function () {
 		}
 	);
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"Check example 2 in DOM",
 		function () {
 			oSession.fnRestore();
 			$('#example').dataTable( {
+				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
 				"sDom": '<lf<t>ip>'
 			} );
 		},
@@ -135,11 +139,12 @@ $(document).ready( function () {
 		}
 	);
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"Check no length element",
 		function () {
 			oSession.fnRestore();
 			$('#example').dataTable( {
+				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
 				"sDom": 'frtip'
 			} );
 		},
@@ -163,11 +168,12 @@ $(document).ready( function () {
 		}
 	);
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"Check no filter element",
 		function () {
 			oSession.fnRestore();
 			$('#example').dataTable( {
+				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
 				"sDom": 'lrtip'
 			} );
 		},
@@ -193,11 +199,12 @@ $(document).ready( function () {
 	
 	/* Note we don't test for no table as this is not supported (and it would be fairly daft! */
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"Check no info element",
 		function () {
 			oSession.fnRestore();
 			$('#example').dataTable( {
+				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
 				"sDom": 'lfrtp'
 			} );
 		},
@@ -221,11 +228,12 @@ $(document).ready( function () {
 		}
 	);
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"Check no paging element",
 		function () {
 			oSession.fnRestore();
 			$('#example').dataTable( {
+				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
 				"sDom": 'lfrti'
 			} );
 		},
@@ -246,71 +254,6 @@ $(document).ready( function () {
 				nNodes[4] == nInfo &&
 				null == nPaging;
 			return bReturn;
-		}
-	);
-	
-	oTest.fnTest( 
-		"Element with an id",
-		function () {
-			$('#example').dataTable( {
-				"bDestroy": true,
-				"sDom": '<"#test"lf>rti'
-			} );
-		},
-		function () {
-			return $('#test').length == 1;
-		}
-	);
-	
-	oTest.fnTest( 
-		"Element with an id and a class",
-		function () {
-			$('#example').dataTable( {
-				"bDestroy": true,
-				"sDom": '<"#test.classTest"lf>rti'
-			} );
-		},
-		function () {
-			return ($('#test').length == 1 && $('#test')[0].className == "classTest");
-		}
-	);
-	
-	oTest.fnTest( 
-		"Element with just a class",
-		function () {
-			$('#example').dataTable( {
-				"bDestroy": true,
-				"sDom": '<"classTest"lf>rti'
-			} );
-		},
-		function () {
-			return ($('div.classTest').length == 1 );
-		}
-	);
-	
-	oTest.fnTest( 
-		"Two elements with an id",
-		function () {
-			$('#example').dataTable( {
-				"bDestroy": true,
-				"sDom": '<"#test1"lf>rti<"#test2"lf>'
-			} );
-		},
-		function () {
-			return ($('#test1').length == 1 && $('#test2').length == 1);
-		}
-	);
-	
-	oTest.fnTest( 
-		"Two elements with an id and one with a class",
-		function () {
-			$('#example').dataTable( {
-				"bDestroy": true,
-				"sDom": '<"#test1"lf>rti<"#test2.classTest"lf>'
-			} );
-		},
-		function () {
-			return ($('#test1').length == 1 && $('#test2').length == 1 && $('div.classTest').length == 1);
 		}
 	);
 	

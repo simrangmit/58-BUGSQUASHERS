@@ -1,43 +1,47 @@
-// DATA_TEMPLATE: dom_data
+// DATA_TEMPLATE: empty_table
 oTest.fnStart( "fnInitComplete" );
 
 /* Fairly boring function compared to the others! */
 
 $(document).ready( function () {
 	/* Check the default */
-	var oTable = $('#example').dataTable();
+	var oTable = $('#example').dataTable( {
+		"sAjaxSource": "../../../examples/ajax/sources/arrays.txt"
+	} );
 	var oSettings = oTable.fnSettings();
 	var mPass;
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"Default should be null",
 		null,
 		function () { return oSettings.fnInitComplete == null; }
 	);
 	
 	
-	oTest.fnTest( 
-		"Two arguments passed",
+	oTest.fnWaitTest( 
+		"Two arguments passed (for Ajax!)",
 		function () {
 			oSession.fnRestore();
 			
 			mPass = -1;
 			$('#example').dataTable( {
+				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
 				"fnInitComplete": function ( ) {
-					mPass = arguments.length===2 && arguments[1]===undefined;
+					mPass = arguments.length;
 				}
 			} );
 		},
-		function () { return mPass; }
+		function () { return mPass == 2; }
 	);
 	
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"That one argument is the settings object",
 		function () {
 			oSession.fnRestore();
 			
 			oTable = $('#example').dataTable( {
+				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
 				"fnInitComplete": function ( oSettings ) {
 					mPass = oSettings;
 				}
@@ -47,13 +51,14 @@ $(document).ready( function () {
 	);
 	
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"fnInitComplete called once on first draw",
 		function () {
 			oSession.fnRestore();
 			
 			mPass = 0;
 			$('#example').dataTable( {
+				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
 				"fnInitComplete": function ( ) {
 					mPass++;
 				}
@@ -62,7 +67,7 @@ $(document).ready( function () {
 		function () { return mPass == 1; }
 	);
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"fnInitComplete never called there after",
 		function () {
 			$('#example_next').click();
@@ -80,6 +85,7 @@ $(document).ready( function () {
 			
 			mPass = 0;
 			$('#example').dataTable( {
+				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
 				"fnInitComplete": function ( ) {
 					mPass = $('#example tbody tr').length;
 				}

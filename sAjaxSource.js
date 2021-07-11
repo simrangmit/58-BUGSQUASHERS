@@ -1,17 +1,21 @@
-// DATA_TEMPLATE: dom_data
+// DATA_TEMPLATE: empty_table
 oTest.fnStart( "sAjaxSource" );
 
-/* Not interested in ajax source here other than to check it's default */
+/* Sanitfy check really - all the other tests blast this */
 
 $(document).ready( function () {
 	/* Check the default */
-	var oTable = $('#example').dataTable();
+	var oTable = $('#example').dataTable( {
+		"sAjaxSource": "../../../examples/ajax/sources/arrays.txt"
+	} );
 	var oSettings = oTable.fnSettings();
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"Server side is off by default",
 		null,
-		function () { return oSettings.sAjaxSource == null; }
+		function () { 
+			return oSettings.sAjaxSource == "../../../examples/ajax/sources/arrays.txt";
+		}
 	);
 	
 	oTest.fnComplete();

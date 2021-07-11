@@ -1,4 +1,4 @@
-// DATA_TEMPLATE: dom_data
+// DATA_TEMPLATE: empty_table
 oTest.fnStart( "oLanguage.sUrl" );
 
 /* Note that we only test the internal storage of language information pulled form a file here
@@ -7,7 +7,9 @@ oTest.fnStart( "oLanguage.sUrl" );
 
 $(document).ready( function () {
 	/* Check the default */
-	var oTable = $('#example').dataTable();
+	var oTable = $('#example').dataTable( {
+		"sAjaxSource": "../../../examples/ajax/sources/arrays.txt"
+	} );
 	var oSettings = oTable.fnSettings();
 	
 	oTest.fnTest( 
@@ -22,6 +24,7 @@ $(document).ready( function () {
 		function () {
 			oSession.fnRestore();
 			oTable = $('#example').dataTable( {
+				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
 				"oLanguage": {
 					"sUrl": "../../../examples/examples_support/de_DE.txt"
 				}

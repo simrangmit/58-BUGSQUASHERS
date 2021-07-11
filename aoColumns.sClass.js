@@ -1,22 +1,25 @@
-// DATA_TEMPLATE: dom_data
+// DATA_TEMPLATE: empty_table
 oTest.fnStart( "aoColumns.sClass" );
 
 $(document).ready( function () {
 	/* Check the default */
-	var oTable = $('#example').dataTable();
+	var oTable = $('#example').dataTable( {
+		"sAjaxSource": "../../../examples/ajax/sources/arrays.txt"
+	} );
 	var oSettings = oTable.fnSettings();
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"By default the test class hasn't been applied to the column (sanity!)",
 		null,
 		function () { return $('#example tbody tr:eq(0) td:eq(2)').hasClass('unittest') == false; }
 	);
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"Add a class to a single column - first row",
 		function () {
 			oSession.fnRestore();
 			$('#example').dataTable( {
+				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
 				"aoColumns": [
 					null,
 					null,
@@ -29,54 +32,55 @@ $(document).ready( function () {
 		function () { return $('#example tbody tr:eq(1) td:eq(2)').hasClass('unittest'); }
 	);
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"Add a class to a single column - third row",
 		null,
 		function () { return $('#example tbody tr:eq(3) td:eq(2)').hasClass('unittest'); }
 	);
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"Add a class to a single column - last row",
 		null,
 		function () { return $('#example tbody tr:eq(9) td:eq(2)').hasClass('unittest'); }
 	);
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"Add a class to a single column - has not applied to other columns - 1st",
 		null,
 		function () { return $('#example tbody tr:eq(3) td:eq(0)').hasClass('unittest') == false; }
 	);
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"Add a class to a single column - has not applied to other columns - 5th",
 		null,
 		function () { return $('#example tbody tr:eq(3) td:eq(4)').hasClass('unittest') == false; }
 	);
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"Add a class to a single column - seventh row - second page",
 		function () { $('#example_next').click(); },
 		function () { return $('#example tbody tr:eq(6) td:eq(2)').hasClass('unittest'); }
 	);
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"Add a class to a single column - has not applied to header",
 		null,
 		function () { return $('#example thead tr:eq(3) th:eq(4)').hasClass('unittest') == false; }
 	);
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"Add a class to a single column - has not applied to footer",
 		null,
 		function () { return $('#example thead tr:eq(3) th:eq(4)').hasClass('unittest') == false; }
 	);
 	
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"Class defined for multiple columns - first row",
 		function () {
 			oSession.fnRestore();
 			$('#example').dataTable( {
+				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
 				"aoColumns": [
 					{ "sClass": 'unittest2' },
 					null,
@@ -94,13 +98,13 @@ $(document).ready( function () {
 		}
 	);
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"Class defined for multiple columns - has not applied to other columns - 5th 1",
 		null,
 		function () { return $('#example tbody tr:eq(0) td:eq(4)').hasClass('unittest1') == false; }
 	);
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"Class defined for multiple columns - has not applied to other columns - 5th 2",
 		null,
 		function () { return $('#example tbody tr:eq(6) td:eq(4)').hasClass('unittest2') == false; }

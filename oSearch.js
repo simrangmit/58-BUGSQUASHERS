@@ -1,12 +1,14 @@
-// DATA_TEMPLATE: dom_data
+// DATA_TEMPLATE: empty_table
 oTest.fnStart( "oSearch" );
 
 $(document).ready( function () {
 	/* Check the default */
-	var oTable = $('#example').dataTable();
+	var oTable = $('#example').dataTable( {
+		"sAjaxSource": "../../../examples/ajax/sources/arrays.txt"
+	} );
 	var oSettings = oTable.fnSettings();
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"Default values should be blank",
 		null,
 		function () {
@@ -19,11 +21,12 @@ $(document).ready( function () {
 	/* This test might be considered iffy since the full object isn't given, but it's reasonable to
 	 * expect DataTables to cope with this. It should just assumine regex false
 	 */
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"Search term only in object",
 		function () {
 			oSession.fnRestore();
 			oTable = $('#example').dataTable( {
+				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
 				"oSearch": {
 					"sSearch": "Mozilla"
 				}
@@ -32,7 +35,7 @@ $(document).ready( function () {
 		function () { return $('#example tbody tr:eq(0) td:eq(0)').html() == "Gecko"; }
 	);
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"New search will kill old one",
 		function () {
 			oTable.fnFilter("Opera");
@@ -40,11 +43,12 @@ $(document).ready( function () {
 		function () { return $('#example tbody tr:eq(0) td:eq(0)').html() == "Presto"; }
 	);
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"Search plain text term and escape regex true",
 		function () {
 			oSession.fnRestore();
 			$('#example').dataTable( {
+				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
 				"oSearch": {
 					"sSearch": "DS",
 					"bRegex": false
@@ -54,11 +58,12 @@ $(document).ready( function () {
 		function () { return $('#example tbody tr:eq(0) td:eq(1)').html() == "Nintendo DS browser"; }
 	);
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"Search plain text term and escape regex false",
 		function () {
 			oSession.fnRestore();
 			$('#example').dataTable( {
+				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
 				"oSearch": {
 					"sSearch": "Opera",
 					"bRegex": true
@@ -68,11 +73,12 @@ $(document).ready( function () {
 		function () { return $('#example tbody tr:eq(0) td:eq(0)').html() == "Presto"; }
 	);
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"Search regex text term and escape regex true",
 		function () {
 			oSession.fnRestore();
 			$('#example').dataTable( {
+				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
 				"oSearch": {
 					"sSearch": "1.*",
 					"bRegex": false
@@ -82,11 +88,12 @@ $(document).ready( function () {
 		function () { return $('#example tbody tr:eq(0) td:eq(0)').html() == "No matching records found"; }
 	);
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"Search regex text term and escape regex false",
 		function () {
 			oSession.fnRestore();
 			$('#example').dataTable( {
+				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
 				"oSearch": {
 					"sSearch": "1.*",
 					"bRegex": true
