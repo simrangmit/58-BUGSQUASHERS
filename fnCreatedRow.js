@@ -6,7 +6,8 @@ $(document).ready( function () {
 	var complete = false;
 
 	$('#example').dataTable( {
-		"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+		"bServerSide": true,
+		"sAjaxSource": "../../../examples/server_side/scripts/server_processing.php",
 		fnCreatedRow: function () {
 			tmp++;
 		}
@@ -15,13 +16,13 @@ $(document).ready( function () {
 	oTest.fnWaitTest( 
 		"Row created is called once for each row on init",
 		null,
-		function () { return tmp===57; }
+		function () { return tmp===10; }
 	);
 	
-	oTest.fnTest( 
-		"Created isn't called back on other draws",
+	oTest.fnWaitTest( 
+		"Created is called back on other draws",
 		function () { $('#example th:eq(1)').click(); },
-		function () { return tmp===57; }
+		function () { return tmp===20; }
 	);
 
 	oTest.fnWaitTest(
@@ -32,7 +33,8 @@ $(document).ready( function () {
 			complete = false;
 
 			$('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"bServerSide": true,
+				"sAjaxSource": "../../../examples/server_side/scripts/server_processing.php",
 				fnCreatedRow: function () {
 					if ( arguments.length !== 3 ) {
 						tmp = false;
@@ -54,7 +56,8 @@ $(document).ready( function () {
 			complete = false;
 
 			$('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"bServerSide": true,
+				"sAjaxSource": "../../../examples/server_side/scripts/server_processing.php",
 				fnCreatedRow: function () {
 					if ( arguments[0].nodeName !== "TR" ) {
 						tmp = false;
@@ -76,7 +79,8 @@ $(document).ready( function () {
 			complete = false;
 
 			$('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"bServerSide": true,
+				"sAjaxSource": "../../../examples/server_side/scripts/server_processing.php",
 				fnCreatedRow: function () {
 					if ( arguments[1].length !== 5 ) {
 						tmp = false;
@@ -98,7 +102,8 @@ $(document).ready( function () {
 			complete = false;
 
 			$('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"bServerSide": true,
+				"sAjaxSource": "../../../examples/server_side/scripts/server_processing.php",
 				fnCreatedRow: function () {
 					if ( arguments[1] !== this.fnSettings().aoData[ arguments[2] ]._aData ) {
 						tmp = false;
@@ -120,7 +125,8 @@ $(document).ready( function () {
 			complete = false;
 
 			$('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"bServerSide": true,
+				"sAjaxSource": "../../../examples/server_side/scripts/server_processing.php",
 				fnCreatedRow: function (tr, data, index) {
 					if ( data[1] === "Firefox 1.0" ) {
 						if ( $('td:eq(3)', tr).html() == "1.7" ) {

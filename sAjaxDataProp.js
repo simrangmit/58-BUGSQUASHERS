@@ -1,13 +1,18 @@
 // DATA_TEMPLATE: empty_table
-oTest.fnStart( "Custom data source property - property given" );
-
+/*
+ * NOTE: There are some differences in this zero config script for server-side
+ * processing compared to the other data sources. The main reason for this is the
+ * difference in how the server-side processing does it's filtering. Also the
+ * sorting state is always reset on each draw.
+ */
+oTest.fnStart( "Custom data property in returned Ajax" );
 
 $(document).ready( function () {
-	var oInit = {
-		"sAjaxSource": "../../../examples/ajax/sources/custom_prop.txt",
-		"sAjaxDataProp": "demo"
-	};
-	$('#example').dataTable( oInit );
+	$('#example').dataTable( {
+		"bServerSide": true,
+		"sAjaxSource": "../../../examples/server_side/scripts/custom_data_property.php",
+		"sAjaxDataProp": "test"
+	} );
 	
 	oTest.fnWaitTest( 
 		"10 rows shown on the first page",
@@ -15,44 +20,44 @@ $(document).ready( function () {
 		function () { return $('#example tbody tr').length == 10; }
 	);
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"Initial sort occured",
 		null,
 		function () { return $('#example tbody td:eq(0)').html() == "Gecko"; }
 	);
 	
 	/* Need to use the WaitTest for sorting due to the setTimeout datatables uses */
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"Sorting (first click) on second column",
 		function () { $('#example thead th:eq(1)').click(); },
 		function () { return $('#example tbody td:eq(1)').html() == "All others"; }
 	);
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"Sorting (second click) on second column",
 		function () { $('#example thead th:eq(1)').click(); },
 		function () { return $('#example tbody td:eq(1)').html() == "Seamonkey 1.1"; }
 	);
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"Sorting (third click) on second column",
 		function () { $('#example thead th:eq(1)').click(); },
 		function () { return $('#example tbody td:eq(1)').html() == "All others"; }
 	);
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"Sorting (first click) on numeric column",
 		function () { $('#example thead th:eq(3)').click(); },
 		function () { return $('#example tbody td:eq(3)').html() == "-"; }
 	);
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"Sorting (second click) on numeric column",
 		function () { $('#example thead th:eq(3)').click(); },
 		function () { return $('#example tbody td:eq(3)').html() == "522.1"; }
 	);
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"Sorting multi-column (first click)",
 		function () { 
 			$('#example thead th:eq(0)').click();
@@ -62,52 +67,54 @@ $(document).ready( function () {
 			$('#example tbody td:eq(1)').html() == "Camino 1.0"; return b; }
 	);
 	
-	oTest.fnTest( 
-		"Sorting multi-column - sorting second column only",
+	oTest.fnWaitTest( 
+		"Sorting multi-column - sorting first column only",
 		function () { 
-			$('#example thead th:eq(1)').click(); },
-		function () { return $('#example tbody td:eq(1)').html() == "All others"; }
+			$('#example thead th:eq(0)').click(); },
+		function () { var b = 
+			$('#example tbody td:eq(0)').html() == "Gecko" && 
+			$('#example tbody td:eq(1)').html() == "Firefox 1.0"; return b; }
 	);
 	
 	/* Basic paging */
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"Paging to second page",
 		function () { $('#example_next').click(); },
-		function () { return $('#example tbody td:eq(1)').html() == "IE Mobile"; }
+		function () { return $('#example tbody td:eq(1)').html() == "Mozilla 1.1"; }
 	);
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"Paging to first page",
 		function () { $('#example_previous').click(); },
-		function () { return $('#example tbody td:eq(1)').html() == "All others"; }
+		function () { return $('#example tbody td:eq(1)').html() == "Firefox 1.0"; }
 	);
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"Attempting to page back beyond the first page",
 		function () { $('#example_previous').click(); },
-		function () { return $('#example tbody td:eq(1)').html() == "All others"; }
+		function () { return $('#example tbody td:eq(1)').html() == "Firefox 1.0"; }
 	);
 	
 	/* Changing length */
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"Changing table length to 25 records",
 		function () { $("select[name=example_length]").val('25').change(); },
 		function () { return $('#example tbody tr').length == 25; }
 	);
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"Changing table length to 50 records",
 		function () { $("select[name=example_length]").val('50').change(); },
 		function () { return $('#example tbody tr').length == 50; }
 	);
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"Changing table length to 100 records",
 		function () { $("select[name=example_length]").val('100').change(); },
 		function () { return $('#example tbody tr').length == 57; }
 	);
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"Changing table length to 10 records",
 		function () { $("select[name=example_length]").val('10').change(); },
 		function () { return $('#example tbody tr').length == 10; }
@@ -116,19 +123,19 @@ $(document).ready( function () {
 	/*
 	 * Information element
 	 */
-	oTest.fnTest(
+	oTest.fnWaitTest(
 		"Information on zero config",
 		null,
 		function () { return document.getElementById('example_info').innerHTML == "Showing 1 to 10 of 57 entries"; }
 	);
 	
-	oTest.fnTest(
+	oTest.fnWaitTest(
 		"Information on second page",
 		function () { $('#example_next').click(); },
 		function () { return document.getElementById('example_info').innerHTML == "Showing 11 to 20 of 57 entries"; }
 	);
 	
-	oTest.fnTest(
+	oTest.fnWaitTest(
 		"Information on third page",
 		function () { $('#example_next').click(); },
 		function () { return document.getElementById('example_info').innerHTML == "Showing 21 to 30 of 57 entries"; }

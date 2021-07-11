@@ -1,36 +1,39 @@
-// DATA_TEMPLATE: dom_data
+// DATA_TEMPLATE: empty_table
 oTest.fnStart( "iDraw - check that iDraw increments for each draw" );
 
 
 $(document).ready( function () {
-	var oTable = $('#example').dataTable();
+	var oTable = $('#example').dataTable( {
+		"bServerSide": true,
+		"sAjaxSource": "../../../examples/server_side/scripts/server_processing.php"
+	} );
 	var oSettings = oTable.fnSettings();
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"After first draw, iDraw is 1",
 		null,
 		function () { return oSettings.iDraw == 1; }
 	);
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"After second draw, iDraw is 2",
 		function () { oTable.fnDraw() },
 		function () { return oSettings.iDraw == 2; }
 	);
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"After sort",
 		function () { oTable.fnSort([[1,'asc']]) },
 		function () { return oSettings.iDraw == 3; }
 	);
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"After filter",
 		function () { oTable.fnFilter('gecko') },
 		function () { return oSettings.iDraw == 4; }
 	);
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"After another filter",
 		function () { oTable.fnFilter('gec') },
 		function () { return oSettings.iDraw == 5; }

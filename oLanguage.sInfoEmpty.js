@@ -4,7 +4,8 @@ oTest.fnStart( "oLanguage.sInfoEmpty" );
 $(document).ready( function () {
 	/* Check the default */
 	var oTable = $('#example').dataTable( {
-		"sAjaxSource": "../../../examples/ajax/sources/arrays.txt"
+		"bServerSide": true,
+		"sAjaxSource": "../../../examples/server_side/scripts/server_processing.php"
 	} );
 	var oSettings = oTable.fnSettings();
 	
@@ -14,7 +15,7 @@ $(document).ready( function () {
 		function () { return oSettings.oLanguage.sInfoEmpty == "Showing 0 to 0 of 0 entries"; }
 	);
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"Info empty language default is in the DOM",
 		null,
 		function () {
@@ -31,7 +32,8 @@ $(document).ready( function () {
 		function () {
 			oSession.fnRestore();
 			oTable = $('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"bServerSide": true,
+		"sAjaxSource": "../../../examples/server_side/scripts/server_processing.php",
 				"oLanguage": {
 					"sInfoEmpty": "unit test"
 				}
@@ -42,7 +44,7 @@ $(document).ready( function () {
 		function () { return oSettings.oLanguage.sInfoEmpty == "unit test"; }
 	);
 	
-	oTest.fnTest( 
+	oTest.fnWaitTest( 
 		"Info empty language default is in the DOM",
 		null,
 		function () {
@@ -59,7 +61,8 @@ $(document).ready( function () {
 		function () {
 			oSession.fnRestore();
 			oTable = $('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"bServerSide": true,
+		"sAjaxSource": "../../../examples/server_side/scripts/server_processing.php",
 				"oLanguage": {
 					"sInfoEmpty": "unit _START_ _END_ _TOTAL_ test"
 				}

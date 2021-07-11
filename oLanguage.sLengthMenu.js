@@ -4,7 +4,8 @@ oTest.fnStart( "oLanguage.sLengthMenu" );
 $(document).ready( function () {
 	/* Check the default */
 	var oTable = $('#example').dataTable( {
-		"sAjaxSource": "../../../examples/ajax/sources/arrays.txt"
+		"bServerSide": true,
+		"sAjaxSource": "../../../examples/server_side/scripts/server_processing.php"
 	} );
 	var oSettings = oTable.fnSettings();
 	
@@ -44,7 +45,8 @@ $(document).ready( function () {
 		function () {
 			oSession.fnRestore();
 			oTable = $('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"bServerSide": true,
+		"sAjaxSource": "../../../examples/server_side/scripts/server_processing.php",
 				"oLanguage": {
 					"sLengthMenu": "unit test"
 				}
@@ -68,7 +70,8 @@ $(document).ready( function () {
 		function () {
 			oSession.fnRestore();
 			oTable = $('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"bServerSide": true,
+		"sAjaxSource": "../../../examples/server_side/scripts/server_processing.php",
 				"oLanguage": {
 					"sLengthMenu": "unit _MENU_ test"
 				}
@@ -90,7 +93,8 @@ $(document).ready( function () {
 		function () {
 			oSession.fnRestore();
 			oTable = $('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"bServerSide": true,
+		"sAjaxSource": "../../../examples/server_side/scripts/server_processing.php",
 				"oLanguage": {
 					"sLengthMenu": "_MENU_"
 				}

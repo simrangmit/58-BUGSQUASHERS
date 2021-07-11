@@ -6,7 +6,8 @@ oTest.fnStart( "aoSearchCols" );
 $(document).ready( function () {
 	/* Check the default */
 	var oTable = $('#example').dataTable( {
-		"sAjaxSource": "../../../examples/ajax/sources/arrays.txt"
+		"bServerSide": true,
+		"sAjaxSource": "../../../examples/server_side/scripts/filter_col.php"
 	} );
 	var oSettings = oTable.fnSettings();
 	
@@ -30,7 +31,8 @@ $(document).ready( function () {
 		function () {
 			oSession.fnRestore();
 			oTable = $('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"bServerSide": true,
+		"sAjaxSource": "../../../examples/server_side/scripts/filter_col.php",
 				"aoSearchCols": [
 					null,
 					{ "sSearch": "Mozilla" },
@@ -40,7 +42,7 @@ $(document).ready( function () {
 				]
 			} );
 		},
-		function () { return $('#example_info').html() == "Showing 1 to 9 of 9 entries (filtered from 57 total entries)"; }
+		function () { return $('#example tbody tr:eq(0) td:eq(3)').html() == "1"; }
 	);
 	
 	oTest.fnWaitTest( 
@@ -48,7 +50,8 @@ $(document).ready( function () {
 		function () {
 			oSession.fnRestore();
 			oTable = $('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"bServerSide": true,
+		"sAjaxSource": "../../../examples/server_side/scripts/filter_col.php",
 				"aoSearchCols": [
 					null,
 					{ "sSearch": "Mozilla" },
@@ -61,59 +64,7 @@ $(document).ready( function () {
 		function () { return $('#example tbody tr:eq(0) td:eq(3)').html() == "1.5"; }
 	);
 	
-	oTest.fnWaitTest( 
-		"Search on single column - escape regex false",
-		function () {
-			oSession.fnRestore();
-			oTable = $('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
-				"aoSearchCols": [
-					{ "sSearch": ".*ML", "bEscapeRegex": false },
-					null,
-					null,
-					null,
-					null
-				]
-			} );
-		},
-		function () { return $('#example_info').html() == "Showing 1 to 3 of 3 entries (filtered from 57 total entries)"; }
-	);
-	
-	oTest.fnWaitTest( 
-		"Search on two columns - escape regex false on first, true on second",
-		function () {
-			oSession.fnRestore();
-			oTable = $('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
-				"aoSearchCols": [
-					{ "sSearch": ".*ML", "bEscapeRegex": false },
-					{ "sSearch": "3.3", "bEscapeRegex": true },
-					null,
-					null,
-					null
-				]
-			} );
-		},
-		function () { return $('#example tbody tr:eq(0) td:eq(1)').html() == "Konqureror 3.3"; }
-	);
-	
-	oTest.fnWaitTest( 
-		"Search on two columns (no records) - escape regex false on first, true on second",
-		function () {
-			oSession.fnRestore();
-			oTable = $('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
-				"aoSearchCols": [
-					{ "sSearch": ".*ML", "bEscapeRegex": false },
-					{ "sSearch": "Allan", "bEscapeRegex": true },
-					null,
-					null,
-					null
-				]
-			} );
-		},
-		function () { return $('#example tbody tr:eq(0) td:eq(0)').html() == "No matching records found"; }
-	);
+	/* No regex escape searches here - would need to be implemented on the server-side */
 	
 	oTest.fnComplete();
 } );

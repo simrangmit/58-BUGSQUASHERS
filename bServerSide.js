@@ -1,19 +1,20 @@
 // DATA_TEMPLATE: empty_table
 oTest.fnStart( "bServerSide" );
 
-/* Not interested in server-side processing here other than to check that it is off */
+/* All the other scripts blast the ssp processing */
 
 $(document).ready( function () {
 	/* Check the default */
 	var oTable = $('#example').dataTable( {
-		"sAjaxSource": "../../../examples/ajax/sources/arrays.txt"
+		"bServerSide": true,
+		"sAjaxSource": "../../../examples/server_side/scripts/server_processing.php"
 	} );
 	var oSettings = oTable.fnSettings();
 	
 	oTest.fnWaitTest( 
-		"Server side is off by default",
+		"Server side can be set to on",
 		null,
-		function () { return oSettings.oFeatures.bServerSide == false; }
+		function () { return oSettings.oFeatures.bServerSide == true; }
 	);
 	
 	oTest.fnComplete();

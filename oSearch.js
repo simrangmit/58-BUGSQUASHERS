@@ -1,10 +1,13 @@
 // DATA_TEMPLATE: empty_table
 oTest.fnStart( "oSearch" );
 
+/* Note with my server-side scripts the regex option has no effect - this just runs that down */
+
 $(document).ready( function () {
 	/* Check the default */
 	var oTable = $('#example').dataTable( {
-		"sAjaxSource": "../../../examples/ajax/sources/arrays.txt"
+		"bServerSide": true,
+		"sAjaxSource": "../../../examples/server_side/scripts/server_processing.php"
 	} );
 	var oSettings = oTable.fnSettings();
 	
@@ -26,13 +29,14 @@ $(document).ready( function () {
 		function () {
 			oSession.fnRestore();
 			oTable = $('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"bServerSide": true,
+		"sAjaxSource": "../../../examples/server_side/scripts/server_processing.php",
 				"oSearch": {
 					"sSearch": "Mozilla"
 				}
 			} );
 		},
-		function () { return $('#example tbody tr:eq(0) td:eq(0)').html() == "Gecko"; }
+		function () { return $('#example tbody tr:eq(0) td:eq(3)').html() == "1"; }
 	);
 	
 	oTest.fnWaitTest( 
@@ -40,7 +44,7 @@ $(document).ready( function () {
 		function () {
 			oTable.fnFilter("Opera");
 		},
-		function () { return $('#example tbody tr:eq(0) td:eq(0)').html() == "Presto"; }
+		function () { return $('#example tbody tr:eq(0) td:eq(1)').html() == "Opera 7.0"; }
 	);
 	
 	oTest.fnWaitTest( 
@@ -48,7 +52,8 @@ $(document).ready( function () {
 		function () {
 			oSession.fnRestore();
 			$('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"bServerSide": true,
+				"sAjaxSource": "../../../examples/server_side/scripts/server_processing.php",
 				"oSearch": {
 					"sSearch": "DS",
 					"bRegex": false
@@ -63,14 +68,15 @@ $(document).ready( function () {
 		function () {
 			oSession.fnRestore();
 			$('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"bServerSide": true,
+				"sAjaxSource": "../../../examples/server_side/scripts/server_processing.php",
 				"oSearch": {
 					"sSearch": "Opera",
 					"bRegex": true
 				}
 			} );
 		},
-		function () { return $('#example tbody tr:eq(0) td:eq(0)').html() == "Presto"; }
+		function () { return $('#example tbody tr:eq(0) td:eq(1)').html() == "Opera 7.0"; }
 	);
 	
 	oTest.fnWaitTest( 
@@ -78,7 +84,8 @@ $(document).ready( function () {
 		function () {
 			oSession.fnRestore();
 			$('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"bServerSide": true,
+				"sAjaxSource": "../../../examples/server_side/scripts/server_processing.php",
 				"oSearch": {
 					"sSearch": "1.*",
 					"bRegex": false
@@ -86,21 +93,6 @@ $(document).ready( function () {
 			} );
 		},
 		function () { return $('#example tbody tr:eq(0) td:eq(0)').html() == "No matching records found"; }
-	);
-	
-	oTest.fnWaitTest( 
-		"Search regex text term and escape regex false",
-		function () {
-			oSession.fnRestore();
-			$('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
-				"oSearch": {
-					"sSearch": "1.*",
-					"bRegex": true
-				}
-			} );
-		},
-		function () { return $('#example tbody tr:eq(0) td:eq(0)').html() == "Gecko"; }
 	);
 	
 	

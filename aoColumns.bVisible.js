@@ -4,7 +4,8 @@ oTest.fnStart( "aoColumns.bVisible" );
 $(document).ready( function () {
 	/* Check the default */
 	var oTable = $('#example').dataTable( {
-		"sAjaxSource": "../../../examples/ajax/sources/arrays.txt"
+		"bServerSide": true,
+		"sAjaxSource": "../../../examples/server_side/scripts/server_processing.php"
 	} );
 	var oSettings = oTable.fnSettings();
 	
@@ -19,7 +20,8 @@ $(document).ready( function () {
 		function () {
 			oSession.fnRestore();
 			$('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"bServerSide": true,
+		"sAjaxSource": "../../../examples/server_side/scripts/server_processing.php",
 				"aoColumns": [
 					null,
 					{ "bVisible": false },
@@ -54,15 +56,13 @@ $(document).ready( function () {
 	
 	oTest.fnWaitTest( 
 		"The correct tbody column has been hidden",
-		function () {
-			oDispacher.click( $('#example thead th:eq(1)')[0], { 'shift': true } );
-		},
+		null,
 		function () {
 			var jqNodes = $('#example tbody tr:eq(0) td');
 			var bReturn = 
 				jqNodes[0].innerHTML == "Gecko" &&
-				jqNodes[1].innerHTML == "Gnome" &&
-				jqNodes[2].innerHTML == "1.8" &&
+				jqNodes[1].innerHTML == "Win 98+ / OSX.2+" &&
+				jqNodes[2].innerHTML == "1.7" &&
 				jqNodes[3].innerHTML == "A";
 			return bReturn;
 		}
@@ -74,7 +74,8 @@ $(document).ready( function () {
 		function () {
 			oSession.fnRestore();
 			$('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"bServerSide": true,
+		"sAjaxSource": "../../../examples/server_side/scripts/server_processing.php",
 				"aoColumns": [
 					null,
 					{ "bVisible": false },
@@ -107,14 +108,12 @@ $(document).ready( function () {
 	
 	oTest.fnWaitTest( 
 		"Multiple hide - the correct tbody columns have been hidden",
-		function () {
-			oDispacher.click( $('#example thead th:eq(1)')[0], { 'shift': true } );
-		},
+		null,
 		function () {
 			var jqNodes = $('#example tbody tr:eq(0) td');
 			var bReturn = 
 				jqNodes[0].innerHTML == "Gecko" &&
-				jqNodes[1].innerHTML == "1"
+				jqNodes[1].innerHTML == "1.7"
 			return bReturn;
 		}
 	);

@@ -6,7 +6,8 @@ $(document).ready( function () {
 	var complete = false;
 
 	$('#example').dataTable( {
-		"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+		"bServerSide": true,
+		"sAjaxSource": "../../../examples/server_side/scripts/server_processing.php",
 		"aoColumnDefs": [ {
 			fnCreatedCell: function () {
 				tmp++;
@@ -18,13 +19,13 @@ $(document).ready( function () {
 	oTest.fnWaitTest( 
 		"Cell created is called once for each cell on init",
 		null,
-		function () { return tmp===285; }
+		function () { return tmp===50; }
 	);
 	
-	oTest.fnTest( 
-		"Created isn't called back on other draws",
+	oTest.fnWaitTest( 
+		"Created is called back on other draws",
 		function () { $('#example th:eq(1)').click(); },
-		function () { return tmp===285; }
+		function () { return tmp===100; }
 	);
 
 	oTest.fnWaitTest(
@@ -35,7 +36,8 @@ $(document).ready( function () {
 			complete = false;
 
 			$('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"bServerSide": true,
+				"sAjaxSource": "../../../examples/server_side/scripts/server_processing.php",
 				"aoColumnDefs": [ {
 					fnCreatedRow: function () {
 						if ( arguments.length !== 4 ) {
@@ -60,7 +62,8 @@ $(document).ready( function () {
 			complete = false;
 
 			$('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"bServerSide": true,
+				"sAjaxSource": "../../../examples/server_side/scripts/server_processing.php",
 				"aoColumnDefs": [ {
 					fnCreatedRow: function () {
 						if ( arguments[0].nodeName !== "TD" ) {
@@ -85,7 +88,8 @@ $(document).ready( function () {
 			complete = false;
 
 			$('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"bServerSide": true,
+				"sAjaxSource": "../../../examples/server_side/scripts/server_processing.php",
 				"aoColumnDefs": [ {
 					fnCreatedRow: function () {
 						if ( arguments[1] != $('td').html() ) {
@@ -110,7 +114,8 @@ $(document).ready( function () {
 			complete = false;
 
 			$('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"bServerSide": true,
+				"sAjaxSource": "../../../examples/server_side/scripts/server_processing.php",
 				"aoColumnDefs": [ {
 					fnCreatedRow: function () {
 						if ( arguments[2].length !== 5 ) {
@@ -135,7 +140,8 @@ $(document).ready( function () {
 			complete = false;
 
 			$('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"bServerSide": true,
+				"sAjaxSource": "../../../examples/server_side/scripts/server_processing.php",
 				"aoColumnDefs": [ {
 					fnCreatedRow: function () {
 						if ( arguments[2] !== this.fnSettings().aoData[ arguments[2] ]._aData ) {
@@ -160,7 +166,8 @@ $(document).ready( function () {
 			complete = false;
 
 			$('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"bServerSide": true,
+				"sAjaxSource": "../../../examples/server_side/scripts/server_processing.php",
 				"aoColumnDefs": [ {
 					fnCreatedRow: function () {
 						if ( arguments[1] != $('td:eq('+arguments[4]+')', arguments[0].parentNode).html() ) {

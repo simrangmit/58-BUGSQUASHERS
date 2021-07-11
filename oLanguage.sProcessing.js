@@ -4,7 +4,14 @@ oTest.fnStart( "oLanguage.sProcessing" );
 $(document).ready( function () {
 	/* Check the default */
 	var oTable = $('#example').dataTable( {
-		"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+		"sAjaxSource": "../../../examples/ajax/sources/objects.txt",
+		"aoColumns": [
+			{ "mData": "engine" },
+			{ "mData": "browser" },
+			{ "mData": "platform" },
+			{ "mData": "version" },
+			{ "mData": "grade" }
+		],
 		"bProcessing": true
 	} );
 	var oSettings = oTable.fnSettings();
@@ -27,7 +34,14 @@ $(document).ready( function () {
 		function () {
 			oSession.fnRestore();
 			oTable = $('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"sAjaxSource": "../../../examples/ajax/sources/objects.txt",
+				"aoColumnDefs": [
+					{ "mData": "engine", "aTargets": [0] },
+					{ "mData": "browser", "aTargets": [1] },
+					{ "mData": "platform", "aTargets": [2] },
+					{ "mData": "version", "aTargets": [3] },
+					{ "mData": "grade", "aTargets": [4] }
+				],
 				"bProcessing": true,
 				"oLanguage": {
 					"sProcessing": "unit test"

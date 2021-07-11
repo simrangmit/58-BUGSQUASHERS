@@ -5,7 +5,8 @@ $(document).ready( function () {
 	/* Check the default */
 	var mTmp = 0;
 	var oTable = $('#example').dataTable( {
-		"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+		"bServerSide": true,
+		"sAjaxSource": "../../../examples/server_side/scripts/server_processing.php",
 		"aoColumns": [
 			null,
 			{ "fnRender": function (a) {
@@ -20,9 +21,9 @@ $(document).ready( function () {
 	var oSettings = oTable.fnSettings();
 	
 	oTest.fnWaitTest( 
-		"Single column - fnRender is called twice for each row",
+		"Single column - fnRender is called once for each row",
 		null,
-		function () { return mTmp == 57; }
+		function () { return mTmp == 10; }
 	);
 	
 	oTest.fnWaitTest( 
@@ -31,7 +32,8 @@ $(document).ready( function () {
 			mTmp = true;
 			oSession.fnRestore();
 			oTable = $('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"bServerSide": true,
+		"sAjaxSource": "../../../examples/server_side/scripts/server_processing.php",
 				"aoColumns": [
 					null,
 					{ "fnRender": function (a) {
@@ -58,7 +60,8 @@ $(document).ready( function () {
 			mTmp = true;
 			oSession.fnRestore();
 			oTable = $('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"bServerSide": true,
+		"sAjaxSource": "../../../examples/server_side/scripts/server_processing.php",
 				"aoColumns": [
 					null,
 					{ "fnRender": function (a) {
@@ -83,7 +86,8 @@ $(document).ready( function () {
 			mTmp = true;
 			oSession.fnRestore();
 			oTable = $('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"bServerSide": true,
+		"sAjaxSource": "../../../examples/server_side/scripts/server_processing.php",
 				"aoColumns": [
 					null,
 					{ "fnRender": function (a) {
@@ -107,7 +111,8 @@ $(document).ready( function () {
 		function () {
 			oSession.fnRestore();
 			oTable = $('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"bServerSide": true,
+		"sAjaxSource": "../../../examples/server_side/scripts/server_processing.php",
 				"aoColumns": [
 					null,
 					{ "fnRender": function (a) {
@@ -127,7 +132,8 @@ $(document).ready( function () {
 		function () {
 			oSession.fnRestore();
 			oTable = $('#example').dataTable( {
-				"sAjaxSource": "../../../examples/ajax/sources/arrays.txt",
+				"bServerSide": true,
+		"sAjaxSource": "../../../examples/server_side/scripts/server_processing.php",
 				"aoColumns": [
 					null,
 					null,
